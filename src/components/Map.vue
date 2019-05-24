@@ -10,7 +10,7 @@ import {
 
 export default {
     name: "Map",
-    props: ["operations"],
+    props: ["operations", "positions"],
     components: {
         mapbox: Mapbox
     },
@@ -54,6 +54,64 @@ export default {
                         "fill-extrusion-height": 10000,
                         "fill-extrusion-base": 0,
                         "fill-extrusion-opacity": 0.5
+                    }
+                });
+            });
+
+            this.positions.forEach(function (position) {
+                var data = {
+                    type: "FeatureCollection",
+                    features: [{
+                        type: "Feature",
+                        geometry: {
+                            type: "LineString",
+                            coordinates: [
+                                [
+                                    -122.019807,
+                                    45.632433
+                                ],
+                                [
+                                    -122.019767,
+                                    45.632453
+                                ],
+                                [
+                                    -122.01971,
+                                    45.632472
+                                ],
+                                [
+                                    -122.01971,
+                                    45.632505
+                                ],
+                                [
+                                    -122.019739,
+                                    45.632531
+                                ],
+                                [
+                                    -122.019781,
+                                    45.632549
+                                ],
+                                [
+                                    -122.019815,
+                                    45.63257
+                                ]
+                            ]
+                        }
+                    }]
+                };
+
+
+
+                map.addLayer({
+                    id: "yoooo",
+                    type: "line",
+                    source: {
+                        type: 'geojson', 
+                        data: data
+                    },
+                    paint: {
+                        "line-color": "yellow",
+                        "line-opacity": 1,
+                        "line-width": 50
                     }
                 });
             });

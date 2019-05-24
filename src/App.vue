@@ -16,7 +16,7 @@
                 <Operations v-bind:operations="operations" />
             </v-flex>
             <v-flex xs9>
-                <Map v-bind:operations="operations"/>
+                <Map v-bind:operations="operations" v-bind:positions="positions"/>
         </v-flex>
       </v-layout>
     </v-content>
@@ -113,7 +113,15 @@ export default {
                         ]
                     }]
                 }
-            ]
+            ],
+            positions: [{
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "uamalpha.arc.nasa.gov",
+                location: {
+                    type: "Point",
+                    coordinates: [-106.43348693847656, 46.800999519926314]
+                }
+            }]
         };
     }
 };
