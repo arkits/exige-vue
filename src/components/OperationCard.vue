@@ -1,10 +1,10 @@
 <template>
-<div v-if="operation.state === 'ACTIVE'">
-    <v-card color="green darken-2" class="white--text">
+    <v-card :color="cardBackgroud" class="white--text">
         <v-card-title primary-title>
             <div>
                 <span>{{operation.gufi}}</span> <br>
-                <span>{{operation.uss_name}}</span>
+                <span>{{operation.uss_name}}</span> <br>
+                <span>{{operation.state}}</span>
             </div>
         </v-card-title>
         <v-card-actions>
@@ -12,35 +12,6 @@
             <OperationDetailsDialog v-bind:operation="operation" />
         </v-card-actions>
     </v-card>
-</div>
-<div v-else-if="operation.state === 'CLOSED'">
-    <v-card color="blue  darken-2" class="white--text">
-        <v-card-title primary-title>
-            <div>
-                <span>{{operation.gufi}}</span> <br>
-                <span>{{operation.uss_name}}</span>
-            </div>
-        </v-card-title>
-        <v-card-actions>
-            <v-btn flat dark>View on Map</v-btn>
-            <OperationDetailsDialog v-bind:operation="operation" />
-        </v-card-actions>
-    </v-card>
-</div>
-<div v-else-if="operation.state === 'ROGUE'">
-    <v-card color="red darken-2" class="white--text">
-        <v-card-title primary-title>
-            <div>
-                <span>{{operation.gufi}}</span> <br>
-                <span>{{operation.uss_name}}</span>
-            </div>
-        </v-card-title>
-        <v-card-actions>
-            <v-btn flat dark>View on Map</v-btn>
-            <OperationDetailsDialog v-bind:operation="operation"/>
-        </v-card-actions>
-    </v-card>
-</div>
 </template>
 
 <script>
@@ -51,6 +22,21 @@ export default {
     props: ["operation"],
     components: {
         OperationDetailsDialog
+    },
+    computed: {
+        cardBackgroud: function () {
+            var bg;
+            if(this.operation.state === "ACTIVE"){
+                bg = "green darken-2";
+            } else 
+            if (this.operation.state === "ROGUE"){
+                bg = "red darken-2";
+            } else
+            if(this.operation.state === "CLOSED"){
+                bg = "grey darken-2";
+            }
+            return bg;
+        }
     }
 };
 </script>
