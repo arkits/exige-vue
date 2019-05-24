@@ -23,7 +23,7 @@ Lints and fixes files
 ### TODO:
 - Map
     - Zoom to operations
-    - Volume color
     - Volume on click
 - Positions
 - Websockets
+- Store data after refresh ?
