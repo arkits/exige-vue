@@ -35,7 +35,7 @@ export default {
     },
     data() {
         return {
-            org_title: "NASA UAM ~ ",
+            org_title: "~/",
             operations: [{
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
                     uss_name: "uamalpha.arc.nasa.gov",
