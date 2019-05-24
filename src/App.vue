@@ -13,8 +13,7 @@
     <v-content>
       <v-layout row wrap>
         <v-flex xs3>
-          <br>
-          <OperationCard v-bind:operations="operations"/>
+          <Operations v-bind:operations="operations"/>
         </v-flex>
         <v-flex xs9>
           <Map />
@@ -25,13 +24,13 @@
 </template>
 
 <script>
-import OperationCard from "./components/OperationCard";
+import Operations from "./components/Operations";
 import Map from "./components/Map";
 
 export default {
   name: "App",
   components: {
-    OperationCard,
+    Operations,
     Map
   },
   data() {
@@ -40,15 +39,18 @@ export default {
       operations: [
         {
           gufi: 1,
-          uss_name: "uamalpha"
+          uss_name: "uamalpha",
+          state: "ACTIVE"
         },
         {
           gufi: 2,
-          uss_name: "uambeta"
+          uss_name: "uambeta",
+          state: "ROGUE"
         },
         {
           gufi: 3,
-          uss_name: "uamgamma"
+          uss_name: "uamgamma",
+          state: "CLOSED"
         }
       ]
     };
