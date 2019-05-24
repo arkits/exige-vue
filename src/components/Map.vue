@@ -1,5 +1,9 @@
 <template>
-<mapbox v-bind:accessToken="mapboxAccessToken" v-bind:map-options="mapboxOptions" @map-load="mapLoaded" @map-click="mapClicked" />
+    <mapbox 
+        v-bind:accessToken="mapboxAccessToken" 
+        v-bind:map-options="mapboxOptions" 
+        @map-load="mapLoaded"
+    />
 </template>
 
 <script>
@@ -13,34 +17,17 @@ export default {
     },
     methods: {
         mapLoaded(map) {
-            console.log(this.operations);
 
             var mapboxData = {
                 type: "FeatureCollection",
-                features: [{
-                        type: "Feature",
-                        geometry: {
-                            type: "Point",
-                            coordinates: [-77.03238901390978, 38.913188059745586]
-                        },
-                        properties: {
-                            title: "Mapbox DC",
-                            icon: "monument"
-                        }
-                    },
-                    {
-                        type: "Feature",
-                        geometry: {
-                            type: "Point",
-                            coordinates: [-122.414, 37.776]
-                        },
-                        properties: {
-                            title: "Mapbox SF",
-                            icon: "harbor"
-                        }
-                    }
-                ]
+                features: []
             };
+
+            this.operations.forEach(function (operation) {
+                var operation_volume = operation.operation_volume;
+                // console.log(operation_volume);
+                mapboxData.features.push(operation_volume);
+            });
 
             map.addLayer({
                 id: "points",
@@ -57,9 +44,6 @@ export default {
                     "text-anchor": "top"
                 }
             });
-        },
-        mapClicked(map, e) {
-            alert("Map Clicked!");
         }
     },
     data() {
