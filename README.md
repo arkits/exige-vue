@@ -25,7 +25,5 @@ Lints and fixes files
     - Zoom to operations
     - Volume color
     - Volume on click
-- Operations
-    - Handle multiple volumes
 - Positions
 - Websockets

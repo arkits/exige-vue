@@ -4,6 +4,9 @@
 
 <script>
 import Mapbox from "mapbox-gl-vue";
+import {
+    constants
+} from "crypto";
 
 export default {
     name: "Map",
@@ -13,52 +16,47 @@ export default {
     },
     methods: {
         mapLoaded(map) {
-
-
             this.operations.forEach(function (operation) {
+                var operation_fill_color;
+                if (operation.state === "ACTIVE") {
+                    operation_fill_color = "#388E3C";
+                } else if (operation.state === "ROGUE") {
+                    operation_fill_color = "#D32F2F";
+                } else if (operation.state === "CLOSED") {
+                    operation_fill_color = "#616161";
+                }
 
                 var mapboxData = {
                     type: "FeatureCollection",
                     features: []
                 };
 
-                var operation_fill_color;
-                if(operation.state === "ACTIVE"){
-                    operation_fill_color = "#388E3C";
-                } else 
-                if (operation.state === "ROGUE"){
-                    operation_fill_color = "#D32F2F";
-                } else
-                if(operation.state === "CLOSED"){
-                    operation_fill_color = "#616161";
-                }
+                var operation_volumes = operation.operation_volumes;
 
-                var operation_volume_geojson = {
-                    geometry: operation.operation_volume,
-                    type: "Feature"
-                };
-
-                mapboxData.features.push(operation_volume_geojson);
-
-                map.addLayer({
-                id: operation.gufi,
-                type: "fill-extrusion",
-                source: {
-                    type: "geojson",
-                    data: mapboxData
-                },
-                layout: {},
-                paint: {
-                    "fill-extrusion-color": operation_fill_color,
-                    "fill-extrusion-height": 10000,
-                    "fill-extrusion-base": 0,
-                    "fill-extrusion-opacity": 0.5
-                }
+                operation_volumes.forEach(function (operation_volume) {
+                    var operation_volume_geojson = {
+                        geometry: operation_volume,
+                        type: "Feature"
+                    };
+                    mapboxData.features.push(operation_volume_geojson);
                 });
 
+                map.addLayer({
+                    id: operation.gufi,
+                    type: "fill-extrusion",
+                    source: {
+                        type: "geojson",
+                        data: mapboxData
+                    },
+                    layout: {},
+                    paint: {
+                        "fill-extrusion-color": operation_fill_color,
+                        "fill-extrusion-height": 10000,
+                        "fill-extrusion-base": 0,
+                        "fill-extrusion-opacity": 0.5
+                    }
+                });
             });
-
-
         }
     },
     data() {
