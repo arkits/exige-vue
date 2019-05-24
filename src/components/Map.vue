@@ -13,22 +13,35 @@ export default {
     },
     methods: {
         mapLoaded(map) {
-            var mapboxData = {
-                type: "FeatureCollection",
-                features: []
-            };
+
 
             this.operations.forEach(function (operation) {
+
+                var mapboxData = {
+                    type: "FeatureCollection",
+                    features: []
+                };
+
+                var operation_fill_color;
+                if(operation.state === "ACTIVE"){
+                    operation_fill_color = "#388E3C";
+                } else 
+                if (operation.state === "ROGUE"){
+                    operation_fill_color = "#D32F2F";
+                } else
+                if(operation.state === "CLOSED"){
+                    operation_fill_color = "#616161";
+                }
+
                 var operation_volume_geojson = {
                     geometry: operation.operation_volume,
                     type: "Feature"
                 };
 
                 mapboxData.features.push(operation_volume_geojson);
-            });
 
-            map.addLayer({
-                id: "maine",
+                map.addLayer({
+                id: operation.gufi,
                 type: "fill-extrusion",
                 source: {
                     type: "geojson",
@@ -36,12 +49,16 @@ export default {
                 },
                 layout: {},
                 paint: {
-                    "fill-extrusion-color": "#088",
-                    "fill-extrusion-height": 100,
+                    "fill-extrusion-color": operation_fill_color,
+                    "fill-extrusion-height": 10000,
                     "fill-extrusion-base": 0,
                     "fill-extrusion-opacity": 0.5
                 }
+                });
+
             });
+
+
         }
     },
     data() {
