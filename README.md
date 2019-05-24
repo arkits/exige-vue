@@ -22,7 +22,6 @@ Lints and fixes files
 
 ### TODO:
 - Map
-    - 3D volumes
     - Zoom to operations
     - Volume color
     - Volume on click
