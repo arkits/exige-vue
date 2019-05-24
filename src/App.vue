@@ -2,8 +2,8 @@
 <v-app dark>
     <v-toolbar app>
         <v-toolbar-title class="headline">
-            <span class="font-weight-light">{{org_title}}</span>
-            <span class="font-weight-bold">Exige</span>
+            <span class="org-title">{{org_title}}</span>
+            <span class="app-title">Exige</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
@@ -35,7 +35,7 @@ export default {
     },
     data() {
         return {
-            org_title: "NASA UAM · ",
+            org_title: "NASA UAM ~ ",
             operations: [{
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
                     uss_name: "uamalpha",
@@ -94,4 +94,16 @@ export default {
 </script>
 
 <style>
+.org-title{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.app-title{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-style: italic;
+}
+
 </style>
