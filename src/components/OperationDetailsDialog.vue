@@ -10,7 +10,7 @@
                 <span class="headline">Advanced Details</span>
             </v-card-title>
             <v-card-text>
-                <v-tabs v-model="active" color="cyan" dark slider-color="yellow">
+                <v-tabs color="cyan" dark slider-color="yellow">
                     <v-tab key="1" ripple>Operation Details</v-tab>
                     <v-tab key="2" ripple>Position Details</v-tab>
 
