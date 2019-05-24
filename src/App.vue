@@ -13,10 +13,14 @@
     <v-content>
       <v-layout row wrap>
         <v-flex xs3>
-          <Operations v-bind:operations="operations"/>
+          <Operations 
+            v-bind:operations="operations"
+          />
         </v-flex>
         <v-flex xs9>
-          <Map />
+          <Map 
+            v-bind:operations="operations"
+          />
         </v-flex>
       </v-layout>
     </v-content>
@@ -40,17 +44,49 @@ export default {
         {
           gufi: 1,
           uss_name: "uamalpha",
-          state: "ACTIVE"
+          state: "ACTIVE",
+          operation_volume :             {
+                type: "Feature",
+                geometry: {
+                  type: "Point",
+                  coordinates: [-122.414, 37.776]
+                },
+                properties: {
+                  title: "Mapbox SF",
+                  icon: "harbor"
+                }
+              }
         },
         {
           gufi: 2,
           uss_name: "uambeta",
-          state: "ROGUE"
+          state: "ROGUE",
+                    operation_volume :             {
+                type: "Feature",
+                geometry: {
+                  type: "Point",
+                  coordinates: [-122.414, 37.776]
+                },
+                properties: {
+                  title: "Mapbox SF",
+                  icon: "harbor"
+                }
+              }
         },
         {
           gufi: 3,
           uss_name: "uamgamma",
-          state: "CLOSED"
+          state: "CLOSED",          operation_volume :             {
+                type: "Feature",
+                geometry: {
+                  type: "Point",
+                  coordinates: [-122.414, 37.776]
+                },
+                properties: {
+                  title: "Mapbox SF",
+                  icon: "harbor"
+                }
+              }
         }
       ]
     };
