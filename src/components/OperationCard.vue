@@ -9,7 +9,7 @@
         </v-card-title>
         <v-card-actions>
             <v-btn flat dark>View on Map</v-btn>
-            <v-btn flat dark>View Details</v-btn>
+            <OperationDetailsDialog v-bind:operation="operation" />
         </v-card-actions>
     </v-card>
 </div>
@@ -23,7 +23,7 @@
         </v-card-title>
         <v-card-actions>
             <v-btn flat dark>View on Map</v-btn>
-            <v-btn flat dark>View Details</v-btn>
+            <OperationDetailsDialog v-bind:operation="operation" />
         </v-card-actions>
     </v-card>
 </div>
@@ -37,16 +37,21 @@
         </v-card-title>
         <v-card-actions>
             <v-btn flat dark>View on Map</v-btn>
-            <v-btn flat dark>View Details</v-btn>
+            <OperationDetailsDialog v-bind:operation="operation"/>
         </v-card-actions>
     </v-card>
 </div>
 </template>
 
 <script>
+import OperationDetailsDialog from "./OperationDetailsDialog";
+
 export default {
     name: "OperationCard",
-    props: ["operation"]
+    props: ["operation"],
+    components: {
+        OperationDetailsDialog
+    }
 };
 </script>
 
