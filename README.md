@@ -1,29 +1,32 @@
 # exige-vue
 
-## Project setup
-```
-npm install
-```
+### Available Scripts
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Setup project with  
+`npm install -g @vue/cli`  
+`npm install`
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Run with Vue UI...  
+`vue ui`   
+or with npm   
+`npm run serve`
 
-### Run your tests
-```
-npm run test
-```
+Build  
+`npm run build`
 
-### Lints and fixes files
-```
-npm run lint
-```
+Test  
+`npm run test`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Lints and fixes files  
+`npm run lint`
+
+### TODO:
+- Map
+    - 3D volumes
+    - Zoom to operations
+    - Volume color
+    - Volume on click
+- Operations
+    - Handle multiple volumes
+- Positions
+- Websockets
