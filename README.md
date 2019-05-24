@@ -1,4 +1,4 @@
-# exige_vue
+# exige-vue
 
 ## Project setup
 ```
