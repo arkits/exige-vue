@@ -17,7 +17,7 @@
           <OperationCard v-bind:operations="operations"/>
         </v-flex>
         <v-flex xs9>
-          <mapbox v-bind:accessToken="mapboxAccessToken" v-bind:map-options="mapboxOptions"/>
+          <Map />
         </v-flex>
       </v-layout>
     </v-content>
@@ -26,24 +26,17 @@
 
 <script>
 import OperationCard from "./components/OperationCard";
-import Mapbox from "mapbox-gl-vue";
+import Map from "./components/Map";
 
 export default {
   name: "App",
   components: {
     OperationCard,
-    mapbox: Mapbox
+    Map
   },
   data() {
     return {
       org_title: "NASA UAM · ",
-      mapboxAccessToken:
-        "pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA",
-      mapboxOptions: {
-        style: "mapbox://styles/mapbox/dark-v9",
-        center: [-100, 37],
-        zoom: 4
-      },
       operations: [
         {
           gufi: 1,
@@ -64,8 +57,4 @@ export default {
 </script>
 
 <style>
-#map {
-  width: 100%;
-  height: 100vh;
-}
 </style>
