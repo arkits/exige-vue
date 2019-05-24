@@ -1,9 +1,5 @@
 <template>
-    <mapbox 
-        v-bind:accessToken="mapboxAccessToken" 
-        v-bind:map-options="mapboxOptions" 
-        @map-load="mapLoaded"
-    />
+<mapbox v-bind:accessToken="mapboxAccessToken" v-bind:map-options="mapboxOptions" @map-load="mapLoaded" />
 </template>
 
 <script>
@@ -24,24 +20,25 @@ export default {
             };
 
             this.operations.forEach(function (operation) {
-                var operation_volume = operation.operation_volume;
-                // console.log(operation_volume);
-                mapboxData.features.push(operation_volume);
+                var operation_volume_geojson = {
+                    "geometry" : operation.operation_volume,
+                    "type": "Feature"
+                };
+
+                mapboxData.features.push(operation_volume_geojson);
             });
 
             map.addLayer({
-                id: "points",
-                type: "symbol",
-                source: {
-                    type: "geojson",
-                    data: mapboxData
+                'id': 'maine',
+                'type': 'fill',
+                'source': {
+                    'type': 'geojson',
+                    'data': mapboxData
                 },
-                layout: {
-                    "icon-image": "{icon}-15",
-                    "text-field": "{title}",
-                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                    "text-offset": [0, 0.6],
-                    "text-anchor": "top"
+                'layout': {},
+                'paint': {
+                    'fill-color': '#088',
+                    'fill-opacity': 0.8
                 }
             });
         }
@@ -50,7 +47,7 @@ export default {
         return {
             mapboxAccessToken: "pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA",
             mapboxOptions: {
-                style: "mapbox://styles/mapbox/dark-v9",
+                style: "mapbox://styles/mapbox/streets-v9",
                 center: [-100, 37],
                 zoom: 4
             }
