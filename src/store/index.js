@@ -1,8 +1,6 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 
-import websockets from './modules/websockets.js';
-
 import {
     SOCKET_ONOPEN,
     SOCKET_ONCLOSE,
