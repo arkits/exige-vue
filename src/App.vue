@@ -13,10 +13,10 @@
     <v-content>
         <v-layout row wrap>
             <v-flex xs3>
-                <Operations v-bind:operations="operations" />
+                <Operations />
             </v-flex>
             <v-flex xs9>
-                <Map v-bind:operations="operations" v-bind:positions="positions"/>
+                <Map v-bind:positions="positions"/>
         </v-flex>
       </v-layout>
     </v-content>
@@ -36,84 +36,6 @@ export default {
     data() {
         return {
             org_title: "~/",
-            operations: [{
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    uss_name: "uamalpha.arc.nasa.gov",
-                    state: "ACTIVE",
-                    operation_volumes: [{
-                            type: "Polygon",
-                            coordinates: [
-                                [
-                                    [-118.91601562499999, 36.84446074079564],
-                                    [-115.83984375, 36.84446074079564],
-                                    [-115.83984375, 44.74673324024678],
-                                    [-118.91601562499999, 44.74673324024678],
-                                    [-118.91601562499999, 36.84446074079564]
-                                ]
-                            ]
-                        },
-                        {
-                            type: "Polygon",
-                            coordinates: [
-                                [
-                                    [-119.0478515625, 42.22851735620852],
-                                    [-104.1064453125, 42.22851735620852],
-                                    [-104.1064453125, 44.653024159812],
-                                    [-119.0478515625, 44.653024159812],
-                                    [-119.0478515625, 42.22851735620852]
-                                ]
-                            ]
-                        }
-                    ]
-                },
-                {
-                    gufi: "76cbc094-55aa-4955-ac55-85b43edfabb2",
-                    uss_name: "uamgamma.arc.nasa.gov",
-                    state: "ROGUE",
-                    operation_volumes: [{
-                            type: "Polygon",
-                            coordinates: [
-                                [
-                                    [-111.62109375, 47.040182144806664],
-                                    [-94.8779296875, 47.040182144806664],
-                                    [-94.8779296875, 48.19538740833338],
-                                    [-111.62109375, 48.19538740833338],
-                                    [-111.62109375, 47.040182144806664]
-                                ]
-                            ]
-                        },
-                        {
-                            type: "Polygon",
-                            coordinates: [
-                                [
-                                    [-105.029296875, 42.261049162113856],
-                                    [-102.26074218749999, 42.261049162113856],
-                                    [-102.26074218749999, 48.22467264956519],
-                                    [-105.029296875, 48.22467264956519],
-                                    [-105.029296875, 42.261049162113856]
-                                ]
-                            ]
-                        }
-                    ]
-                },
-                {
-                    gufi: "c8e40827-44c0-4b3f-9594-b256586cc64e",
-                    uss_name: "utmuno.arc.nasa.gov",
-                    state: "CLOSED",
-                    operation_volumes: [{
-                        type: "Polygon",
-                        coordinates: [
-                            [
-                                [-102.919921875, 32.69486597787505],
-                                [-81.73828125, 32.69486597787505],
-                                [-81.73828125, 35.10193405724606],
-                                [-102.919921875, 35.10193405724606],
-                                [-102.919921875, 32.69486597787505]
-                            ]
-                        ]
-                    }]
-                }
-            ],
             positions: [{
                 gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
                 uss_name: "uamalpha.arc.nasa.gov",
@@ -123,6 +45,8 @@ export default {
                 }
             }]
         };
+    },
+    computed:{
     }
 };
 </script>

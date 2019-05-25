@@ -4,9 +4,8 @@
 
 <script>
 import Mapbox from "mapbox-gl-vue";
-import {
-    constants
-} from "crypto";
+import store from '../store'
+import {constants} from "crypto";
 
 export default {
     name: "Map",
@@ -16,7 +15,8 @@ export default {
     },
     methods: {
         mapLoaded(map) {
-            this.operations.forEach(function (operation) {
+            var store_operations = store.state.socket_operations;
+            store_operations.forEach(function (operation) {
                 var operation_fill_color;
                 if (operation.state === "ACTIVE") {
                     operation_fill_color = "#388E3C";
@@ -126,6 +126,11 @@ export default {
                 zoom: 4
             }
         };
+    },
+    computed: {
+        getSocketOperations(state) {
+            return store.state.socket_operations;
+        }        
     }
 };
 </script>
