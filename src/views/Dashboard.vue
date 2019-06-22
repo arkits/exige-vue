@@ -1,5 +1,6 @@
 <template>
 <v-layout row wrap>
+    <ExigeOptions />
     <v-flex xs3>
         <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
     </v-flex>
@@ -7,11 +8,13 @@
         <Map ref="Map" v-bind:positions="positions"/>
     </v-flex>
   </v-layout>
+
 </template>
 
 <script>
 import Operations from "../components/Operations";
 import Map from "../components/Map";
+import ExigeOptions from "../components/ExigeOptions";
 import {
     constants
 } from "crypto";
@@ -21,7 +24,8 @@ export default {
     name: "Dashboard",
     components: {
         Operations,
-        Map
+        Map,
+        ExigeOptions
     },
     data() {
         return {
