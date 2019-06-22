@@ -4,7 +4,10 @@
     <div v-for="operation in getSocketOperations" v-bind:key="operation.gufi">
         <v-layout row wrap>
             <v-flex xs12>
-                <OperationCard v-bind:operation="operation" />
+                <OperationCard 
+                    v-bind:operation="operation" 
+                    v-on:view-map="$emit('view-map', operation.gufi)"
+                />
             </v-flex>
         </v-layout>
     </div>

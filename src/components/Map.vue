@@ -1,11 +1,13 @@
 <template>
-<mapbox v-bind:accessToken="mapboxAccessToken" v-bind:map-options="mapboxOptions" @map-load="mapLoaded" />
+<mapbox v-bind:accessToken="mapboxAccessToken" v-bind:map-options="mapOptions" @map-load="mapLoaded" @map-init="mapInitialized" />
 </template>
 
 <script>
 import Mapbox from "mapbox-gl-vue";
-import store from '../store'
-import {constants} from "crypto";
+import store from "../store";
+import {
+    constants
+} from "crypto";
 
 export default {
     name: "Map",
@@ -14,10 +16,16 @@ export default {
         mapbox: Mapbox
     },
     methods: {
+        mapInitialized(map) {
+            this.map = map;
+        },
         mapLoaded(map) {
+            console.log("Map Loaded!");
             var store_operations = store.state.socket_operations;
             store_operations.forEach(function (operation) {
+                
                 var operation_fill_color;
+
                 if (operation.state === "ACTIVE") {
                     operation_fill_color = "#388E3C";
                 } else if (operation.state === "ROGUE") {
@@ -92,12 +100,17 @@ export default {
                     }
                 });
             });
+        },
+        handleMapEmit() {
+            console.log("Handling Map Emit!");
+            this.map.setPitch(70);
         }
     },
     data() {
         return {
+            map: {},
             mapboxAccessToken: "pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA",
-            mapboxOptions: {
+            mapOptions: {
                 style: "mapbox://styles/mapbox/dark-v9",
                 center: [-100, 37],
                 zoom: 4
@@ -107,7 +120,7 @@ export default {
     computed: {
         getSocketOperations(state) {
             return store.state.socket_operations;
-        }        
+        }
     }
 };
 </script>
