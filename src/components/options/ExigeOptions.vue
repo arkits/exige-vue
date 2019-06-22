@@ -1,8 +1,8 @@
 <template>
 <div class="text-xs-center">
-    <v-dialog v-model="dialog" width="800">
+    <v-dialog v-model="dialog" persistent scrollable width="800">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="pink" dark fixed bottom left fab>
+            <v-btn v-on="on" color="orange" small dark fab>
                 <v-icon>settings</v-icon>
             </v-btn>
         </template>
@@ -55,7 +55,7 @@
 
 <script>
 import Vue from "vue";
-import store from "../store";
+import store from "../../store";
 
 export default {
     name: "ExigeOptions",

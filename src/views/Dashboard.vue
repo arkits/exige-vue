@@ -1,6 +1,6 @@
 <template>
 <v-layout row wrap>
-    <ExigeOptions />
+    <OptionsFab />
     <v-flex xs3>
         <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
     </v-flex>
@@ -14,7 +14,7 @@
 <script>
 import Operations from "../components/Operations";
 import Map from "../components/Map";
-import ExigeOptions from "../components/ExigeOptions";
+import OptionsFab from "../components/options/OptionsFab";
 import {
     constants
 } from "crypto";
@@ -25,7 +25,7 @@ export default {
     components: {
         Operations,
         Map,
-        ExigeOptions
+        OptionsFab
     },
     data() {
         return {
