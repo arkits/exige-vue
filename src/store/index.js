@@ -18,10 +18,10 @@ export default new Vuex.Store({
             isConnected: false,
             message: '',
             reconnectError: false,
-        },
+            },
         socket_operations: [{
             gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-            uss_name: "uamalpha.arc.nasa.gov",
+            uss_name: "uam.archit.xyz",
             state: "ACTIVE",
             operation_volumes: [{
                 type: "Polygon",
@@ -53,29 +53,36 @@ export default new Vuex.Store({
     },
     mutations: {
         [SOCKET_ONOPEN](state, event) {
+            console.log("WebSocket Connected!");
             state.socket.isConnected = true
         },
         [SOCKET_ONCLOSE](state, event) {
+            console.log("WebSocket Closed!");
             state.socket.isConnected = false
         },
         [SOCKET_ONERROR](state, event) {
+            console.log("WebSocket Closed with an error!");
             console.error(state, event)
         },
         [SOCKET_ONMESSAGE](state, message) {
-            var received_data = JSON.parse(message.data);
-            state.socket_operations.push(received_data);
+            console.log("Received Message from WebSocket");
+            try{
+                var received_data = JSON.parse(message.data);
+                state.socket_operations.push(received_data);
+            } catch {
+                console.log("An error occured when trying to parse WebSocket message...");
+            }
         },
         [SOCKET_RECONNECT](state, count) {
+            console.log("WebSocket reconnecting...");
             console.info(state, count)
         },
         [SOCKET_RECONNECT_ERROR](state) {
+            console.log("WebSocket reconnecting error!");
             state.socket.reconnectError = true;
         }
     },
     actions: {
-        sendMessage: function (context, message) {
-            Vue.prototype.$socket.send(message)
-        }
     },
     getters: {
         getSocketOperations(state) {

@@ -6,8 +6,8 @@
             <span class="app-title">Exige</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
-            <span class="mr-2">Login</span>
+        <v-btn flat @click="websocketButton">
+            <span class="mr-2">WebSocket Toggle</span>
         </v-btn>
     </v-toolbar>
     <v-content>
@@ -24,8 +24,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Operations from "./components/Operations";
 import Map from "./components/Map";
+import { constants } from 'crypto';
+import store from './store' 
 
 export default {
     name: "App",
@@ -38,7 +41,7 @@ export default {
             org_title: "~/",
             positions: [{
                 gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                uss_name: "uamalpha.arc.nasa.gov",
+                uss_name: "uam.archit.xyz",
                 location: {
                     type: "Point",
                     coordinates: [-106.43348693847656, 46.800999519926314]
@@ -47,7 +50,18 @@ export default {
         };
     },
     computed:{
-    }
+    },
+    methods:{
+            websocketButton: function(val) {
+                if(store.state.socket.isConnected){
+                    console.log("WebSocket is conneted... trying to disconnect...");
+                    Vue.prototype.$disconnect()
+                } else {
+                    console.log("WebSocket is not conneted... trying to connect...");
+                    Vue.prototype.$connect()
+                }
+            }
+        }
 };
 </script>
 

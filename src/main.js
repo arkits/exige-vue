@@ -24,11 +24,13 @@ import {
     SOCKET_RECONNECT_ERROR
   }
   
-
-Vue.use(VueNativeSock, 'ws://localhost:7869', { 
+Vue.use(VueNativeSock, 'wss://echo.websocket.org', { 
     store: store,
-    mutations: mutations
+    mutations: mutations,
+    connectManually: true
 })
+
+store.$socket = Vue.prototype.$socket;
 
 Vue.config.productionTip = false;
 
