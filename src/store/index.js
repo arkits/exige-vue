@@ -137,6 +137,9 @@ export default new Vuex.Store({
         [SOCKET_RECONNECT_ERROR](state) {
             console.log("WebSocket reconnecting error!");
             state.socket.reconnectError = true;
+        },
+        addOperationToSocketOperations: function(state, op){
+            state.socket_operations.push(op);
         }
     },
     actions: {

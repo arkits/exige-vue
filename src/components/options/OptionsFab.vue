@@ -14,9 +14,8 @@
             <v-icon color="blue">edit</v-icon>
         </v-btn>
 
-        <v-btn fab dark small color="green">
-            <v-icon>add</v-icon>
-        </v-btn>
+        <OperationAdder />
+        
     </v-speed-dial>
 </div>
 </template>
@@ -25,11 +24,13 @@
 import Vue from "vue";
 import store from "../../store";
 import ExigeOptions from "./ExigeOptions";
+import OperationAdder from "./OperationAdder";
 
 export default {
     name: "OptionsFab",
     components: {
-        ExigeOptions
+        ExigeOptions,
+        OperationAdder
     },
     data() {
         return {
