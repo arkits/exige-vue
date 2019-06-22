@@ -12,7 +12,7 @@
             <v-spacer></v-spacer>
 
             <v-btn flat to="/exige/about">About</v-btn>
-            <v-btn flat @click="websocketButton">{{websocketToggleButton}}</v-btn>
+            
         </v-toolbar>
 
         <v-content>

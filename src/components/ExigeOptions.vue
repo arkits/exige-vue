@@ -10,21 +10,22 @@
             <v-card-title class="headline" primary-title>Exige Options</v-card-title>
             <v-card-text>
                 <v-tabs color="blue" dark slider-color="yellow">
-
                     <v-tab key="1" ripple>WebSocket Options</v-tab>
                     <v-tab key="2" ripple>Other Options</v-tab>
                     <v-tab key="3" ripple>Dev Options</v-tab>
 
                     <v-tab-item key="1">
-                            <v-card-text>
-                                <h3>WebSocket Connections</h3>
-                            </v-card-text>
+                        <v-card-text>
+                            <center>
+                                <v-btn depressed @click="websocketButton">{{websocketToggleButton}}</v-btn>
+                            </center>
+                        </v-card-text>
                     </v-tab-item>
 
                     <v-tab-item key="2">
-                            <v-card-text>
-                                <h3>Other options.</h3>
-                            </v-card-text>
+                        <v-card-text>
+                            <h3>Other options.</h3>
+                        </v-card-text>
                     </v-tab-item>
 
                     <v-tab-item key="3">
@@ -45,16 +46,50 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
+    <v-snackbar v-model="snackbar" :color="snackbarColor" :bottom="snackbarY === 'bottom'" :left="snackbarX === 'left'" :multi-line="mode === 'multi-line'" :right="snackbarX === 'right'" :timeout="snackbarTimeout" :top="snackbarY === 'top'" :vertical="mode === 'vertical'">
+        {{ snackbarMessage }}
+        <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
 </div>
 </template>
 
 <script>
+import Vue from "vue";
+import store from "../store";
+
 export default {
     name: "ExigeOptions",
     data() {
         return {
-            dialog: false
+            dialog: false,
+            websocketToggleButton: "Connect WebSocket",
+            snackbar: false,
+            snackbarY: "bottom",
+            snackbarX: "right",
+            mode: "",
+            snackbarTimeout: 6000,
+            snackbarColor: "success",
+            snackbarMessage: "Welcome to Exige!"
         };
+    },
+    methods: {
+        websocketButton: function () {
+            console.log("Toggling WebSocket...");
+            if (store.state.socket.isConnected) {
+                this.snackbarMaker("Disconnecting WebSocket...", "dark");
+                Vue.prototype.$disconnect();
+                this.$data.websocketToggleButton = "Connect WebSocket";
+            } else {
+                this.snackbarMaker("Connecting WebSocket...", "dark");
+                Vue.prototype.$connect();
+                this.$data.websocketToggleButton = "Disconnect WebSocket";
+            }
+        },
+        snackbarMaker: function (snackbarMessage, snackbarColor) {
+            this.$data.snackbarMessage = snackbarMessage;
+            this.$data.snackbarColor = snackbarColor;
+            this.$data.snackbar = true;
+        }
     }
 };
 </script>
