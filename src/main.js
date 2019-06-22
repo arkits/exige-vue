@@ -14,16 +14,18 @@ import {
     SOCKET_RECONNECT,
     SOCKET_RECONNECT_ERROR
   } from './store/mutation-types'
-   
-  const mutations = {
-    SOCKET_ONOPEN,
-    SOCKET_ONCLOSE,
-    SOCKET_ONERROR,
-    SOCKET_ONMESSAGE,
-    SOCKET_RECONNECT,
-    SOCKET_RECONNECT_ERROR
-  }
-  
+
+import router from './router'
+
+const mutations = {
+  SOCKET_ONOPEN,
+  SOCKET_ONCLOSE,
+  SOCKET_ONERROR,
+  SOCKET_ONMESSAGE,
+  SOCKET_RECONNECT,
+  SOCKET_RECONNECT_ERROR
+}
+
 Vue.use(VueNativeSock, 'wss://echo.websocket.org', { 
     store: store,
     mutations: mutations,
@@ -36,5 +38,6 @@ Vue.config.productionTip = false;
 
 new Vue({
     store,
+    router,
     render: h => h(App)
 }).$mount("#app");
