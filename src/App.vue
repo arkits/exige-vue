@@ -2,16 +2,16 @@
 <div id="app">
     <v-app dark>
         <v-toolbar app>
-            <v-toolbar-title class="headline" href="/">
+            <v-toolbar-title class="headline" href="/exige">
                 <span class="org-title">{{org_title}}</span>
                 <span>
-            <a href="/" class="app-title">Exige</a>
+            <a href="/exige" class="app-title">Exige</a>
           </span>
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
 
-            <v-btn flat to="/about">About</v-btn>
+            <v-btn flat to="/exige/about">About</v-btn>
             <v-btn flat @click="websocketButton">{{websocketToggleButton}}</v-btn>
         </v-toolbar>
 

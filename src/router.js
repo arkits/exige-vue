@@ -8,12 +8,12 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/exige',
       name: 'dashboard',
       component: Dashboard
     },
     {
-      path: '/about',
+      path: '/exige/about',
       name: 'about',
       component: () => import('./views/About.vue')
     }
