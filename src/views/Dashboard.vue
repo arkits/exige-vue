@@ -32,7 +32,7 @@ export default {
             org_title: "~/",
             positions: [{
                 gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                uss_name: "uam.archit.xyz",
+                uss_name: "exige.archit.xyz",
                 location: {
                     type: "Point",
                     coordinates: [-106.43348693847656, 46.800999519926314]

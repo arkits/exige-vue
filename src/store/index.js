@@ -21,7 +21,7 @@ export default new Vuex.Store({
         },
         socket_operations: [{
             gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-            uss_name: "uam.archit.xyz",
+            uss_name: "exige.archit.xyz",
             state: "ACTIVE",
             operation_volumes: [{
                 type: "Polygon",
