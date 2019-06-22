@@ -7,11 +7,7 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn flat @click="websocketButton">
-            <span class="mr-2">WebSocket Toggle</span>
-        </v-btn>
-
-        <v-btn flat @click="snackbar = true">
-            <span class="mr-2">snackbar Toggle</span>
+            <span class="mr-2">{{websocketToggleButton}}</span>
         </v-btn>
     </v-toolbar>
     <v-content>
@@ -27,15 +23,15 @@
       <v-snackbar
         v-model="snackbar"
         :color="snackbarColor"
-        :bottom="y === 'bottom'"
-        :left="x === 'left'"
+        :bottom="snackbarY === 'bottom'"
+        :left="snackbarX === 'left'"
         :multi-line="mode === 'multi-line'"
-        :right="x === 'right'"
-        :timeout="timeout"
-        :top="y === 'top'"
+        :right="snackbarX === 'right'"
+        :timeout="snackbarTimeout"
+        :top="snackbarY === 'top'"
         :vertical="mode === 'vertical'"
       >
-        {{ text }}
+        {{ snackbarMessage }}
         <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
       </v-snackbar>
     </v-content>
@@ -69,29 +65,37 @@ export default {
                 }
             }],
             snackbar: false,
-            y: "bottom",
-            x: "right",
+            snackbarY: "bottom",
+            snackbarX: "right",
             mode: "",
-            timeout: 6000,
+            snackbarTimeout: 6000,
             snackbarColor: "success",
-            text: "Hello, I'm a snackbar"
+            snackbarMessage: "Welcome to Exige!",
+            websocketToggleButton: "Connect WebSocket"
         };
     },
     computed: {},
     methods: {
         websocketButton: function (val) {
             if (store.state.socket.isConnected) {
-                console.log("WebSocket is conneted... trying to disconnect...");
+                this.snackbarMaker("Disconnecting WebSocket...", "dark");
                 Vue.prototype.$disconnect();
+                this.$data.websocketToggleButton = "Connect WebSocket";
             } else {
-                console.log("WebSocket is not conneted... trying to connect...");
+                this.snackbarMaker("Connecting WebSocket...", "dark");
                 Vue.prototype.$connect();
+                this.$data.websocketToggleButton = "Disconnect WebSocket";
             }
         },
         emitViewMap: function () {
             console.log("Emiting MapEmit From App");
             this.$refs.Map.handleMapEmit();
-        }
+        },
+        snackbarMaker: function (snackbarMessage, snackbarColor) {
+            this.$data.snackbarMessage = snackbarMessage;
+            this.$data.snackbarColor = snackbarColor;
+            this.$data.snackbar = true;
+        },      
     }
 };
 </script>
