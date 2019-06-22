@@ -17,7 +17,9 @@
                     <v-tab-item key="1">
                         <v-card-text>
                             <center>
-                                <v-btn depressed @click="websocketButton">{{websocketToggleButton}}</v-btn>
+                                <h2>Status: {{getSocketState}} </h2>
+                                <br>
+                                <v-btn @click="websocketButton">{{websocketToggleButton}}</v-btn>
                             </center>
                         </v-card-text>
                     </v-tab-item>
@@ -89,6 +91,15 @@ export default {
             this.$data.snackbarMessage = snackbarMessage;
             this.$data.snackbarColor = snackbarColor;
             this.$data.snackbar = true;
+        }
+    },
+    computed: {
+        getSocketState(state) {
+            if(store.state.socket.isConnected){
+                return "Connected";
+            } else {
+                return "Not Connected";
+            }
         }
     }
 };

@@ -144,6 +144,9 @@ export default new Vuex.Store({
     getters: {
         getSocketOperations(state) {
             return state.socket_operations;
-        }
+        },
+        getSocketState(state) {
+            return state.socket.isConnected;
+        },
     }
 });
