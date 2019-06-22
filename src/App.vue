@@ -13,13 +13,14 @@
     <v-content>
         <v-layout row wrap>
             <v-flex xs3>
-                <Operations v-on:view-map="emitViewMap" />
+                <Operations 
+                    v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" 
+                />
             </v-flex>
             <v-flex xs9>
                 <Map ref="Map" v-bind:positions="positions"/>
         </v-flex>
       </v-layout>
-
       <v-snackbar
         v-model="snackbar"
         :color="snackbarColor"
@@ -76,7 +77,7 @@ export default {
     },
     computed: {},
     methods: {
-        websocketButton: function (val) {
+        websocketButton: function () {
             if (store.state.socket.isConnected) {
                 this.snackbarMaker("Disconnecting WebSocket...", "dark");
                 Vue.prototype.$disconnect();
@@ -87,9 +88,10 @@ export default {
                 this.$data.websocketToggleButton = "Disconnect WebSocket";
             }
         },
-        emitViewMap: function () {
-            console.log("Emiting MapEmit From App");
-            this.$refs.Map.handleMapEmit();
+        viewOperationOnMap: function (val) {
+            console.log("viewOperationOnMap");
+            console.log(val);
+            this.$refs.Map.viewOperationOnMap();
         },
         snackbarMaker: function (snackbarMessage, snackbarColor) {
             this.$data.snackbarMessage = snackbarMessage;

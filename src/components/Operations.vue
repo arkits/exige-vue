@@ -6,7 +6,7 @@
             <v-flex xs12>
                 <OperationCard 
                     v-bind:operation="operation" 
-                    v-on:view-map="$emit('view-map', operation.gufi)"
+                    v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', operation)"
                 />
             </v-flex>
         </v-layout>

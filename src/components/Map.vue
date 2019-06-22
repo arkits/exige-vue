@@ -101,9 +101,10 @@ export default {
                 });
             });
         },
-        handleMapEmit() {
+        viewOperationOnMap() {
             console.log("Handling Map Emit!");
             this.map.setPitch(70);
+            this.map.flyTo({center:[76.9921875,22.59372606392931]});
         }
     },
     data() {
