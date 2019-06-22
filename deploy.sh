@@ -19,6 +19,6 @@ git add -A
 git commit -m "$git_commit_message"
 
 # Push to gh-pages
-git push -f https://github.com/arkits/exige-vue.git master:gh-pages
+git push -f https://github.com/arkits/exige.git master:gh-pages
 
 cd -
