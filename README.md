@@ -1,5 +1,7 @@
 # Exige
 
+![exige-screenshot](https://github.com/arkits/exige/blob/master/img/main.png?raw=true)
+
 ## About
 
 Exige is a proof-of-concept traffic visualizer for [UAM](https://www.nasa.gov/uamgc) / [UTM](https://utm.arc.nasa.gov/index.shtml) data. 
