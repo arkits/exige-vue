@@ -1,5 +1,5 @@
-import Vuex from 'vuex';
-import Vue from 'vue';
+import Vuex from "vuex";
+import Vue from "vue";
 
 import {
     SOCKET_ONOPEN,
@@ -8,7 +8,7 @@ import {
     SOCKET_ONMESSAGE,
     SOCKET_RECONNECT,
     SOCKET_RECONNECT_ERROR
-} from './mutation-types'
+} from "./mutation-types";
 
 Vue.use(Vuex);
 
@@ -16,96 +16,96 @@ export default new Vuex.Store({
     state: {
         socket: {
             isConnected: false,
-            message: '',
-            reconnectError: false,
+            message: "",
+            reconnectError: false
         },
-        socket_operations: [{
-            gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-            uss_name: "exige.archit.xyz",
-            state: "ACTIVE",
-            operation_volumes: [{
-                type: "Polygon",
-                coordinates: [
-                    [
-                        [
-                            -120.89355468749999,
-                            45.336701909968134
-                        ],
-                        [
-                            -101.337890625,
-                            45.336701909968134
-                        ],
-                        [
-                            -101.337890625,
-                            47.21956811231547
-                        ],
-                        [
-                            -120.89355468749999,
-                            47.21956811231547
-                        ],
-                        [
-                            -120.89355468749999,
-                            45.336701909968134
+        socket_operations: [
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                state: "ACTIVE",
+                operation_volumes: [
+                    {
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [-120.89355468749999, 45.336701909968134],
+                                [-101.337890625, 45.336701909968134],
+                                [-101.337890625, 47.21956811231547],
+                                [-120.89355468749999, 47.21956811231547],
+                                [-120.89355468749999, 45.336701909968134]
+                            ]
                         ]
-                    ]
+                    },
+                    {
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [-105.29296874999999, 32.731840896865684],
+                                [-101.337890625, 32.731840896865684],
+                                [-101.337890625, 47.21956811231547],
+                                [-105.29296874999999, 47.21956811231547],
+                                [-105.29296874999999, 32.731840896865684]
+                            ]
+                        ]
+                    },
+                    {
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [-105.205078125, 32.80574473290688],
+                                [-85.5615234375, 32.80574473290688],
+                                [-85.5615234375, 35.567980458012094],
+                                [-105.205078125, 35.567980458012094],
+                                [-105.205078125, 32.80574473290688]
+                            ]
+                        ]
+                    }
                 ]
             },
             {
-                type: "Polygon",
-                coordinates: [
-                    [
-                        [
-                            -105.29296874999999,
-                            32.731840896865684
-                        ],
-                        [
-                            -101.337890625,
-                            32.731840896865684
-                        ],
-                        [
-                            -101.337890625,
-                            47.21956811231547
-                        ],
-                        [
-                            -105.29296874999999,
-                            47.21956811231547
-                        ],
-                        [
-                            -105.29296874999999,
-                            32.731840896865684
+                gufi: "527f31ea-cc79-4082-9551-acfca28f02b6",
+                uss_name: "exige.archit.xyz",
+                state: "ROGUE",
+                operation_volumes: [
+                    {
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [-115.6640625, 25.958044673317843],
+                                [-106.435546875, 25.958044673317843],
+                                [-106.435546875, 41.57436130598913],
+                                [-115.6640625, 41.57436130598913],
+                                [-115.6640625, 25.958044673317843]
+                            ]
                         ]
-                    ]
+                    }
                 ]
             },
             {
-                type: "Polygon",
-                coordinates: [
-                    [
-                        [
-                            -105.205078125,
-                            32.80574473290688
-                        ],
-                        [
-                            -85.5615234375,
-                            32.80574473290688
-                        ],
-                        [
-                            -85.5615234375,
-                            35.567980458012094
-                        ],
-                        [
-                            -105.205078125,
-                            35.567980458012094
-                        ],
-                        [
-                            -105.205078125,
-                            32.80574473290688
+                gufi: "d8fa0933-9e51-4bd5-9529-27dd18c3aa1c",
+                uss_name: "exige.archit.xyz",
+                state: "CLOSED",
+                operation_volumes: [
+                    {
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [-85.8251953125, 50.875311142200765],
+                                [-97.470703125, 46.70973594407157],
+                                [-93.33984375, 41.934976500546604],
+                                [-90.17578124999999, 41.31082388091818],
+                                [-91.8017578125, 45.398449976304086],
+                                [-86.0009765625, 48.40003249610685],
+                                [-84.90234375, 42.48830197960227],
+                                [-80.0244140625, 44.902577996288876],
+                                [-85.8251953125, 50.875311142200765]
+                            ]
                         ]
-                    ]
+                    }
                 ]
             }
-            ]
-        }],
+        ],
         socket_positions: [
             {
                 gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
@@ -162,23 +162,21 @@ export default new Vuex.Store({
                     type: "Point",
                     coordinates: [-86.3525390625, 33.211116472416855]
                 }
-            },
-
+            }
         ]
-
     },
     mutations: {
         [SOCKET_ONOPEN](state, event) {
             console.log("WebSocket Connected!");
-            state.socket.isConnected = true
+            state.socket.isConnected = true;
         },
         [SOCKET_ONCLOSE](state, event) {
             console.log("WebSocket Closed!");
-            state.socket.isConnected = false
+            state.socket.isConnected = false;
         },
         [SOCKET_ONERROR](state, event) {
             console.log("WebSocket Closed with an error!");
-            console.error(state, event)
+            console.error(state, event);
         },
         [SOCKET_ONMESSAGE](state, message) {
             console.log("Received Message from WebSocket");
@@ -186,12 +184,14 @@ export default new Vuex.Store({
                 var received_data = JSON.parse(message.data);
                 state.socket_operations.push(received_data);
             } catch {
-                console.log("An error occured when trying to parse WebSocket message...");
+                console.log(
+                    "An error occured when trying to parse WebSocket message..."
+                );
             }
         },
         [SOCKET_RECONNECT](state, count) {
             console.log("WebSocket reconnecting...");
-            console.info(state, count)
+            console.info(state, count);
         },
         [SOCKET_RECONNECT_ERROR](state) {
             console.log("WebSocket reconnecting error!");
@@ -201,8 +201,7 @@ export default new Vuex.Store({
             state.socket_operations.push(op);
         }
     },
-    actions: {
-    },
+    actions: {},
     getters: {
         getSocketOperations(state) {
             return state.socket_operations;
@@ -212,6 +211,6 @@ export default new Vuex.Store({
         },
         getSocketState(state) {
             return state.socket.isConnected;
-        },
+        }
     }
 });

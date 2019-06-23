@@ -5,9 +5,6 @@
 <script>
 import Mapbox from "mapbox-gl-vue";
 import store from "../store";
-import {
-    constants
-} from "crypto";
 
 export default {
     name: "Map",

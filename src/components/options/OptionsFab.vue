@@ -21,8 +21,6 @@
 </template>
 
 <script>
-import Vue from "vue";
-import store from "../../store";
 import ExigeOptions from "./ExigeOptions";
 import OperationAdder from "./OperationAdder";
 
