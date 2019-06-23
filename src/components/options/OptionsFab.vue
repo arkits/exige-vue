@@ -11,7 +11,7 @@
         <ExigeOptions />
 
         <v-btn fab dark small color="white">
-            <v-icon color="blue">edit</v-icon>
+            <v-icon color="blue">play_circle_filled</v-icon>
         </v-btn>
 
         <OperationAdder />
