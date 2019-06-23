@@ -5,7 +5,7 @@
         <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
     </v-flex>
     <v-flex xs9>
-        <Map ref="Map" v-bind:positions="positions"/>
+        <Map ref="Map"/>
     </v-flex>
   </v-layout>
 
@@ -30,14 +30,6 @@ export default {
     data() {
         return {
             org_title: "~/",
-            positions: [{
-                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                uss_name: "exige.archit.xyz",
-                location: {
-                    type: "Point",
-                    coordinates: [-106.43348693847656, 46.800999519926314]
-                }
-            }],
             snackbar: false,
             snackbarY: "bottom",
             snackbarX: "right",

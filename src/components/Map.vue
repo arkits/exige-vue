@@ -21,7 +21,10 @@ export default {
         },
         mapLoaded(map) {
             console.log("Map Loaded!");
+
             var store_operations = store.state.socket_operations;
+            var store_positions = store.state.socket_positions;
+
             store_operations.forEach(function (operation) {
                 
                 var operation_fill_color;
@@ -64,30 +67,31 @@ export default {
                         "fill-extrusion-opacity": 0.5
                     }
                 });
-            });
 
-            this.positions.forEach(function (position) {
+                var operation_positions = [];
+                
+                store_positions.filter(function checker(position){
+                    if(position.gufi === operation.gufi){
+                        var location = position.location;
+                        var coordinates = location.coordinates;
+                        var data_to_map = [coordinates[0], coordinates[1]];
+                        operation_positions.push(data_to_map);
+                    }
+                });
+
                 var data = {
                     type: "FeatureCollection",
                     features: [{
                         type: "Feature",
                         geometry: {
                             type: "LineString",
-                            coordinates: [
-                                [-119.794921875, 45.55252525134013],
-                                [-111.57714843749999, 46.830133640447386],
-                                [-102.12890625, 45.67548217560647],
-                                [-104.80957031249999, 39.53793974517628],
-                                [-102.12890625, 33.394759218577995],
-                                [-93.8232421875, 34.95799531086792],
-                                [-86.3525390625, 33.211116472416855]
-                            ]
+                            coordinates: operation_positions
                         }
                     }]
                 };
 
                 map.addLayer({
-                    id: "yoooo",
+                    id: operation.gufi + "_positions",
                     type: "line",
                     source: {
                         type: "geojson",
@@ -121,7 +125,10 @@ export default {
     computed: {
         getSocketOperations(state) {
             return store.state.socket_operations;
-        }
+        },
+        getSocketPositions(state) {
+            return store.state.socket_positions;
+        },
     }
 };
 </script>

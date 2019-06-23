@@ -105,8 +105,67 @@ export default new Vuex.Store({
                 ]
             }
             ]
-        }
+        }],
+        socket_positions: [
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                location: {
+                    type: "Point",
+                    coordinates: [-119.794921875, 45.55252525134013]
+                }
+            },
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                location: {
+                    type: "Point",
+                    coordinates: [-111.57714843749999, 46.830133640447386]
+                }
+            },
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                location: {
+                    type: "Point",
+                    coordinates: [-102.12890625, 45.67548217560647]
+                }
+            },
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                location: {
+                    type: "Point",
+                    coordinates: [-104.80957031249999, 39.53793974517628]
+                }
+            },
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                location: {
+                    type: "Point",
+                    coordinates: [-102.12890625, 33.394759218577995]
+                }
+            },
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                location: {
+                    type: "Point",
+                    coordinates: [-93.8232421875, 34.95799531086792]
+                }
+            },
+            {
+                gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                uss_name: "exige.archit.xyz",
+                location: {
+                    type: "Point",
+                    coordinates: [-86.3525390625, 33.211116472416855]
+                }
+            },
+
         ]
+
     },
     mutations: {
         [SOCKET_ONOPEN](state, event) {
@@ -138,7 +197,7 @@ export default new Vuex.Store({
             console.log("WebSocket reconnecting error!");
             state.socket.reconnectError = true;
         },
-        addOperationToSocketOperations: function(state, op){
+        addOperationToSocketOperations: function (state, op) {
             state.socket_operations.push(op);
         }
     },
@@ -147,6 +206,9 @@ export default new Vuex.Store({
     getters: {
         getSocketOperations(state) {
             return state.socket_operations;
+        },
+        getSocketPositions(state) {
+            return state.socket_positions;
         },
         getSocketState(state) {
             return state.socket.isConnected;
