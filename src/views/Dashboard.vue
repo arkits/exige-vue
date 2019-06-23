@@ -1,6 +1,8 @@
 <template>
 <v-layout row wrap>
-    <OptionsFab />
+    <OptionsFab 
+        v-on:exige-clearStore="clearStore()"
+    />
     <v-flex xs3>
         <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
     </v-flex>
@@ -46,6 +48,10 @@ export default {
             console.log("viewOperationOnMap");
             var operationToView = val;
             this.$refs.Map.viewOperationOnMap(operationToView);
+        },
+        clearStore: function () {
+            console.log("clearStore");
+            this.$refs.Map.clearMapAndStore();
         }
     }
 };

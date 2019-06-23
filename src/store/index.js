@@ -243,6 +243,9 @@ export default new Vuex.Store({
         },
         addOperationToSocketOperations: function (state, op) {
             state.socket_operations.push(op);
+        },
+        clearSocketOperations: function (state) {
+            state.socket_operations = [];
         }
     },
     actions: {},

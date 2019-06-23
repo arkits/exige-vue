@@ -11,8 +11,7 @@
             <v-card-text>
                 <v-tabs color="blue" dark slider-color="yellow">
                     <v-tab key="1" ripple>WebSocket Options</v-tab>
-                    <v-tab key="2" ripple>Other Options</v-tab>
-                    <v-tab key="3" ripple>Dev Options</v-tab>
+                    <v-tab key="2" ripple>Exige Options</v-tab>
 
                     <v-tab-item key="1">
                         <v-card-text>
@@ -26,17 +25,10 @@
 
                     <v-tab-item key="2">
                         <v-card-text>
-                            <h3>Other options.</h3>
+                            <v-btn @click="clearStore">Clear Store</v-btn>
                         </v-card-text>
                     </v-tab-item>
 
-                    <v-tab-item key="3">
-                        <v-card flat>
-                            <v-card-text>
-                                <h3>You found the dev options!</h3>
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
                 </v-tabs>
             </v-card-text>
 
@@ -86,6 +78,11 @@ export default {
                 Vue.prototype.$connect();
                 this.$data.websocketToggleButton = "Disconnect WebSocket";
             }
+        },
+        clearStore: function () {
+            console.log("Clearing Store...");
+            // this.$store.commit('clearSocketOperations');
+            this.$emit('exige-clearStore');
         },
         snackbarMaker: function (snackbarMessage, snackbarColor) {
             this.$data.snackbarMessage = snackbarMessage;

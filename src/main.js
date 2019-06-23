@@ -26,6 +26,12 @@ const mutations = {
   SOCKET_RECONNECT_ERROR
 }
 
+Vue.use(VueNativeSock, 'ws://127.0.0.1:7869', { 
+    store: store,
+    mutations: mutations,
+    connectManually: true
+})
+
 Vue.use(VueNativeSock, 'wss://echo.websocket.org', { 
     store: store,
     mutations: mutations,

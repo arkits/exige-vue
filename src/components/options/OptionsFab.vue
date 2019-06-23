@@ -8,7 +8,9 @@
             </v-btn>
         </template>
 
-        <ExigeOptions />
+        <ExigeOptions 
+            v-on:exige-clearStore="$emit('exige-clearStore')"
+        />
 
         <v-btn fab dark small color="white">
             <v-icon color="blue">play_circle_filled</v-icon>
