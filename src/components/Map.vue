@@ -6,6 +6,11 @@
 import Mapbox from "mapbox-gl-vue";
 import store from "../store";
 
+import geojsonExtent from "@mapbox/geojson-extent";
+import {
+    constants
+} from "crypto";
+
 export default {
     name: "Map",
     props: ["operations", "positions"],
@@ -23,7 +28,6 @@ export default {
             var store_positions = store.state.socket_positions;
 
             store_operations.forEach(function (operation) {
-                
                 var operation_fill_color;
 
                 if (operation.state === "ACTIVE") {
@@ -66,9 +70,9 @@ export default {
                 });
 
                 var operation_positions = [];
-                
-                store_positions.filter(function checker(position){
-                    if(position.gufi === operation.gufi){
+
+                store_positions.filter(function checker(position) {
+                    if (position.gufi === operation.gufi) {
                         var location = position.location;
                         var coordinates = location.coordinates;
                         var data_to_map = [coordinates[0], coordinates[1]];
@@ -102,10 +106,15 @@ export default {
                 });
             });
         },
-        viewOperationOnMap() {
-            console.log("Handling Map Emit!");
+        viewOperationOnMap(operationToView) {
+
+            console.log(
+                geojsonExtent.bboxify(operationToView.operation_volumes)
+            );
+
+            var bounds = geojsonExtent.bboxify(operationToView.operation_volumes);
             this.map.setPitch(70);
-            this.map.flyTo({center:[76.9921875,22.59372606392931]});
+            this.map.fitBounds(bounds[0].bbox);
         }
     },
     data() {
@@ -125,7 +134,7 @@ export default {
         },
         getSocketPositions(state) {
             return store.state.socket_positions;
-        },
+        }
     }
 };
 </script>

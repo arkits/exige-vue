@@ -44,8 +44,8 @@ export default {
     methods: {
         viewOperationOnMap: function (val) {
             console.log("viewOperationOnMap");
-            console.log(val);
-            this.$refs.Map.viewOperationOnMap();
+            var operationToView = val;
+            this.$refs.Map.viewOperationOnMap(operationToView);
         }
     }
 };

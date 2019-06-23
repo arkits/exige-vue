@@ -1,5 +1,5 @@
 import Vue from "vue";
-import VueNativeSock from 'vue-native-websocket'
+import VueNativeSock from 'vue-native-websocket';
 
 import "./plugins/vuetify";
 
