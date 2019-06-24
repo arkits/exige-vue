@@ -258,6 +258,16 @@ export default new Vuex.Store({
         },
         getSocketState(state) {
             return state.socket.isConnected;
+        },
+        getSocketPositionsForOperation: (state) => (operationGufi) => {
+            var positionsToReturn = [];
+            state.socket_positions.forEach(function(position){
+                if(position.gufi == operationGufi){
+                    positionsToReturn.push(position);
+                }
+            })
+
+            return positionsToReturn;
         }
     }
 });
