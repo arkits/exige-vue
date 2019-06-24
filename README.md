@@ -18,10 +18,10 @@ Exige is a Vue.js 2.0 based web-app which connects to a UTM Service Suplier and 
 - Mapping
   - Graph multi-volume Operations.
   - Graph flight-path trajectory based on received Position updates.
+  - View Operation on Map based Operation Volume's extent.
+
 ### Planned
-- Determine Map bbox based on Operation's volume.
-- Operation data manupilation.
-- Custom Operation generation - be able to add operations without WebSocket connectivity.
+- Operation creator and data manupilator.
 - Operation lifecycle demo simulation.
 
 ## Development
