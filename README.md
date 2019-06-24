@@ -24,6 +24,12 @@ Exige is a Vue.js 2.0 based web-app which connects to a UTM Service Suplier and 
 - Operation creator and data manupilator.
 - Operation lifecycle demo simulation.
 
+## Reference
+
+## UTM
+
+Exige's data models are based on the NASA UTM OpenAPI specification, available at https://github.com/nasa/utm-apis.
+
 ## Development
 
 ### Available Scripts
