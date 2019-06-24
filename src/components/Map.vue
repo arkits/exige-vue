@@ -47,7 +47,7 @@ export default {
 
                 operation_volumes.forEach(function (operation_volume) {
                     var operation_volume_geojson = {
-                        geometry: operation_volume,
+                        geometry: operation_volume.flight_geography,
                         type: "Feature"
                     };
                     mapboxData.features.push(operation_volume_geojson);
@@ -118,7 +118,7 @@ export default {
                 var geometry = {
                     type: "Feature",
                     properties: {},
-                    geometry: operation_volume
+                    geometry: operation_volume.flight_geography
                 };
 
                 operationVolumeFeatureCollection.features.push(geometry);
