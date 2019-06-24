@@ -1,6 +1,6 @@
 <template>
   <v-container id="operations-cards-list" grid-list-md>
-    <div v-for="operation in getSocketOperations" v-bind:key="operation.gufi">
+    <div v-for="operation in getSocketOperationsFromStore" v-bind:key="operation.gufi">
       <v-layout row wrap>
         <v-flex xs12>
           <OperationCard
@@ -24,8 +24,8 @@ export default {
     OperationCard
   },
   computed: {
-    getSocketOperations(state) {
-      return store.state.socket_operations;
+    getSocketOperationsFromStore() {
+      return store.getters.getSocketOperations;
     }
   }
 };

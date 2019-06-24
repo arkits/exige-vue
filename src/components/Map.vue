@@ -24,8 +24,8 @@ export default {
         mapLoaded(map) {
             console.log("Map Loaded!");
 
-            var store_operations = store.state.socket_operations;
-            var store_positions = store.state.socket_positions;
+            var store_operations = store.getters.getSocketOperations;
+            var store_positions = store.getters.getSocketPositions;
 
             store_operations.forEach(function (operation) {
                 var operation_fill_color;
@@ -159,12 +159,6 @@ export default {
         };
     },
     computed: {
-        getSocketOperations(state) {
-            return store.state.socket_operations;
-        },
-        getSocketPositions(state) {
-            return store.state.socket_positions;
-        }
     }
 };
 </script>

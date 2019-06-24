@@ -250,13 +250,13 @@ export default new Vuex.Store({
     },
     actions: {},
     getters: {
-        getSocketOperations(state) {
+        getSocketOperations: (state) => {
             return state.socket_operations;
         },
-        getSocketPositions(state) {
+        getSocketPositions: (state) => {
             return state.socket_positions;
         },
-        getSocketState(state) {
+        getSocketState: (state) => {
             return state.socket.isConnected;
         },
         getSocketPositionsForOperation: (state) => (operationGufi) => {
@@ -266,8 +266,7 @@ export default new Vuex.Store({
                     positionsToReturn.push(position);
                 }
             })
-
             return positionsToReturn;
-        }
+        },
     }
 });
