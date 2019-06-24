@@ -2,7 +2,7 @@
 <div class="text-xs-center">
     <v-dialog v-model="dialog" persistent scrollable width="800">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="green" small dark fab>
+            <v-btn v-on="on" color="green" dark fab>
                 <v-icon>add</v-icon>
             </v-btn>
         </template>
