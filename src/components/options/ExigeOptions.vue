@@ -7,9 +7,12 @@
             </v-btn>
         </template>
         <v-card>
-            <v-card-title class="headline" primary-title>Exige Options</v-card-title>
-            <v-card-text>
-                <v-tabs color="blue" dark slider-color="yellow">
+            <v-card-title class="headline blue"  primary-title>
+                Exige Options
+            </v-card-title>
+            
+            <v-card-text >
+                <v-tabs centered color="blue" dark slider-color="yellow">
                     <v-tab key="1" ripple>WebSocket Options</v-tab>
                     <v-tab key="2" ripple>Exige Options</v-tab>
 
@@ -25,7 +28,18 @@
 
                     <v-tab-item key="2">
                         <v-card-text>
-                            <v-btn @click="clearStore">Clear Store</v-btn>
+                            <v-container>
+                                <v-layout row wrap>
+                            <v-flex xs9 >
+                                <h3>Clear the Store</h3>
+                                <p>Will clear all stored Operations and Positions</p>
+                            </v-flex>
+                            <v-flex xs3>
+                                <v-btn depressed @click="clearStore">Clear Store</v-btn>
+                            </v-flex>
+                                   </v-layout>
+                            </v-container>
+
                         </v-card-text>
                     </v-tab-item>
 
