@@ -11,7 +11,7 @@ Exige is a Vue.js 2.0 based web-app which connects to a UTM Service Suplier and 
 ## Features
 
 ### Implemented
-- WebSocket
+- Connectivity
   - Connect to an USS over WebSocket endpoint.
   - Receive Operations and Positions over WebSocket and store.
   - Connect and disconnect WebSocket.
