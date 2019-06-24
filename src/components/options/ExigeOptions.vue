@@ -32,7 +32,7 @@
                                 <v-layout row wrap>
                             <v-flex xs9 >
                                 <h3>Clear the Store</h3>
-                                <p>Will clear all stored Operations and Positions</p>
+                                <p>Will clear all stored Operations and Positions.</p>
                             </v-flex>
                             <v-flex xs3>
                                 <v-btn depressed @click="clearStore">Clear Store</v-btn>
