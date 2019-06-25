@@ -21,90 +21,67 @@ export default {
         mapInitialized(map) {
             this.map = map;
         },
+        createOperationLayer(operation) {
+            var operationFillColor;
+
+            if (operation.state === "ACTIVE") {
+                operationFillColor = "#388E3C";
+            } else if (operation.state === "ROGUE") {
+                operationFillColor = "#D32F2F";
+            } else if (operation.state === "CLOSED") {
+                operationFillColor = "#616161";
+            }
+
+            var mapboxData = {
+                type: "FeatureCollection",
+                features: []
+            };
+
+            var operationVolumes = operation.operation_volumes;
+
+            operationVolumes.forEach(function (operationVolume) {
+                var operationVolumeGeojson = {
+                    geometry: operationVolume.flight_geography,
+                    type: "Feature"
+                };
+                mapboxData.features.push(operationVolumeGeojson);
+            });
+
+            var operationLayerId = operation.gufi + "_operation";
+
+            var mapLayer = {
+                id: operationLayerId,
+                type: "fill-extrusion",
+                source: {
+                    type: "geojson",
+                    data: mapboxData
+                },
+                layout: {},
+                paint: {
+                    "fill-extrusion-color": operationFillColor,
+                    "fill-extrusion-height": 10000,
+                    "fill-extrusion-base": 0,
+                    "fill-extrusion-opacity": 0.5
+                }
+            };
+
+            if(this.map.getSource(operationLayerId)){
+                console.log("Updating existing layer - " + operationLayerId);
+                this.map.getSource(operationLayerId).setData(mapLayer);
+            }else{
+                console.log("Adding new layer - " + operationLayerId);
+                this.map.addLayer(mapLayer);
+            }
+
+        },
         mapLoaded(map) {
             console.log("Map Loaded!");
 
             var store_operations = store.getters.getSocketOperations;
-            var store_positions = store.getters.getSocketPositions;
 
-            store_operations.forEach(function (operation) {
-                var operation_fill_color;
-
-                if (operation.state === "ACTIVE") {
-                    operation_fill_color = "#388E3C";
-                } else if (operation.state === "ROGUE") {
-                    operation_fill_color = "#D32F2F";
-                } else if (operation.state === "CLOSED") {
-                    operation_fill_color = "#616161";
-                }
-
-                var mapboxData = {
-                    type: "FeatureCollection",
-                    features: []
-                };
-
-                var operation_volumes = operation.operation_volumes;
-
-                operation_volumes.forEach(function (operation_volume) {
-                    var operation_volume_geojson = {
-                        geometry: operation_volume.flight_geography,
-                        type: "Feature"
-                    };
-                    mapboxData.features.push(operation_volume_geojson);
-                });
-
-                map.addLayer({
-                    id: operation.gufi,
-                    type: "fill-extrusion",
-                    source: {
-                        type: "geojson",
-                        data: mapboxData
-                    },
-                    layout: {},
-                    paint: {
-                        "fill-extrusion-color": operation_fill_color,
-                        "fill-extrusion-height": 10000,
-                        "fill-extrusion-base": 0,
-                        "fill-extrusion-opacity": 0.5
-                    }
-                });
-
-                var operation_positions = [];
-
-                store_positions.filter(function checker(position) {
-                    if (position.gufi === operation.gufi) {
-                        var location = position.location;
-                        var coordinates = location.coordinates;
-                        var data_to_map = [coordinates[0], coordinates[1]];
-                        operation_positions.push(data_to_map);
-                    }
-                });
-
-                var data = {
-                    type: "FeatureCollection",
-                    features: [{
-                        type: "Feature",
-                        geometry: {
-                            type: "LineString",
-                            coordinates: operation_positions
-                        }
-                    }]
-                };
-
-                map.addLayer({
-                    id: operation.gufi + "_positions",
-                    type: "line",
-                    source: {
-                        type: "geojson",
-                        data: data
-                    },
-                    paint: {
-                        "line-color": "yellow",
-                        "line-opacity": 0.7,
-                        "line-width": 5
-                    }
-                });
-            });
+            for (var operation in store_operations) {
+                this.createOperationLayer(store_operations[operation]);
+            }
         },
         viewOperationOnMap(operationToView) {
             console.log(operationToView.operation_volumes);
@@ -159,6 +136,18 @@ export default {
         };
     },
     computed: {
+        computeStoreSocketOperations() {
+            return store.getters.getSocketOperations;
+        }
+    },
+    watch: {
+        computeStoreSocketOperations(newStore, oldStore) {
+            console.log("Watched change in Store Operations. Redrawing Map.");
+
+            for (var i in newStore) {
+                this.createOperationLayer(newStore[i]);
+            }
+        }
     }
 };
 </script>
@@ -168,10 +157,11 @@ export default {
     width: 100%;
     height: 95vh;
 }
+
 @media screen and (max-width: 960px) {
-  #map {
-    width: 100%;
-    height: 60vh;
-  }
+    #map {
+        width: 100%;
+        height: 60vh;
+    }
 }
 </style>
