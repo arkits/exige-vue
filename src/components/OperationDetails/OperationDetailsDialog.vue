@@ -9,22 +9,20 @@
                 <span class="headline">Advanced Details</span>
             </v-card-title>
             <v-card-text>
-                <v-tabs color="blue" centered dark slider-color="yellow">
+                <v-tabs color="blue" centered dark slider-color="pink">
                     <v-tab key="1" ripple>Operation Details</v-tab>
                     <v-tab key="2" ripple>Position Details</v-tab>
                     <v-tab-item key="1">
                         <v-card flat>
                             <v-card-text>
-                                <pre>{{operation}}</pre>
+                                <OperationDataView v-bind:operation="operation" />
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
                     <v-tab-item key="2">
                         <v-card flat>
                             <v-card-text>
-                                <pre>
-                                    {{getSocketPositionsForOperation}}
-                                </pre>
+                                <PositionsTimeline v-bind:operation="operation" />
                             </v-card-text>
                         </v-card>
                     </v-tab-item>
@@ -32,7 +30,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
+                <v-btn color="green darken-1" @click="dialog = false">Close</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -41,11 +39,17 @@
 
 <script>
 import Vue from "vue";
-import store from "../store";
+import store from "../../store";
+import OperationDataView from "./OperationDataView";
+import PositionsTimeline from "./PositionsTimeline";
 
 export default {
     name: "OperationDetailsDialog",
     props: ["operation"],
+    components: {
+        OperationDataView,
+        PositionsTimeline
+    },
     data() {
         return {
             dialog: false

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import OperationDetailsDialog from "./OperationDetailsDialog";
+import OperationDetailsDialog from "./OperationDetails/OperationDetailsDialog";
 
 export default {
     name: "OperationCard",
