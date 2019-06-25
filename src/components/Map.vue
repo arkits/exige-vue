@@ -73,13 +73,63 @@ export default {
                 this.map.addLayer(mapLayer);
             }
         },
+        createPositionLayer(positions) {
+
+            var positionLayerId = positions[0].gufi + "_positions";
+            console.log("Add new layer - " + positionLayerId);
+
+            var positionsToMap = [];
+
+            for(var i in positions){
+                var position = positions[i];
+                var location = position.location;
+                var coordinates = location.coordinates;
+                var tempPos = [coordinates[0], coordinates[1]];
+                positionsToMap.push(tempPos);
+            }
+
+            var data = {
+                type: "FeatureCollection",
+                features: [{
+                    type: "Feature",
+                    geometry: {
+                        type: "LineString",
+                        coordinates: positionsToMap
+                    }
+                }]
+            };
+
+            this.map.addLayer({
+                id: positionLayerId,
+                type: "line",
+                source: {
+                    type: "geojson",
+                    data: data
+                },
+                paint: {
+                    "line-color": "yellow",
+                    "line-opacity": 0.7,
+                    "line-width": 5
+                }
+            });
+        },
         mapLoaded(map) {
             console.log("Map Loaded!");
 
-            var store_operations = store.getters.getSocketOperations;
+            var storeOperations = store.getters.getSocketOperations;
 
-            for (var operation in store_operations) {
-                this.createOperationLayer(store_operations[operation]);
+            for (var i in storeOperations) {
+                var operation = storeOperations[i];
+
+                this.createOperationLayer(operation);
+
+                var positions = store.getters.getSocketPositionsForOperation(
+                    operation.gufi
+                );
+
+                if (positions != 0) {
+                    this.createPositionLayer(positions);
+                }
             }
         },
         viewOperationOnMap(operationToView) {
@@ -103,6 +153,8 @@ export default {
             var bounds = geojsonExtent.bboxify(operationVolumeFeatureCollection);
 
             console.log(bounds);
+
+            this.map.setPitch(70);
 
             this.map.fitBounds(bounds.bbox);
         },
