@@ -28,7 +28,7 @@ export default new Vuex.Store({
                 operation_volumes: [
                     {
                         ordinal: 1,
-                        flight_geography: {
+                        operation_geography: {
                             type: "Polygon",
                             coordinates: [
                                 [
@@ -43,7 +43,7 @@ export default new Vuex.Store({
                     },
                     {
                         ordinal: 2,
-                        flight_geography: {
+                        operation_geography: {
                             type: "Polygon",
                             coordinates: [
                                 [
@@ -58,7 +58,7 @@ export default new Vuex.Store({
                     },
                     {
                         ordinal: 3,
-                        flight_geography: {
+                        operation_geography: {
                             type: "Polygon",
                             coordinates: [
                                 [
@@ -80,7 +80,7 @@ export default new Vuex.Store({
                 operation_volumes: [
                     {
                         ordinal: 1,
-                        flight_geography: {
+                        operation_geography: {
                             type: "Polygon",
                             coordinates: [
                                 [
@@ -106,7 +106,7 @@ export default new Vuex.Store({
                 operation_volumes: [
                     {
                         ordinal: 1,
-                        flight_geography: {
+                        operation_geography: {
                             type: "Polygon",
                             coordinates: [
                                 [
@@ -321,7 +321,7 @@ function validateOperationData(operation) {
         goodOperation.operation_volumes = [
             {
                 ordinal: 1,
-                flight_geography: {
+                operation_geography: {
                     type: "Polygon",
                     coordinates: [
                         [

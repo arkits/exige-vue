@@ -41,7 +41,7 @@ export default {
 
             operationVolumes.forEach(function (operationVolume) {
                 var operationVolumeGeojson = {
-                    geometry: operationVolume.flight_geography,
+                    geometry: operationVolume.operation_geography,
                     type: "Feature"
                 };
                 mapboxData.features.push(operationVolumeGeojson);
@@ -65,14 +65,13 @@ export default {
                 }
             };
 
-            if(this.map.getSource(operationLayerId)){
+            if (this.map.getSource(operationLayerId)) {
                 console.log("Updating existing layer - " + operationLayerId);
                 this.map.getSource(operationLayerId).setData(mapLayer);
-            }else{
+            } else {
                 console.log("Adding new layer - " + operationLayerId);
                 this.map.addLayer(mapLayer);
             }
-
         },
         mapLoaded(map) {
             console.log("Map Loaded!");
@@ -95,7 +94,7 @@ export default {
                 var geometry = {
                     type: "Feature",
                     properties: {},
-                    geometry: operation_volume.flight_geography
+                    geometry: operation_volume.operation_geography
                 };
 
                 operationVolumeFeatureCollection.features.push(geometry);
@@ -110,16 +109,17 @@ export default {
         clearMapAndStore() {
             console.log("clearMapStore from Map");
 
-            var store_operations = store.state.socket_operations;
+            var storeOperations = store.getters.getSocketOperations;
             var map = this.map;
 
             console.log("Removing operation layers...");
-            store_operations.forEach(function (operation) {
-                var operationLayerId = operation.gufi;
-                var positionLayerId = operationLayerId + "_positions";
+
+            for (var i in storeOperations) {
+                var operation = storeOperations[i];
+                var operationLayerId = operation.gufi + "_operation";
+                console.log("Removing layer - " + operationLayerId);
                 map.removeLayer(operationLayerId);
-                map.removeLayer(positionLayerId);
-            });
+            }
 
             this.$store.commit("clearSocketOperations");
         }
@@ -141,11 +141,11 @@ export default {
         }
     },
     watch: {
-        computeStoreSocketOperations(newStore, oldStore) {
-            console.log("Watched change in Store Operations. Redrawing Map.");
-
-            for (var i in newStore) {
-                this.createOperationLayer(newStore[i]);
+        computeStoreSocketOperations() {
+            console.log("Watched change in Store Operations.");
+            var updatedStoreOperations = store.getters.getSocketOperations;
+            for (var i in updatedStoreOperations) {
+                this.createOperationLayer(updatedStoreOperations[i]);
             }
         }
     }
