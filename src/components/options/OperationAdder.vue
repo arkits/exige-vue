@@ -7,22 +7,37 @@
             </v-btn>
         </template>
         <v-card>
-            <v-card-title class="headline green" primary-title>Operation Adder</v-card-title>
+            <v-card-title class="headline green" primary-title>Add New Operation</v-card-title>
+            <v-card-title class="green font-weight-thin font-italic">
+                <h3 class="font-weight-thin">Add a new operation to Exige's Store. This is a front-end action and does reflect a USS's data!</h3>
+            </v-card-title>
 
             <v-card-text>
+                <div v-if="showRawJsonForm">
+                    <center>
+                        <br>
+                        <v-flex xs10>
+                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="Raw JSON Operation" hint="Refer to UTM USS API Operation"></v-textarea>
+                        </v-flex>
+                    </center>
+                </div>
+                <div v-else></div>
 
-                 <v-text-field   v-model="userInputOperation" label="Operation as a JSON" required></v-text-field>
-            
+                <center>
+                    <div v-if="inputError">
+                        <p class="font-weight-bold red">{{inputError}}</p>
+                    </div>
+                </center>
             </v-card-text>
 
             <v-divider></v-divider>
 
             <v-card-actions>
+                <v-btn color="green" depressed @click="showRawJsonForm=!showRawJsonForm">Toggle Form</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="addToStore">Add</v-btn>
-                <v-btn color="primary" flat @click="dialog = false">Close</v-btn>
+                <v-btn color="green" depressed @click="addToStore">Add</v-btn>
+                <v-btn color="green" depressed @click="dialog = false">Close</v-btn>
             </v-card-actions>
-            
         </v-card>
     </v-dialog>
 </div>
@@ -34,22 +49,25 @@ export default {
     data() {
         return {
             userInputOperation: "",
+            showRawJsonForm: true,
             dialog: false,
+            inputError: ""
         };
     },
     methods: {
-        addToStore: function(){
-            var userInput = this.$data.userInputOperation
+        addToStore: function () {
+            var userInput = this.$data.userInputOperation;
             try {
                 var jsonUserOperation = JSON.parse(userInput);
                 console.log(jsonUserOperation);
-                this.$store.commit('addOperationToSocketOperations', jsonUserOperation);
+                this.$store.commit("addOperationToSocketOperations", jsonUserOperation);
             } catch (error) {
-                console.log("Error occured when addToStore!");
+                this.inputError =
+                    "Error occured when adding Operation to Store... " + error;
+                console.log("Error occured when adding Operation to Store!");
                 console.error(error);
             }
         }
-
     }
 };
 </script>
