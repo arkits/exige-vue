@@ -259,7 +259,14 @@ export default new Vuex.Store({
         },
         addOperationToSocketOperations: function (state, op) {
             var goodOperation = validateOperationData(op);
+            console.log("Adding to Operation to Store.");
+            console.log(goodOperation);
             state.socket_operations.push(goodOperation);
+        },
+        addPositionToSocketPositions: function (state, pos) {
+            console.log("Adding to Position to Store.");
+            console.log(pos);
+            state.socket_positions.push(pos);
         },
         clearSocketOperations: function (state) {
             state.socket_operations = [];

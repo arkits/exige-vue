@@ -7,9 +7,9 @@
             </v-btn>
         </template>
         <v-card>
-            <v-card-title class="headline green" primary-title>Add New Operation</v-card-title>
-            <v-card-title class="green font-weight-thin font-italic">
-                <h3 class="font-weight-thin">Add a new operation to Exige's Store. This is a front-end action and does reflect a USS's data!</h3>
+            <v-card-title class="green">
+                <h1 class="font-weight-thin">Add Data to Store</h1>
+                <h4 class="font-weight-thin font-italic">Add a new Operation or Position to Exige's Store. This is a front-end action and does reflect a USS's data!</h4>
             </v-card-title>
 
             <v-card-text>
@@ -17,7 +17,9 @@
                     <center>
                         <br>
                         <v-flex xs10>
-                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="Raw JSON Operation" hint="Refer to UTM USS API Operation"></v-textarea>
+                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Refer to UTM USS API Operation"></v-textarea>
+
+                            <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Refer to UTM USS API Positions"></v-textarea>
                         </v-flex>
                     </center>
                 </div>
@@ -35,7 +37,8 @@
             <v-card-actions>
                 <v-btn color="green" depressed @click="showRawJsonForm=!showRawJsonForm">Toggle Form</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="green" depressed @click="addToStore">Add</v-btn>
+                <v-btn color="green" depressed @click="addOperationToStore">Add Operation</v-btn>
+                <v-btn color="green" depressed @click="addPositionToStore">Add Position</v-btn>
                 <v-btn color="green" depressed @click="dialog = false">Close</v-btn>
             </v-card-actions>
         </v-card>
@@ -49,22 +52,34 @@ export default {
     data() {
         return {
             userInputOperation: "",
+            userInputPosition: "",
             showRawJsonForm: true,
             dialog: false,
             inputError: ""
         };
     },
     methods: {
-        addToStore: function () {
+        addOperationToStore: function () {
             var userInput = this.$data.userInputOperation;
             try {
                 var jsonUserOperation = JSON.parse(userInput);
-                console.log(jsonUserOperation);
                 this.$store.commit("addOperationToSocketOperations", jsonUserOperation);
             } catch (error) {
                 this.inputError =
                     "Error occured when adding Operation to Store... " + error;
                 console.log("Error occured when adding Operation to Store!");
+                console.error(error);
+            }
+        },
+        addPositionToStore: function () {
+            var userInput = this.$data.userInputPosition;
+            try {
+                var jsonUserPosition = JSON.parse(userInput);
+                this.$store.commit("addPositionToSocketPositions", jsonUserPosition);
+            } catch (error) {
+                this.inputError =
+                    "Error occured when adding Position to Store... " + error;
+                console.log("Error occured when adding Position to Store!");
                 console.error(error);
             }
         }

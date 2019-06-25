@@ -74,13 +74,11 @@ export default {
             }
         },
         createPositionLayer(positions) {
-
             var positionLayerId = positions[0].gufi + "_positions";
-            console.log("Add new layer - " + positionLayerId);
 
             var positionsToMap = [];
 
-            for(var i in positions){
+            for (var i in positions) {
                 var position = positions[i];
                 var location = position.location;
                 var coordinates = location.coordinates;
@@ -99,7 +97,7 @@ export default {
                 }]
             };
 
-            this.map.addLayer({
+            var mapLayer = {
                 id: positionLayerId,
                 type: "line",
                 source: {
@@ -111,7 +109,15 @@ export default {
                     "line-opacity": 0.7,
                     "line-width": 5
                 }
-            });
+            };
+
+            if (this.map.getSource(positionLayerId)) {
+                console.log("Updating existing layer - " + positionLayerId);
+                this.map.getSource(positionLayerId).setData(data);
+            } else {
+                console.log("Adding new layer - " + positionLayerId);
+                this.map.addLayer(mapLayer);
+            }
         },
         mapLoaded(map) {
             console.log("Map Loaded!");
@@ -169,8 +175,11 @@ export default {
             for (var i in storeOperations) {
                 var operation = storeOperations[i];
                 var operationLayerId = operation.gufi + "_operation";
+                var positionLayerId = operation.gufi + "_positions";
                 console.log("Removing layer - " + operationLayerId);
+                console.log("Removing layer - " + positionLayerId);
                 map.removeLayer(operationLayerId);
+                map.removeLayer(positionLayerId);
             }
 
             this.$store.commit("clearSocketOperations");
@@ -190,6 +199,9 @@ export default {
     computed: {
         computeStoreSocketOperations() {
             return store.getters.getSocketOperations;
+        },
+        computeStoreSocketPositions() {
+            return store.getters.getSocketPositions;
         }
     },
     watch: {
@@ -198,6 +210,19 @@ export default {
             var updatedStoreOperations = store.getters.getSocketOperations;
             for (var i in updatedStoreOperations) {
                 this.createOperationLayer(updatedStoreOperations[i]);
+            }
+        },
+        computeStoreSocketPositions() {
+            console.log("Watched change in Store Positions.");
+            var storeOperations = store.getters.getSocketOperations;
+            for (var i in storeOperations) {
+                var operation = storeOperations[i];
+
+                var positions = store.getters.getSocketPositionsForOperation(operation.gufi);
+
+                if(positions.length > 0){
+                    this.createPositionLayer(positions);
+                }
             }
         }
     }
