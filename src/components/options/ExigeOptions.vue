@@ -7,11 +7,9 @@
             </v-btn>
         </template>
         <v-card>
-            <v-card-title class="headline blue"  primary-title>
-                Exige Options
-            </v-card-title>
-            
-            <v-card-text >
+            <v-card-title class="headline blue" primary-title>Exige Options</v-card-title>
+
+            <v-card-text>
                 <v-tabs centered color="blue" dark slider-color="yellow">
                     <v-tab key="1" ripple>WebSocket Options</v-tab>
                     <v-tab key="2" ripple>Exige Options</v-tab>
@@ -19,7 +17,7 @@
                     <v-tab-item key="1">
                         <v-card-text>
                             <center>
-                                <h2>Status: {{getSocketState}} </h2>
+                                <h2>Status: {{getSocketState}}</h2>
                                 <br>
                                 <v-btn @click="websocketButton">{{websocketToggleButton}}</v-btn>
                             </center>
@@ -29,20 +27,27 @@
                     <v-tab-item key="2">
                         <v-card-text>
                             <v-container>
-                                <v-layout row wrap>
-                            <v-flex xs9 >
-                                <h3>Clear the Store</h3>
-                                <p>Will clear all stored Operations and Positions.</p>
-                            </v-flex>
-                            <v-flex xs3>
-                                <v-btn depressed @click="clearStore">Clear Store</v-btn>
-                            </v-flex>
-                                   </v-layout>
+                                <v-layout pt-1>
+                                    <v-flex xs8>
+                                        <h3>Load Sample Data</h3>
+                                        <p>This will add 3 Operations to the map.</p>
+                                    </v-flex>
+                                    <v-flex xs3>
+                                        <v-btn depressed @click="clearStore">Load Data</v-btn>
+                                    </v-flex>
+                                </v-layout>
+                                <v-layout pt-1>
+                                    <v-flex xs8>
+                                        <h3>Clear the Store</h3>
+                                        <p>Will clear all stored Operations and Positions.</p>
+                                    </v-flex>
+                                    <v-flex xs3>
+                                        <v-btn depressed @click="clearStore">Clear Store</v-btn>
+                                    </v-flex>
+                                </v-layout>
                             </v-container>
-
                         </v-card-text>
                     </v-tab-item>
-
                 </v-tabs>
             </v-card-text>
 
@@ -50,7 +55,7 @@
 
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="dialog = false">Close</v-btn>
+                <v-btn color="primary" @click="dialog = false">Close</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -96,7 +101,7 @@ export default {
         clearStore: function () {
             console.log("Clearing Store...");
             // this.$store.commit('clearSocketOperations');
-            this.$emit('exige-clearStore');
+            this.$emit("exige-clearStore");
         },
         snackbarMaker: function (snackbarMessage, snackbarColor) {
             this.$data.snackbarMessage = snackbarMessage;
@@ -106,7 +111,7 @@ export default {
     },
     computed: {
         getSocketState(state) {
-            if(store.state.socket.isConnected){
+            if (store.state.socket.isConnected) {
                 return "Connected";
             } else {
                 return "Not Connected";
