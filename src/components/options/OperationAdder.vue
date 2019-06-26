@@ -17,9 +17,9 @@
                     <center>
                         <br>
                         <v-flex xs10>
-                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Refer to UTM USS API Operation"></v-textarea>
+                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Enter an Operation or list of Operations. Refer to UTM USS API Operation"></v-textarea>
 
-                            <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Refer to UTM USS API Positions"></v-textarea>
+                            <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Enter a Position or list of Positions. Refer to UTM USS API Positions"></v-textarea>
                         </v-flex>
                     </center>
                 </div>
@@ -62,8 +62,14 @@ export default {
         addOperationToStore: function () {
             var userInput = this.$data.userInputOperation;
             try {
-                var jsonUserOperation = JSON.parse(userInput);
-                this.$store.commit("addOperationToSocketOperations", jsonUserOperation);
+                var jsonUserInput = JSON.parse(userInput);
+                if(Array.isArray(jsonUserInput)){
+                    for(var i in jsonUserInput){
+                        this.$store.commit("addOperationToSocketOperations", jsonUserInput[i]);
+                    }
+                }else{
+                    this.$store.commit("addOperationToSocketOperations", jsonUserInput);
+                }
             } catch (error) {
                 this.inputError =
                     "Error occured when adding Operation to Store... " + error;
@@ -74,8 +80,14 @@ export default {
         addPositionToStore: function () {
             var userInput = this.$data.userInputPosition;
             try {
-                var jsonUserPosition = JSON.parse(userInput);
-                this.$store.commit("addPositionToSocketPositions", jsonUserPosition);
+                var jsonUserInput = JSON.parse(userInput);
+                if(Array.isArray(jsonUserInput)){
+                    for(var i in jsonUserInput){
+                        this.$store.commit("addPositionToSocketPositions", jsonUserInput[i]);
+                    }
+                }else{
+                    this.$store.commit("addPositionToSocketPositions", jsonUserInput);
+                }
             } catch (error) {
                 this.inputError =
                     "Error occured when adding Position to Store... " + error;
