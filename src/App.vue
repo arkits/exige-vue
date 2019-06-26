@@ -10,9 +10,7 @@
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
-
-            <v-btn flat to="/exige/about">About</v-btn>
-            
+                        
         </v-toolbar>
 
         <v-content>
