@@ -12,10 +12,10 @@
       <v-layout grey darken-3 row wrap>
         <v-flex grey darken-4 white--text xs12>
           <v-layout row wrap>
-            <v-flex xs12 md6>
+            <v-flex xs12 md10>
               <OptionsList v-on:exige-clearStore="clearStore()"/>
             </v-flex>
-            <v-flex xs12 md6>
+            <v-flex xs12 md2>
               <AboutPopup/>
             </v-flex>
           </v-layout>
