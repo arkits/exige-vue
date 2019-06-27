@@ -21,7 +21,7 @@ export default new Vuex.Store({
             reconnectError: false
         },
         socket_operations: [],
-        socket_positions: [],
+        socket_positions: []
     },
     mutations: {
         [SOCKET_ONOPEN](state, event) {
@@ -56,14 +56,24 @@ export default new Vuex.Store({
             state.socket.reconnectError = true;
         },
         addOperationToSocketOperations: function (state, op) {
-            var goodOperation = validateOperationData(op);
-            console.log("Adding to Operation to Store.");
-            console.log(goodOperation);
-            state.socket_operations.push(goodOperation);
+            var validOperation = validateOperationData(op);
+
+            var index = state.socket_operations.findIndex(function (operation, i) {
+                return operation.gufi === validOperation.gufi;
+            });
+
+            if (index != -1) {
+                console.log("Update Operation")
+                Vue.set(state.socket_operations, index, validOperation);
+            } else {
+                console.log("Add Operation")
+                state.socket_operations.push(validOperation)
+            }
+
+
         },
         addPositionToSocketPositions: function (state, pos) {
             console.log("Adding to Position to Store.");
-            console.log(pos);
             state.socket_positions.push(pos);
         },
         clearSocketOperations: function (state) {
@@ -95,8 +105,6 @@ export default new Vuex.Store({
 
 function validateOperationData(operation) {
     var goodOperation = {};
-
-    console.log("validateOperationData");
 
     if (operation.gufi) {
         goodOperation.gufi = operation.gufi;
