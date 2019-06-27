@@ -20,8 +20,7 @@ export default {
         RefreshData
     },
     data() {
-        return {
-        };
+        return {};
     }
 };
 </script>
