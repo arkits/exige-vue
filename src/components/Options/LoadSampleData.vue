@@ -2,7 +2,7 @@
 <div class="text-xs-center">
     <v-dialog v-model="dialog" scrollable width="400">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="green" dark depressed @click="loadData">Load Sample Data</v-btn>
+            <v-btn v-on="on" color="green" dark block @click="loadData">Load Sample Data</v-btn>
         </template>
         <v-card>
             <v-card-title class="green">
@@ -13,7 +13,7 @@
                 <h3>{{loadDataMessage}}</h3>
                 <br>
                 <center>
-                    <v-btn color="green" large depressed @click="dialog = false">YAY!</v-btn>
+                    <v-btn color="green" large block @click="dialog = false">YAY!</v-btn>
                 </center>
             </v-card-text>
         </v-card>

@@ -4,7 +4,7 @@
         <template v-slot:activator="{ on }">
             <v-btn v-on="on" color="orange" dark depressed round>
                 Options
-                <v-icon right dark>add</v-icon>
+                <v-icon right dark>settings</v-icon>
             </v-btn>
         </template>
         <v-card>
@@ -21,7 +21,7 @@
                                 <v-layout pt-1>
                                     <v-flex xs8>
                                         <h3>Load Sample Data</h3>
-                                        <p>This will add 3 Operations to the map.</p>
+                                        <p>Load 3 sample Operations into Exige.</p>
                                     </v-flex>
                                     <v-flex xs3>
                                         <LoadSampleData />
@@ -29,11 +29,11 @@
                                 </v-layout>
                                 <v-layout pt-1>
                                     <v-flex xs8>
-                                        <h3>Clear the Store</h3>
-                                        <p>Will clear all stored Operations and Positions.</p>
+                                        <h3>Clear Data</h3>
+                                        <p>Clear all store data - Operations and Positions.</p>
                                     </v-flex>
                                     <v-flex xs3>
-                                        <v-btn depressed @click="clearStore">Clear Store</v-btn>
+                                        <v-btn block @click="clearStore">Clear Data</v-btn>
                                     </v-flex>
                                 </v-layout>
                                 <br>
@@ -41,7 +41,7 @@
                                 <br>
                                 <v-layout pt-1>
                                     <v-flex xs8>
-                                        <h3>NUSS Data</h3>
+                                        <h3>USS Data</h3>
                                         <p>Cached locally.</p>
                                         <v-text-field v-model="name" label="First name" required></v-text-field>
                                     </v-flex>

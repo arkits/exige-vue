@@ -1,9 +1,10 @@
 <template>
 <div class="text-xs-center">
-    <v-dialog v-model="dialog" persistent scrollable width="800">
+    <v-dialog v-model="dialog" scrollable width="800">
         <template v-slot:activator="{ on }">
             <v-btn v-on="on" color="green" dark depressed round>
-                Add Data <v-icon right dark >add</v-icon>
+                Add Data
+                <v-icon right dark>add</v-icon>
             </v-btn>
         </template>
         <v-card>
@@ -35,10 +36,10 @@
             <v-divider></v-divider>
 
             <v-card-actions>
-                <v-btn color="green" depressed @click="showRawJsonForm=!showRawJsonForm">Toggle Form</v-btn>
-                <v-spacer></v-spacer>
                 <v-btn color="green" depressed @click="addOperationToStore">Add Operation</v-btn>
                 <v-btn color="green" depressed @click="addPositionToStore">Add Position</v-btn>
+                <v-spacer></v-spacer>
+
                 <v-btn color="green" depressed @click="dialog = false">Close</v-btn>
             </v-card-actions>
         </v-card>
@@ -63,11 +64,14 @@ export default {
             var userInput = this.$data.userInputOperation;
             try {
                 var jsonUserInput = JSON.parse(userInput);
-                if(Array.isArray(jsonUserInput)){
-                    for(var i in jsonUserInput){
-                        this.$store.commit("addOperationToSocketOperations", jsonUserInput[i]);
+                if (Array.isArray(jsonUserInput)) {
+                    for (var i in jsonUserInput) {
+                        this.$store.commit(
+                            "addOperationToSocketOperations",
+                            jsonUserInput[i]
+                        );
                     }
-                }else{
+                } else {
                     this.$store.commit("addOperationToSocketOperations", jsonUserInput);
                 }
             } catch (error) {
@@ -81,11 +85,14 @@ export default {
             var userInput = this.$data.userInputPosition;
             try {
                 var jsonUserInput = JSON.parse(userInput);
-                if(Array.isArray(jsonUserInput)){
-                    for(var i in jsonUserInput){
-                        this.$store.commit("addPositionToSocketPositions", jsonUserInput[i]);
+                if (Array.isArray(jsonUserInput)) {
+                    for (var i in jsonUserInput) {
+                        this.$store.commit(
+                            "addPositionToSocketPositions",
+                            jsonUserInput[i]
+                        );
                     }
-                }else{
+                } else {
                     this.$store.commit("addPositionToSocketPositions", jsonUserInput);
                 }
             } catch (error) {
