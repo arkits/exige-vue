@@ -41,8 +41,12 @@ export default {
 
             operationVolumes.forEach(function (operationVolume) {
                 var operationVolumeGeojson = {
+                    type: "Feature",
                     geometry: operationVolume.operation_geography,
-                    type: "Feature"
+                    properties: {
+                        height: operationVolume.max_altitude.altitude_value,
+                        base_height: operationVolume.min_altitude.altitude_value,
+                    }
                 };
                 mapboxData.features.push(operationVolumeGeojson);
             });
@@ -59,8 +63,8 @@ export default {
                 layout: {},
                 paint: {
                     "fill-extrusion-color": operationFillColor,
-                    "fill-extrusion-height": 10000,
-                    "fill-extrusion-base": 0,
+                    "fill-extrusion-height": ['get', 'height'],
+                    "fill-extrusion-base": ['get', 'base_height'],
                     "fill-extrusion-opacity": 0.5
                 }
             };
@@ -122,22 +126,6 @@ export default {
         },
         mapLoaded(map) {
             console.log("Map Loaded!");
-
-            var storeOperations = store.getters.getSocketOperations;
-
-            for (var i in storeOperations) {
-                var operation = storeOperations[i];
-
-                this.createOperationLayer(operation);
-
-                var positions = store.getters.getSocketPositionsForOperation(
-                    operation.gufi
-                );
-
-                if (positions != 0) {
-                    this.createPositionLayer(positions);
-                }
-            }
         },
         viewOperationOnMap(operationToView) {
             console.log(operationToView.operation_volumes);
