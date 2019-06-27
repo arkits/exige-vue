@@ -32,6 +32,18 @@ export default {
                     state: "ACTIVE",
                     operation_volumes: [{
                             ordinal: 1,
+                            min_altitude: {
+                                altitude_value: 500,
+                                vertical_reference: "W84",
+                                units_of_measure: "FT",
+                                source: "OTHER"
+                            },
+                            max_altitude: {
+                                altitude_value: 2000,
+                                vertical_reference: "W84",
+                                units_of_measure: "FT",
+                                source: "OTHER"
+                            },
                             operation_geography: {
                                 type: "Polygon",
                                 coordinates: [
@@ -47,6 +59,18 @@ export default {
                         },
                         {
                             ordinal: 2,
+                            min_altitude: {
+                                altitude_value: 500,
+                                vertical_reference: "W84",
+                                units_of_measure: "FT",
+                                source: "OTHER"
+                            },
+                            max_altitude: {
+                                altitude_value: 2000,
+                                vertical_reference: "W84",
+                                units_of_measure: "FT",
+                                source: "OTHER"
+                            },
                             operation_geography: {
                                 type: "Polygon",
                                 coordinates: [
@@ -62,6 +86,18 @@ export default {
                         },
                         {
                             ordinal: 3,
+                            min_altitude: {
+                                altitude_value: 500,
+                                vertical_reference: "W84",
+                                units_of_measure: "FT",
+                                source: "OTHER"
+                            },
+                            max_altitude: {
+                                altitude_value: 2000,
+                                vertical_reference: "W84",
+                                units_of_measure: "FT",
+                                source: "OTHER"
+                            },
                             operation_geography: {
                                 type: "Polygon",
                                 coordinates: [
@@ -83,6 +119,18 @@ export default {
                     state: "ROGUE",
                     operation_volumes: [{
                         ordinal: 1,
+                        min_altitude: {
+                            altitude_value: 500,
+                            vertical_reference: "W84",
+                            units_of_measure: "FT",
+                            source: "OTHER"
+                        },
+                        max_altitude: {
+                            altitude_value: 2000,
+                            vertical_reference: "W84",
+                            units_of_measure: "FT",
+                            source: "OTHER"
+                        },
                         operation_geography: {
                             type: "Polygon",
                             coordinates: [
@@ -107,6 +155,18 @@ export default {
                     state: "CLOSED",
                     operation_volumes: [{
                         ordinal: 1,
+                        min_altitude: {
+                            altitude_value: 500,
+                            vertical_reference: "W84",
+                            units_of_measure: "FT",
+                            source: "OTHER"
+                        },
+                        max_altitude: {
+                            altitude_value: 2000,
+                            vertical_reference: "W84",
+                            units_of_measure: "FT",
+                            source: "OTHER"
+                        },
                         operation_geography: {
                             type: "Polygon",
                             coordinates: [
