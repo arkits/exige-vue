@@ -8,8 +8,8 @@
             <Map ref="Map"/>
       </v-flex>
     </v-layout>
-    <v-footer absolute height="auto" color="primary lighten-1">
-      <v-layout grey darken-3 row wrap>
+    <v-footer fixed height="auto">
+      <v-layout row wrap>
         <v-flex grey darken-4 white--text xs12>
           <v-layout row wrap>
             <v-flex xs12 md10>

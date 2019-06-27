@@ -1,5 +1,5 @@
 <template>
-<v-btn color="cyan" @click="refreshData" dark depressed round>
+<v-btn color="cyan" @click="refreshData" flat>
     Refresh Data
     <v-icon right dark>refresh</v-icon>
 </v-btn>
