@@ -67,11 +67,12 @@ export default {
 
             if (this.map.getSource(operationLayerId)) {
                 console.log("Updating existing layer - " + operationLayerId);
-                this.map.getSource(operationLayerId).setData(mapLayer);
-            } else {
-                console.log("Adding new layer - " + operationLayerId);
-                this.map.addLayer(mapLayer);
+                this.map.removeLayer(operationLayerId);
+                this.map.removeSource(operationLayerId);
             }
+
+            console.log("Adding layer - " + operationLayerId);
+            this.map.addLayer(mapLayer);
         },
         createPositionLayer(positions) {
             var positionLayerId = positions[0].gufi + "_positions";
@@ -220,7 +221,7 @@ export default {
 
                 var positions = store.getters.getSocketPositionsForOperation(operation.gufi);
 
-                if(positions.length > 0){
+                if (positions.length > 0) {
                     this.createPositionLayer(positions);
                 }
             }
