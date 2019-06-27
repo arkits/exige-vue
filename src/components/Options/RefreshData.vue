@@ -13,19 +13,31 @@ export default {
     name: "RefreshData",
     components: {},
     data() {
-        return {};
+        return {
+            name: ""
+        };
     },
     computed: {},
     methods: {
         refreshData: function () {
             console.log("RefreshData");
-            axios.get("https://jsonplaceholder.typicode.com/posts")
+            console.log(localStorage.name);
+            axios
+                .get("https://jsonplaceholder.typicode.com/posts")
                 .then(function (response) {
                     console.log(response);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+        }
+    },
+    mounted() {
+        if (localStorage.name) this.name = localStorage.name;
+    },
+    watch: {
+        name(newName) {
+            localStorage.name = newName;
         }
     }
 };
