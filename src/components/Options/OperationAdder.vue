@@ -9,8 +9,8 @@
         </template>
         <v-card>
             <v-card-title class="green">
-                <h1 class="font-weight-thin">Add Data to Store</h1>
-                <h4 class="font-weight-thin font-italic">Add a new Operation or Position to Exige's Store. This is a front-end action and does reflect a USS's data!</h4>
+                <h1 class="headline">Add Data to Store</h1>
+                <h4 class="font-weight-regular font-italic">Add a new Operation or Position to Exige's Store. This is a front-end action and does reflect a USS's data!</h4>
             </v-card-title>
 
             <v-card-text>

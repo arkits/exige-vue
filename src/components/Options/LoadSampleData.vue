@@ -6,11 +6,11 @@
         </template>
         <v-card>
             <v-card-title class="green">
-                <h1 class="font-weight-thin">Loaded Sample Data to Store</h1>
+                <h1 class="headline">Load Sample Data</h1>
             </v-card-title>
 
             <v-card-text>
-                <h3>{{loadDataMessage}}</h3>
+                <h3 class="font-weight-regular">{{loadDataMessage}}</h3>
                 <br>
                 <center>
                     <v-btn color="green" large block @click="dialog = false">YAY!</v-btn>
@@ -294,7 +294,7 @@ export default {
                 this.addOperationToStore();
                 this.addPositionToStore();
                 this.$data.sampleDataLoaded = true;
-                this.$data.loadDataMessage = "Loading Sample data to Store!";
+                this.$data.loadDataMessage = "Loading Sample data to Store...";
             } else {
                 this.$data.loadDataMessage = "Sample data has already been loaded!";
             }

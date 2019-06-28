@@ -8,10 +8,10 @@
             </v-btn>
         </template>
         <v-card>
-            <v-card-title class="headline blue" primary-title>Exige Options</v-card-title>
+            <v-card-title class="headline orange darken-2" primary-title>Exige Options</v-card-title>
 
             <v-card-text>
-                <v-tabs centered color="blue" dark slider-color="yellow">
+                <v-tabs centered color="orange darken-2" dark slider-color="white">
                     <v-tab key="1" ripple>Exige Options</v-tab>
                     <v-tab key="2" ripple>WebSocket Options</v-tab>
 
@@ -66,7 +66,7 @@
 
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="dialog = false">Close</v-btn>
+                <v-btn color="orange" @click="dialog = false">Close</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
