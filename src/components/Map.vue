@@ -40,14 +40,30 @@ export default {
             var operationVolumes = operation.operation_volumes;
 
             operationVolumes.forEach(function (operationVolume) {
-                var operationVolumeGeojson = {
-                    type: "Feature",
-                    geometry: operationVolume.operation_geography,
-                    properties: {
-                        height: operationVolume.max_altitude.altitude_value,
-                        base_height: operationVolume.min_altitude.altitude_value,
-                    }
-                };
+                var operationVolumeGeojson = {};
+
+                if (operationVolume.hasOwnProperty("operation_geography")) {
+
+                    operationVolumeGeojson = {
+                        type: "Feature",
+                        geometry: operationVolume.operation_geography,
+                        properties: {
+                            height: operationVolume.max_altitude.altitude_value,
+                            base_height: operationVolume.min_altitude.altitude_value
+                        }
+                    };
+                } else if (operationVolume.hasOwnProperty("flight_geography")) {
+
+                    operationVolumeGeojson = {
+                        type: "Feature",
+                        geometry: operationVolume.flight_geography,
+                        properties: {
+                            height: operationVolume.max_altitude_wgs84_ft,
+                            base_height: operationVolume.min_altitude_wgs84_ft
+                        }
+                    };
+                }
+
                 mapboxData.features.push(operationVolumeGeojson);
             });
 
@@ -63,8 +79,8 @@ export default {
                 layout: {},
                 paint: {
                     "fill-extrusion-color": operationFillColor,
-                    "fill-extrusion-height": ['get', 'height'],
-                    "fill-extrusion-base": ['get', 'base_height'],
+                    "fill-extrusion-height": ["get", "height"],
+                    "fill-extrusion-base": ["get", "base_height"],
                     "fill-extrusion-opacity": 0.5
                 }
             };
@@ -128,26 +144,34 @@ export default {
             console.log("Map Loaded!");
         },
         viewOperationOnMap(operationToView) {
-            console.log(operationToView.operation_volumes);
 
             var operationVolumeFeatureCollection = {
                 type: "FeatureCollection",
                 features: []
             };
 
-            operationToView.operation_volumes.forEach(function (operation_volume) {
-                var geometry = {
-                    type: "Feature",
-                    properties: {},
-                    geometry: operation_volume.operation_geography
-                };
+            operationToView.operation_volumes.forEach(function (operationVolume) {
+                var geometry = {};
+
+                if (operationVolume.hasOwnProperty("operation_geography")) {
+                    geometry = {
+                        type: "Feature",
+                        properties: {},
+                        geometry: operationVolume.operation_geography
+                    };
+                } else if (operationVolume.hasOwnProperty("flight_geography")) {
+                    geometry = {
+                        type: "Feature",
+                        properties: {},
+                        geometry: operationVolume.flight_geography
+                    };
+                }
 
                 operationVolumeFeatureCollection.features.push(geometry);
             });
 
             var bounds = geojsonExtent.bboxify(operationVolumeFeatureCollection);
 
-            console.log(bounds);
 
             this.map.setPitch(70);
 
@@ -207,7 +231,9 @@ export default {
             for (var i in storeOperations) {
                 var operation = storeOperations[i];
 
-                var positions = store.getters.getSocketPositionsForOperation(operation.gufi);
+                var positions = store.getters.getSocketPositionsForOperation(
+                    operation.gufi
+                );
 
                 if (positions.length > 0) {
                     this.createPositionLayer(positions);

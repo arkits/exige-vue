@@ -18,9 +18,9 @@
                     <center>
                         <br>
                         <v-flex xs10>
-                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Enter an Operation or list of Operations. Refer to UTM USS API Operation"></v-textarea>
+                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Enter an Operation or list of Operations. v2 and v4 data model accepted. Refer to UTM API."></v-textarea>
 
-                            <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Enter a Position or list of Positions. Refer to UTM USS API Positions"></v-textarea>
+                            <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Enter a Position or list of Positions. Refer to UTM API."></v-textarea>
                         </v-flex>
                     </center>
                 </div>
