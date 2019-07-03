@@ -24,13 +24,18 @@ export default {
         createOperationLayer(operation) {
             var operationFillColor;
 
-            if (operation.state === "ACTIVE") {
+            if (operation.state === "ACTIVE" || operation.state === "A" || operation.state === "V") {
                 operationFillColor = "#388E3C";
-            } else if (operation.state === "ROGUE") {
-                operationFillColor = "#D32F2F";
-            } else if (operation.state === "CLOSED") {
-                operationFillColor = "#616161";
             }
+            else if (operation.state === "ROGUE" || operation.state === "U") {
+                operationFillColor = "#FF5722";
+            }
+            else if (operation.state === "REJECTED" || operation.state === "R") {
+                operationFillColor = "#D32F2F";
+            }
+            else if (operation.state === "CLOSED" || operation.state === "C" || operation.state === "G") {
+                operationFillColor = "#616161";
+            };
 
             var mapboxData = {
                 type: "FeatureCollection",
