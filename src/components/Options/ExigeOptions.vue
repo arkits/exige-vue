@@ -1,6 +1,6 @@
 <template>
 <div class="text-xs-center">
-    <v-dialog v-model="dialog" persistent scrollable width="800">
+    <v-dialog v-model="dialog" scrollable width="800">
         <template v-slot:activator="{ on }">
             <v-btn v-on="on" color="orange" flat>
                 Options
@@ -20,6 +20,17 @@
                             <v-container>
                                 <v-layout pt-1>
                                     <v-flex xs8>
+                                        <h3>Lifecycle Demo</h3>
+                                        <p>Description of the lifecycle demo.</p>
+                                    </v-flex>
+                                    <v-flex xs3>
+                                        <LifecycleSample 
+                                        v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)"
+                                        />
+                                    </v-flex>
+                                </v-layout>
+                                <v-layout pt-1>
+                                    <v-flex xs8>
                                         <h3>Load Sample Data</h3>
                                         <p>Load 3 sample Operations into Exige.</p>
                                     </v-flex>
@@ -36,9 +47,9 @@
                                         <v-btn block @click="clearStore">Clear Data</v-btn>
                                     </v-flex>
                                 </v-layout>
-                                <br>
+                                <br />
                                 <v-divider></v-divider>
-                                <br>
+                                <br />
                                 <v-layout pt-1>
                                     <v-flex xs8>
                                         <h3>USS Data</h3>
@@ -54,7 +65,7 @@
                         <v-card-text>
                             <center>
                                 <h2>Status: {{getSocketState}}</h2>
-                                <br>
+                                <br />
                                 <v-btn @click="websocketButton">{{websocketToggleButton}}</v-btn>
                             </center>
                         </v-card-text>
@@ -82,11 +93,13 @@ import Vue from "vue";
 import store from "../../store";
 
 import LoadSampleData from "./LoadSampleData";
+import LifecycleSample from "./LifecycleSample";
 
 export default {
     name: "ExigeOptions",
-    components:{
-        LoadSampleData
+    components: {
+        LoadSampleData,
+        LifecycleSample
     },
     data() {
         return {

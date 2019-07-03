@@ -2,10 +2,12 @@
 <div>
     <v-layout row wrap>
         <v-flex xs12 md3>
-            <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
+            <Operations 
+                v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" 
+            />
         </v-flex>
         <v-flex xs12 md9>
-            <Map ref="Map"/>
+            <Map ref="Map" />
       </v-flex>
     </v-layout>
     <v-footer fixed height="auto">
@@ -13,10 +15,13 @@
         <v-flex grey darken-4 white--text xs12>
           <v-layout row wrap>
             <v-flex xs12 md10>
-              <OptionsList v-on:exige-clearStore="clearStore()"/>
+              <OptionsList
+                v-on:exige-clearStore="clearStore()"
+                v-on:exige-viewOperationOnMap="viewOperationOnMap($event)"
+              />
             </v-flex>
             <v-flex xs12 md2>
-              <AboutPopup/>
+              <AboutPopup />
             </v-flex>
           </v-layout>
         </v-flex>
