@@ -134,6 +134,18 @@ function validateOperationData(operation) {
         goodOperation.operation_volumes = [
             {
                 ordinal: 1,
+                min_altitude: {
+                    altitude_value: 500,
+                    vertical_reference: "W84",
+                    units_of_measure: "FT",
+                    source: "OTHER"
+                },
+                max_altitude: {
+                    altitude_value: 1500,
+                    vertical_reference: "W84",
+                    units_of_measure: "FT",
+                    source: "OTHER"
+                },
                 operation_geography: {
                     type: "Polygon",
                     coordinates: [
