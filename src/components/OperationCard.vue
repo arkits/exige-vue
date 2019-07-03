@@ -8,7 +8,7 @@
             </div>
         </v-card-title>
         <v-card-actions>
-            <v-btn flat dark @click="$emit('exige-viewOperationOnMap', operation.gufi)">View on Map</v-btn>
+            <v-btn flat dark @click="$emit('exige-viewOperationOnMap', operation)">View on Map</v-btn>
             <OperationDetailsDialog v-bind:operation="operation" />
         </v-card-actions>
     </v-card>
