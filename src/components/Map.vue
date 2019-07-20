@@ -104,6 +104,16 @@ export default {
         },
         createPositionLayer(positions) {
             var positionLayerId = positions[0].gufi + "_positions";
+            var operationLayerId = positions[0].gufi + "_operation";
+
+            var layers = this.map.getStyle().layers;
+            var placeBelowOperationLayer = false;
+            for (var i = 0; i < layers.length; i++) {
+                if (operationLayerId == layers[i].id) {
+                    placeBelowOperationLayer = true;
+                    break;
+                }
+            }
 
             var mapboxData = {
                 type: "FeatureCollection",
@@ -111,12 +121,11 @@ export default {
             };
 
             for (var i in positions) {
-
                 var coordinates = positions[i].location.coordinates;
 
                 var topAlt = 5000;
                 var baseAlt = 500;
-                if(positions[i].altitude_gps_wgs84_ft != null){
+                if (positions[i].altitude_gps_wgs84_ft != null) {
                     topAlt = positions[i].altitude_gps_wgs84_ft + 10;
                     baseAlt = positions[i].altitude_gps_wgs84_ft - 10;
                 }
@@ -144,6 +153,8 @@ export default {
                 mapboxData.features.push(positionVolumeGeojson);
             }
 
+            console.log(mapboxData);
+
             var mapLayer = {
                 id: positionLayerId,
                 type: "fill-extrusion",
@@ -152,7 +163,7 @@ export default {
                     data: mapboxData
                 },
                 paint: {
-                    "fill-extrusion-color": "#388E3C",
+                    "fill-extrusion-color": "yellow",
                     "fill-extrusion-height": ["get", "height"],
                     "fill-extrusion-base": ["get", "base_height"]
                 }
@@ -163,7 +174,12 @@ export default {
                 this.map.getSource(positionLayerId).setData(data);
             } else {
                 console.log("Adding new layer - " + positionLayerId);
-                this.map.addLayer(mapLayer);
+                if (placeBelowOperationLayer) {
+                    console.log("Placing below opLayer - " + positionLayerId);
+                    this.map.addLayer(mapLayer, operationLayerId);
+                } else {
+                    this.map.addLayer(mapLayer);
+                }
             }
         },
         mapLoaded(map) {
@@ -256,36 +272,20 @@ export default {
 
             var sortedPositions = [];
 
-            for(var i in storePositions){
+            for (var i in storePositions) {
                 var position = storePositions[i];
-                
-                if(sortedPositions.hasOwnProperty(position.gufi)){
+
+                if (sortedPositions.hasOwnProperty(position.gufi)) {
                     sortedPositions[position.gufi].push(position);
-                } else{
+                } else {
                     sortedPositions[position.gufi] = [];
                     sortedPositions[position.gufi].push(position);
                 }
-                
             }
 
-            for(var i in sortedPositions){
+            for (var i in sortedPositions) {
                 this.createPositionLayer(sortedPositions[i]);
             }
-
-            /*
-            var storeOperations = store.getters.getSocketOperations;
-            for (var i in storeOperations) {
-                var operation = storeOperations[i];
-
-                var positions = store.getters.getSocketPositionsForOperation(
-                    operation.gufi
-                );
-
-                if (positions.length > 0) {
-                    this.createPositionLayer(positions);
-                }
-            }
-            */
         }
     }
 };
