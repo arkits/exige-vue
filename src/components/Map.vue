@@ -24,18 +24,23 @@ export default {
         createOperationLayer(operation) {
             var operationFillColor;
 
-            if (operation.state === "ACTIVE" || operation.state === "A" || operation.state === "V") {
+            if (
+                operation.state === "ACTIVE" ||
+                operation.state === "A" ||
+                operation.state === "V"
+            ) {
                 operationFillColor = "#388E3C";
-            }
-            else if (operation.state === "ROGUE" || operation.state === "U") {
+            } else if (operation.state === "ROGUE" || operation.state === "U") {
                 operationFillColor = "#FF5722";
-            }
-            else if (operation.state === "REJECTED" || operation.state === "R") {
+            } else if (operation.state === "REJECTED" || operation.state === "R") {
                 operationFillColor = "#D32F2F";
-            }
-            else if (operation.state === "CLOSED" || operation.state === "C" || operation.state === "G") {
+            } else if (
+                operation.state === "CLOSED" ||
+                operation.state === "C" ||
+                operation.state === "G"
+            ) {
                 operationFillColor = "#616161";
-            };
+            }
 
             var mapboxData = {
                 type: "FeatureCollection",
@@ -48,7 +53,6 @@ export default {
                 var operationVolumeGeojson = {};
 
                 if (operationVolume.hasOwnProperty("operation_geography")) {
-
                     operationVolumeGeojson = {
                         type: "Feature",
                         geometry: operationVolume.operation_geography,
@@ -58,7 +62,6 @@ export default {
                         }
                     };
                 } else if (operationVolume.hasOwnProperty("flight_geography")) {
-
                     operationVolumeGeojson = {
                         type: "Feature",
                         geometry: operationVolume.flight_geography,
@@ -102,38 +105,56 @@ export default {
         createPositionLayer(positions) {
             var positionLayerId = positions[0].gufi + "_positions";
 
-            var positionsToMap = [];
+            var mapboxData = {
+                type: "FeatureCollection",
+                features: []
+            };
 
             for (var i in positions) {
-                var position = positions[i];
-                var location = position.location;
-                var coordinates = location.coordinates;
-                var tempPos = [coordinates[0], coordinates[1]];
-                positionsToMap.push(tempPos);
-            }
 
-            var data = {
-                type: "FeatureCollection",
-                features: [{
+                var coordinates = positions[i].location.coordinates;
+
+                var topAlt = 5000;
+                var baseAlt = 500;
+                if(positions[i].altitude_gps_wgs84_ft != null){
+                    topAlt = positions[i].altitude_gps_wgs84_ft + 10;
+                    baseAlt = positions[i].altitude_gps_wgs84_ft - 10;
+                }
+
+                var positionVolumeGeojson = {
                     type: "Feature",
                     geometry: {
-                        type: "LineString",
-                        coordinates: positionsToMap
+                        type: "Polygon",
+                        coordinates: [
+                            [
+                                [coordinates[0], coordinates[1]],
+                                [coordinates[0] - 0.0002, coordinates[1]],
+                                [coordinates[0] - 0.0002, coordinates[1] + 0.0002],
+                                [coordinates[0], coordinates[1] + 0.0002],
+                                [coordinates[0], coordinates[1]]
+                            ]
+                        ]
+                    },
+                    properties: {
+                        height: topAlt,
+                        base_height: baseAlt
                     }
-                }]
-            };
+                };
+
+                mapboxData.features.push(positionVolumeGeojson);
+            }
 
             var mapLayer = {
                 id: positionLayerId,
-                type: "line",
+                type: "fill-extrusion",
                 source: {
                     type: "geojson",
-                    data: data
+                    data: mapboxData
                 },
                 paint: {
-                    "line-color": "yellow",
-                    "line-opacity": 0.7,
-                    "line-width": 5
+                    "fill-extrusion-color": "#388E3C",
+                    "fill-extrusion-height": ["get", "height"],
+                    "fill-extrusion-base": ["get", "base_height"]
                 }
             };
 
@@ -149,7 +170,6 @@ export default {
             console.log("Map Loaded!");
         },
         viewOperationOnMap(operationToView) {
-
             var operationVolumeFeatureCollection = {
                 type: "FeatureCollection",
                 features: []
@@ -177,8 +197,7 @@ export default {
 
             var bounds = geojsonExtent.bboxify(operationVolumeFeatureCollection);
 
-
-            this.map.setPitch(70);
+            // this.map.setPitch(70);
 
             this.map.fitBounds(bounds.bbox);
         },
@@ -232,6 +251,28 @@ export default {
         },
         computeStoreSocketPositions() {
             console.log("Watched change in Store Positions.");
+
+            var storePositions = store.getters.getSocketPositions;
+
+            var sortedPositions = [];
+
+            for(var i in storePositions){
+                var position = storePositions[i];
+                
+                if(sortedPositions.hasOwnProperty(position.gufi)){
+                    sortedPositions[position.gufi].push(position);
+                } else{
+                    sortedPositions[position.gufi] = [];
+                    sortedPositions[position.gufi].push(position);
+                }
+                
+            }
+
+            for(var i in sortedPositions){
+                this.createPositionLayer(sortedPositions[i]);
+            }
+
+            /*
             var storeOperations = store.getters.getSocketOperations;
             for (var i in storeOperations) {
                 var operation = storeOperations[i];
@@ -244,6 +285,7 @@ export default {
                     this.createPositionLayer(positions);
                 }
             }
+            */
         }
     }
 };
