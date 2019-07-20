@@ -16,11 +16,12 @@
             <v-card-text>
                 <div v-if="showRawJsonForm">
                     <center>
-                        <br>
+                        <br />
                         <v-flex xs10>
-                            <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Enter an Operation or list of Operations. v2 and v4 data model accepted. Refer to UTM API."></v-textarea>
-
-                            <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Enter a Position or list of Positions. Refer to UTM API."></v-textarea>
+                            <v-form ref="operationAdderForm">
+                                <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Enter an Operation or list of Operations. v2 and v4 data model accepted. Refer to UTM API."></v-textarea>
+                                <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Enter a Position or list of Positions. Refer to UTM API."></v-textarea>
+                            </v-form>
                         </v-flex>
                     </center>
                 </div>
@@ -39,8 +40,7 @@
                 <v-btn color="green" depressed @click="addOperationToStore">Add Operation</v-btn>
                 <v-btn color="green" depressed @click="addPositionToStore">Add Position</v-btn>
                 <v-spacer></v-spacer>
-
-                <v-btn color="green" depressed @click="dialog = false">Close</v-btn>
+                <v-btn color="green" depressed @click="closeDialog">Close</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -60,6 +60,10 @@ export default {
         };
     },
     methods: {
+        closeDialog: function () {
+            this.dialog = false;
+            this.$refs.operationAdderForm.reset();
+        },
         addOperationToStore: function () {
             var userInput = this.$data.userInputOperation;
             try {
