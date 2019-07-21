@@ -388,39 +388,26 @@ export default {
         },
         addPositionToStore: function () {
             var positions = this.$data.samplePositions;
-
+            
             try {
-                for (var i in positions) {
-                    this.$store.commit("addPositionToSocketPositions", positions[i]);
-                }
+                var i = 0;
+
+                var delayedPositionAdder = function () {
+                    if (i < positions.length) {
+                        this.$store.commit("addPositionToSocketPositions", positions[i]);
+                        i++;
+                    } else {
+                        window.clearInterval(timer);
+                    }
+                };
+
+                var timer = window.setInterval(delayedPositionAdder.bind(this), 1000);
             } catch (error) {
+                this.inputError =
+                    "Error occured when adding Position to Store... " + error;
                 console.log("Error occured when adding Position to Store!");
                 console.error(error);
             }
-
-            /*
-                                                try {
-                                                    var i = 0;
-
-                                                    var delayedPositionAdder = function () {
-                                                        if (i < positions.length) {
-                                                            this.$store.commit("addPositionToSocketPositions", positions[i]);
-                                                            i++;
-                                                        } else {
-                                                            window.clearInterval(timer);
-                                                        }
-                                                    };
-
-                                                    var timer = window.setInterval(delayedPositionAdder.bind(this), 1000);
-
-                                                } catch (error) {
-                                                    this.inputError =
-                                                        "Error occured when adding Position to Store... " + error;
-                                                    console.log("Error occured when adding Position to Store!");
-                                                    console.error(error);
-                                                }
-
-                                                */
         }
     }
 };
