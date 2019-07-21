@@ -153,8 +153,6 @@ export default {
                 mapboxData.features.push(positionVolumeGeojson);
             }
 
-            console.log(mapboxData);
-
             var mapLayer = {
                 id: positionLayerId,
                 type: "fill-extrusion",
@@ -171,7 +169,7 @@ export default {
 
             if (this.map.getSource(positionLayerId)) {
                 console.log("Updating existing layer - " + positionLayerId);
-                this.map.getSource(positionLayerId).setData(data);
+                this.map.getSource(positionLayerId).setData(mapboxData);
             } else {
                 console.log("Adding new layer - " + positionLayerId);
                 if (placeBelowOperationLayer) {
