@@ -21,21 +21,12 @@
                                 <v-layout pt-1>
                                     <v-flex xs8>
                                         <h3>Lifecycle Demo</h3>
-                                        <p>Description of the lifecycle demo.</p>
+                                        <p>Loads a sample Operation and position.</p>
                                     </v-flex>
                                     <v-flex xs3>
                                         <LifecycleSample 
                                         v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)"
                                         />
-                                    </v-flex>
-                                </v-layout>
-                                <v-layout pt-1>
-                                    <v-flex xs8>
-                                        <h3>Load Sample Data</h3>
-                                        <p>Load 3 sample Operations into Exige.</p>
-                                    </v-flex>
-                                    <v-flex xs3>
-                                        <LoadSampleData />
                                     </v-flex>
                                 </v-layout>
                                 <v-layout pt-1>
@@ -92,13 +83,11 @@
 import Vue from "vue";
 import store from "../../store";
 
-import LoadSampleData from "./LoadSampleData";
 import LifecycleSample from "./LifecycleSample";
 
 export default {
     name: "ExigeOptions",
     components: {
-        LoadSampleData,
         LifecycleSample
     },
     data() {
