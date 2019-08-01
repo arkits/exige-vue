@@ -3,13 +3,13 @@
     <div v-if="viewRawOperation">
         <v-layout>
             <v-flex>
-                <v-textarea outline height="50vh" name="raw-json" label="Raw Operation JSON" :value="operationAsString"></v-textarea>
+                <v-textarea outlined auto-grow name="raw-json" label="Raw Operation JSON" :value="operationAsString"></v-textarea>
             </v-flex>
         </v-layout>
     </div>
     <div v-else>
-        <br>
-        <br>
+        <br />
+        <br />
         <v-layout pt-1>
             <v-flex xs2>
                 <h3>
@@ -50,22 +50,19 @@
                 <h3>{{operationVolumeLength}}</h3>
             </v-flex>
         </v-layout>
-        <br>
-        <br>
+        <br />
+        <br />
     </div>
 
-        <v-divider></v-divider>
-        <br>
-        <center>
-            <v-btn color="pink darken-1" @click="viewRawOperation = !viewRawOperation">View Raw</v-btn>
-        </center>
-    </div>
+    <v-divider></v-divider>
+    <br />
+    <center>
+        <v-btn color="pink darken-1" @click="viewRawOperation = !viewRawOperation">View Raw</v-btn>
+    </center>
+</div>
 </template>
 
 <script>
-import Vue from "vue";
-import store from "../../store";
-
 export default {
     name: "OperationDataView",
     props: ["operation"],

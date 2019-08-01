@@ -1,12 +1,11 @@
 <template>
-<v-btn color="cyan" @click="refreshData" flat>
+<v-btn color="cyan" @click="refreshData" text>
     Refresh Data
     <v-icon right dark>refresh</v-icon>
 </v-btn>
 </template>
 
 <script>
-import store from "../../store";
 import axios from "axios";
 
 export default {

@@ -1,14 +1,14 @@
 <template>
     <v-card :color="cardBackgroud" class="white--text">
-        <v-card-title primary-title>
-            <div>
+        <v-card-text dark>
+            <div class="white--text">
                 <span>{{operation.gufi}}</span> <br>
                 <span>{{operation.uss_name}}</span> <br>
                 <span>{{operation.state}}</span>
             </div>
-        </v-card-title>
+        </v-card-text>
         <v-card-actions>
-            <v-btn flat dark @click="$emit('exige-viewOperationOnMap', operation)">View on Map</v-btn>
+            <v-btn text @click="$emit('exige-viewOperationOnMap', operation)">View on Map</v-btn>
             <OperationDetailsDialog v-bind:operation="operation" />
         </v-card-actions>
     </v-card>
@@ -38,7 +38,7 @@ export default {
             }
             else if (this.operation.state === "CLOSED" || this.operation.state === "C" || this.operation.state === "G") {
                 bg = "#616161";
-            };
+            }
 
 
             return bg;

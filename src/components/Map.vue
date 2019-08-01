@@ -5,11 +5,7 @@
 <script>
 import Mapbox from "mapbox-gl-vue";
 import store from "../store";
-
 import geojsonExtent from "@mapbox/geojson-extent";
-import {
-    constants
-} from "crypto";
 
 export default {
     name: "Map",
@@ -120,7 +116,7 @@ export default {
                 features: []
             };
 
-            for (var i in positions) {
+            for (i in positions) {
                 var coordinates = positions[i].location.coordinates;
 
                 var topAlt = 5000;
@@ -180,7 +176,7 @@ export default {
                 }
             }
         },
-        mapLoaded(map) {
+        mapLoaded() {
             console.log("Map Loaded!");
         },
         viewOperationOnMap(operationToView) {
@@ -281,7 +277,7 @@ export default {
                 }
             }
 
-            for (var i in sortedPositions) {
+            for (i in sortedPositions) {
                 this.createPositionLayer(sortedPositions[i]);
             }
         }

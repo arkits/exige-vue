@@ -3,7 +3,7 @@
     <div v-if="viewRawPositions">
         <v-layout>
             <v-flex>
-                <v-textarea outline height="50vh" name="raw-json" label="Raw Operation JSON" :value="positionsAsString"></v-textarea>
+                <v-textarea outlined auto-grow name="raw-json" label="Raw Operation JSON" :value="positionsAsString"></v-textarea>
             </v-flex>
         </v-layout>
     </div>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import store from "../../store";
 
 export default {

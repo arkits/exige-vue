@@ -1,11 +1,11 @@
 <template>
 <div id="app">
     <v-app dark>
-        <v-toolbar app>
+        <v-toolbar>
             <v-toolbar-title class="headline" href="/exige">
                 <span class="org-title">{{org_title}}</span>
                 <span>
-            <a href="/exige" class="app-title">Exige</a>
+            <a href="/exige" class="app-title white--text">Exige</a>
           </span>
             </v-toolbar-title>
 
@@ -70,13 +70,14 @@ export default {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 300;
     font-style: italic;
+    color: white;
 }
 
 .app-title {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
     font-style: italic;
-    color: whitesmoke;
+    color: white;
     text-decoration: none;
 }
 </style>

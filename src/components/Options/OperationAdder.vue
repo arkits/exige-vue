@@ -2,45 +2,45 @@
 <div class="text-xs-center">
     <v-dialog v-model="dialog" scrollable width="800">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="green" flat>
+            <v-btn v-on="on" color="green" text>
                 Add Data
                 <v-icon right dark>add</v-icon>
             </v-btn>
         </template>
-        <v-card>
+        <v-card outlined>
             <v-card-title class="green">
-                <h1 class="headline">Add Data to Store</h1>
-                <h4 class="font-weight-regular font-italic">Add a new Operation or Position to Exige's Store. This is a front-end action and does reflect a USS's data!</h4>
+                <v-list-item>
+                    <v-list-item-content>
+                        <v-list-item-title class="headline mb-1">Add Data to Exige</v-list-item-title>
+                        <v-list-item-subtitle>Add a new Operation or Position to Exige's Store. This is a front-end action and does reflect a USS's data!</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-list-item>
             </v-card-title>
 
-            <v-card-text>
-                <div v-if="showRawJsonForm">
-                    <center>
-                        <br />
-                        <v-flex xs10>
-                            <v-form ref="operationAdderForm">
-                                <v-textarea outline v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Enter an Operation or list of Operations. v2 and v4 data model accepted. Refer to UTM API."></v-textarea>
-                                <v-textarea outline v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Enter a Position or list of Positions. Refer to UTM API."></v-textarea>
-                            </v-form>
-                        </v-flex>
-                    </center>
-                </div>
-                <div v-else></div>
-
+            <div v-if="showRawJsonForm">
                 <center>
-                    <div v-if="inputError">
-                        <p class="font-weight-bold red">{{inputError}}</p>
-                    </div>
+                    <br />
+                    <v-flex xs10>
+                        <v-form ref="operationAdderForm">
+                            <v-textarea outlined v-model="userInputOperation" name="input-json-op" label="JSON Operation" hint="Enter an Operation or list of Operations. v2 and v4 data model accepted. Refer to UTM API."></v-textarea>
+                            <v-textarea outlined v-model="userInputPosition" name="input-json-pos" label="JSON Position" hint="Enter a Position or list of Positions. Refer to UTM API."></v-textarea>
+                        </v-form>
+                    </v-flex>
                 </center>
-            </v-card-text>
+            </div>
+            <div v-else></div>
 
-            <v-divider></v-divider>
+            <center>
+                <div v-if="inputError">
+                    <p class="font-weight-bold red">{{inputError}}</p>
+                </div>
+            </center>
 
             <v-card-actions>
-                <v-btn color="green" depressed @click="addOperationToStore">Add Operation</v-btn>
-                <v-btn color="green" depressed @click="addPositionToStore">Add Position</v-btn>
+                <v-btn color="green" @click="addOperationToStore">Add Operation</v-btn>
+                <v-btn color="green" @click="addPositionToStore">Add Position</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="green" depressed @click="closeDialog">Close</v-btn>
+                <v-btn color="green" @click="closeDialog">Close</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>

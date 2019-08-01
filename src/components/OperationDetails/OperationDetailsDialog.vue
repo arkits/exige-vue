@@ -2,11 +2,15 @@
 <div class="text-xs-center">
     <v-dialog v-model="dialog" width="800">
         <template v-slot:activator="{ on }">
-            <v-btn flat dark v-on="on">Details</v-btn>
+            <v-btn text v-on="on">Details</v-btn>
         </template>
         <v-card>
             <v-card-title class="blue">
-                <span class="headline">Advanced Details</span>
+                <v-list-item>
+                    <v-list-item-content>
+                        <v-list-item-title class="headline mb-1">Operation Details</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
             </v-card-title>
             <v-card-text>
                 <v-tabs color="blue" centered dark slider-color="pink">
@@ -38,7 +42,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import store from "../../store";
 import OperationDataView from "./OperationDataView";
 import PositionsTimeline from "./PositionsTimeline";

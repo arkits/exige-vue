@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-layout row wrap>
+    <v-layout>
         <v-flex xs12 md3>
             <Operations 
                 v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" 
@@ -11,9 +11,9 @@
       </v-flex>
     </v-layout>
     <v-footer fixed height="auto">
-      <v-layout row wrap>
+      <v-layout>
         <v-flex grey darken-4 white--text xs12>
-          <v-layout row wrap>
+          <v-layout >
             <v-flex xs12 md10>
               <OptionsList
                 v-on:exige-clearStore="clearStore()"
@@ -35,10 +35,6 @@ import Operations from "../components/Operations";
 import Map from "../components/Map";
 import AboutPopup from "../components/Options/AboutPopup";
 import OptionsList from "../components/Options/OptionsList";
-import {
-    constants
-} from "crypto";
-import store from "../store";
 
 export default {
     name: "Dashboard",
@@ -76,16 +72,3 @@ export default {
 };
 </script>
 
-<style>
-.org-title {
-    font-family: "IBM Plex Mono", monospace;
-    font-weight: 300;
-    font-style: italic;
-}
-
-.app-title {
-    font-family: "IBM Plex Mono", monospace;
-    font-weight: 600;
-    font-style: italic;
-}
-</style>

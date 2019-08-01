@@ -2,14 +2,19 @@
 <div class="text-xs-center">
     <v-dialog v-model="dialog" scrollable width="400">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="teal" dark block @click="startLifecycleDemo">Start Lifecycle Demo</v-btn>
+            <v-btn v-on="on" color="teal" block @click="startLifecycleDemo">Start Demo</v-btn>
         </template>
-        <v-card>
+        <v-card outlined>
             <v-card-title class="teal">
-                <h1 class="headline">Lifecycle Demo</h1>
+                <v-list-item>
+                    <v-list-item-content>
+                        <v-list-item-title class="headline">Lifecycle Demo</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
             </v-card-title>
 
             <v-card-text>
+                <br>
                 <h3 class="font-weight-regular">{{lifecyleMessage}}</h3>
                 <br />
                 <center>
