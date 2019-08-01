@@ -3,7 +3,7 @@
     <div v-if="viewRawPositions">
         <v-layout>
             <v-flex>
-                <v-textarea outlined auto-grow name="raw-json" label="Raw Operation JSON" :value="positionsAsString"></v-textarea>
+                <v-textarea outlined name="raw-json" label="Raw Operation JSON" :value="positionsAsString"></v-textarea>
             </v-flex>
         </v-layout>
     </div>

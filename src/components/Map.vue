@@ -98,7 +98,7 @@ export default {
             console.log("Adding layer - " + operationLayerId);
             this.map.addLayer(mapLayer);
         },
-        createPositionLayer(positions) {
+        createPositionLayer(positions, layerColor) {
             var positionLayerId = positions[0].gufi + "_positions";
             var operationLayerId = positions[0].gufi + "_operation";
 
@@ -157,7 +157,7 @@ export default {
                     data: mapboxData
                 },
                 paint: {
-                    "fill-extrusion-color": "yellow",
+                    "fill-extrusion-color": layerColor,
                     "fill-extrusion-height": ["get", "height"],
                     "fill-extrusion-base": ["get", "base_height"]
                 }
@@ -215,7 +215,6 @@ export default {
             console.log("clearMapStore from Map");
 
             var storeOperations = store.getters.getSocketOperations;
-            var map = this.map;
 
             console.log("Removing operation layers...");
 
@@ -225,11 +224,19 @@ export default {
                 var positionLayerId = operation.gufi + "_positions";
                 console.log("Removing layer - " + operationLayerId);
                 console.log("Removing layer - " + positionLayerId);
-                map.removeLayer(operationLayerId);
-                map.removeLayer(positionLayerId);
+                this.map.removeLayer(operationLayerId);
+                this.map.removeLayer(positionLayerId);
+                this.map.removeSource(operationLayerId);
+                this.map.removeSource(positionLayerId);
             }
 
             this.$store.commit("clearSocketOperations");
+        },
+        clearPositionsLayer(gufi) {
+            console.log("clearPositionsLayer from Map");
+            var positionLayerId = gufi + "_positions";
+            this.map.removeLayer(positionLayerId);
+            this.map.removeSource(positionLayerId);
         }
     },
     data() {
@@ -249,6 +256,9 @@ export default {
         },
         computeStoreSocketPositions() {
             return store.getters.getSocketPositions;
+        },
+        computePositionLayerColor() {
+            return store.getters.getPositionLayerColorMap;
         }
     },
     watch: {
@@ -277,8 +287,21 @@ export default {
                 }
             }
 
+            var positionLayerColor = "yellow";
+
             for (i in sortedPositions) {
-                this.createPositionLayer(sortedPositions[i]);
+                this.createPositionLayer(sortedPositions[i], positionLayerColor);
+            }
+        },
+        computePositionLayerColor(newValue, oldValue) {
+            console.log("Watched change in Store PositionLayerColors.");
+            for (var i in newValue) {
+                var storePositions = store.getters.getSocketPositionsForOperation(
+                    newValue[i].gufi
+                );
+
+                this.clearPositionsLayer(newValue[i].gufi);
+                this.createPositionLayer(storePositions, newValue[i].color);
             }
         }
     }

@@ -264,7 +264,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -273,7 +273,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -282,7 +282,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -291,7 +291,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -300,7 +300,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -309,7 +309,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -318,7 +318,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -327,7 +327,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -336,7 +336,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
@@ -345,7 +345,7 @@ export default {
                 },
                 {
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
+                    altitude_gps_wgs84_ft: 750,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",

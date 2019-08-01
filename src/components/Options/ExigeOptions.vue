@@ -7,7 +7,7 @@
                 <v-icon right dark>settings</v-icon>
             </v-btn>
         </template>
-        <v-card>
+        <v-card outlined>
             <v-card-title class="headline orange darken-2" primary-title>
                 
                 <v-list-item>

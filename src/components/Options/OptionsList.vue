@@ -5,7 +5,6 @@
         v-on:exige-clearStore="$emit('exige-clearStore')" 
         v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)"/>
         <OperationAdder />
-        <RefreshData />
     </v-layout>
 </div>
 </template>

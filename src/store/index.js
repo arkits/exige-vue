@@ -7,7 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         socket_operations: [],
-        socket_positions: []
+        socket_positions: [],
+        positionsLayerColorMap: []
     },
     mutations: {
         addOperationToSocketOperations: function (state, op) {
@@ -18,14 +19,12 @@ export default new Vuex.Store({
             });
 
             if (index != -1) {
-                console.log("Update Operation")
+                console.log("Update Operation");
                 Vue.set(state.socket_operations, index, validOperation);
             } else {
-                console.log("Add Operation")
-                state.socket_operations.push(validOperation)
+                console.log("Add Operation");
+                state.socket_operations.push(validOperation);
             }
-
-
         },
         addPositionToSocketPositions: function (state, pos) {
             console.log("Adding to Position to Store.");
@@ -33,6 +32,19 @@ export default new Vuex.Store({
         },
         clearSocketOperations: function (state) {
             state.socket_operations = [];
+        },
+        addToPositionsLayerColorMap: function (state, posLayerColor) {
+            var index = state.positionsLayerColorMap.findIndex(function (plc, i) {
+                return plc.gufi === posLayerColor.gufi;
+            });
+
+            if (index != -1) {
+                console.log("Update PLC");
+                Vue.set(state.positionsLayerColorMap, index, posLayerColor);
+            } else {
+                console.log("Add PLC");
+                state.positionsLayerColorMap.push(posLayerColor);
+            }
         }
     },
     actions: {},
@@ -43,9 +55,6 @@ export default new Vuex.Store({
         getSocketPositions: state => {
             return state.socket_positions;
         },
-        getSocketState: state => {
-            return state.socket.isConnected;
-        },
         getSocketPositionsForOperation: state => operationGufi => {
             var positionsToReturn = [];
             state.socket_positions.forEach(function (position) {
@@ -54,6 +63,18 @@ export default new Vuex.Store({
                 }
             });
             return positionsToReturn;
+        },
+        getPositionLayerColorForGufi: state => gufi => {
+            var colorToReturn;
+            state.positionsLayerColorMap.forEach(function (posLayerColor) {
+                if (posLayerColor.gufi == gufi) {
+                    colorToReturn = posLayerColor.color;
+                }
+            });
+            return colorToReturn;
+        },
+        getPositionLayerColorMap: state => {
+            return state.positionsLayerColorMap;
         }
     }
 });
@@ -86,39 +107,37 @@ function validateOperationData(operation) {
         goodOperation.operation_volumes = operation.operation_volumes;
     } else {
         console.log("OpVal: operation_volumes not found. Using default.");
-        goodOperation.operation_volumes = [
-            {
-                ordinal: 1,
-                min_altitude: {
-                    altitude_value: 500,
-                    vertical_reference: "W84",
-                    units_of_measure: "FT",
-                    source: "OTHER"
-                },
-                max_altitude: {
-                    altitude_value: 1500,
-                    vertical_reference: "W84",
-                    units_of_measure: "FT",
-                    source: "OTHER"
-                },
-                operation_geography: {
-                    type: "Polygon",
-                    coordinates: [
-                        [
-                            [-107.9296875, 52.05249047600099],
-                            [-110.830078125, 53.904338156274704],
-                            [-112.5, 52.802761415419674],
-                            [-112.763671875, 50.90303283111257],
-                            [-107.40234375, 48.16608541901253],
-                            [-102.65625, 51.12421275782688],
-                            [-102.39257812499999, 53.12040528310657],
-                            [-105.205078125, 53.69670647530323],
-                            [-107.9296875, 52.05249047600099]
-                        ]
+        goodOperation.operation_volumes = [{
+            ordinal: 1,
+            min_altitude: {
+                altitude_value: 500,
+                vertical_reference: "W84",
+                units_of_measure: "FT",
+                source: "OTHER"
+            },
+            max_altitude: {
+                altitude_value: 1500,
+                vertical_reference: "W84",
+                units_of_measure: "FT",
+                source: "OTHER"
+            },
+            operation_geography: {
+                type: "Polygon",
+                coordinates: [
+                    [
+                        [-107.9296875, 52.05249047600099],
+                        [-110.830078125, 53.904338156274704],
+                        [-112.5, 52.802761415419674],
+                        [-112.763671875, 50.90303283111257],
+                        [-107.40234375, 48.16608541901253],
+                        [-102.65625, 51.12421275782688],
+                        [-102.39257812499999, 53.12040528310657],
+                        [-105.205078125, 53.69670647530323],
+                        [-107.9296875, 52.05249047600099]
                     ]
-                }
+                ]
             }
-        ];
+        }];
     }
 
     return goodOperation;
