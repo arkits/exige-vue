@@ -15,22 +15,20 @@
 
             <v-card-text class="white--text">
                 <br />
+                <div>
+                    <p>Exige is a proof-of-concept traffic visualizer for UAM / UTM data.</p>
+                    <p>Exige is a Vue.js 2.0 based front-end web-app which connects to a UTM Service Suplier and display relevant data.</p>
+                </div>
 
-                <p>Exige is a proof-of-concept traffic visualizer for UAM / UTM data.</p>
-
-                <p>
-                    Exige is a Vue.js 2.0 based front-end web-app which connects to a
-                    UTM Service Suplier and display relevant data.
-                </p>
+                <v-divider />
                 <br />
-
                 <center>
-                    <v-btn class="text-none" color="primary" href="https://github.com/arkits/exige">View Exige on GitHub</v-btn>
+                    <v-btn class="text-none" color="primary" href="https://github.com/arkits/exige">Exige on GitHub</v-btn>
 
                     <br />
                     <br />
 
-                    <v-btn class="text-none" color="primary" href="https://github.com/arkits/">View ArKits on GitHub</v-btn>
+                    <v-btn class="text-none" color="primary" href="https://github.com/arkits/">ArKits on GitHub</v-btn>
                 </center>
             </v-card-text>
         </v-card>
