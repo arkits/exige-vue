@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             dialog: false,
-            items: ["red", "blue", "green", "yellow"]
+            items: ["red", "lime", "pink", "yellow", "orange", "teal"]
         };
     },
     methods: {
