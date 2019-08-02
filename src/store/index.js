@@ -15,7 +15,7 @@ export default new Vuex.Store({
         addOperationToSocketOperations: function (state, op) {
             var validOperation = validateOperationData(op);
 
-            var index = state.socket_operations.findIndex(function (operation, i) {
+            var index = state.socket_operations.findIndex(function (operation) {
                 return operation.gufi === validOperation.gufi;
             });
 
@@ -35,7 +35,7 @@ export default new Vuex.Store({
             state.socket_operations = [];
         },
         addToPositionsLayerColorMap: function (state, posLayerColor) {
-            var index = state.positionsLayerColorMap.findIndex(function (plc, i) {
+            var index = state.positionsLayerColorMap.findIndex(function (plc) {
                 return plc.gufi === posLayerColor.gufi;
             });
 
