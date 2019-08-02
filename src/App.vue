@@ -1,27 +1,18 @@
 <template>
-<div id="app">
-    <v-app dark>
-        <v-toolbar>
-            <v-toolbar-title class="headline" href="/exige">
-                <span class="org-title">{{org_title}}</span>
-                <span>
-            <a href="/exige" class="app-title white--text">Exige</a>
-          </span>
-            </v-toolbar-title>
+<v-app id="exige">
+    <v-app-bar app dark>
+        <v-toolbar-title class="headline">
+            <span class="org-title">{{org_title}}</span>
+            <span>
+                <a href="/exige" class="app-title white--text">Exige</a>
+            </span>
+        </v-toolbar-title>
+    </v-app-bar>
 
-            <v-spacer></v-spacer>
-                        
-        </v-toolbar>
-
-        <v-content>
-            <router-view />
-            <v-snackbar v-model="snackbar" :color="snackbarColor" :bottom="snackbarY === 'bottom'" :left="snackbarX === 'left'" :multi-line="mode === 'multi-line'" :right="snackbarX === 'right'" :timeout="snackbarTimeout" :top="snackbarY === 'top'" :vertical="mode === 'vertical'">
-                {{ snackbarMessage }}
-                <v-btn color="white" flat @click="snackbar = false">Close</v-btn>
-            </v-snackbar>
-        </v-content>
-    </v-app>
-</div>
+    <v-content>
+        <router-view />
+    </v-content>
+</v-app>
 </template>
 
 <script>
@@ -32,36 +23,10 @@ export default {
     name: "App",
     data() {
         return {
-            org_title: "~/",
-            snackbar: false,
-            snackbarY: "bottom",
-            snackbarX: "right",
-            mode: "",
-            snackbarTimeout: 6000,
-            snackbarColor: "success",
-            snackbarMessage: "Welcome to Exige!",
-            websocketToggleButton: "Connect WebSocket"
+            org_title: "~/"
         };
     },
-    methods:{
-        websocketButton: function () {
-            console.log("Toggling WebSocket...");
-            if (store.state.socket.isConnected) {
-                this.snackbarMaker("Disconnecting WebSocket...", "dark");
-                Vue.prototype.$disconnect();
-                this.$data.websocketToggleButton = "Connect WebSocket";
-            } else {
-                this.snackbarMaker("Connecting WebSocket...", "dark");
-                Vue.prototype.$connect();
-                this.$data.websocketToggleButton = "Disconnect WebSocket";
-            }
-        },
-        snackbarMaker: function (snackbarMessage, snackbarColor) {
-            this.$data.snackbarMessage = snackbarMessage;
-            this.$data.snackbarColor = snackbarColor;
-            this.$data.snackbar = true;
-        }
-    }
+    methods: {}
 };
 </script>
 

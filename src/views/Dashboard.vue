@@ -1,33 +1,26 @@
 <template>
 <div>
-    <v-layout>
+    <v-layout row>
         <v-flex xs12 md3>
-            <Operations 
-                v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" 
-            />
+            <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
         </v-flex>
         <v-flex xs12 md9>
             <Map ref="Map" />
-      </v-flex>
+        </v-flex>
     </v-layout>
     <v-footer fixed height="auto">
-      <v-layout>
-        <v-flex grey darken-4 white--text xs12>
-          <v-layout >
-            <v-flex xs12 md10>
-              <OptionsList
-                v-on:exige-clearStore="clearStore()"
-                v-on:exige-viewOperationOnMap="viewOperationOnMap($event)"
-              />
+        <v-layout>
+            <v-flex row grey darken-4 white--text xs12>
+                <v-layout align-end justify-start>
+                    <OptionsList v-on:exige-clearStore="clearStore()" v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
+                </v-layout>
+                <v-layout align-end justify-end>
+                    <AboutPopup />
+                </v-layout>
             </v-flex>
-            <v-flex xs12 md2>
-              <AboutPopup />
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>
+        </v-layout>
     </v-footer>
-  </div>
+</div>
 </template>
 
 <script>
@@ -71,4 +64,3 @@ export default {
     }
 };
 </script>
-

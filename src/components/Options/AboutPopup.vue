@@ -2,7 +2,7 @@
 <div class="text-xs-center">
     <v-dialog v-model="dialog" scrollable width="500">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" class="text-none app-title">~/Exige by ArKits</v-btn>
+            <v-btn text v-on="on" class="text-none app-title">~/Exige by ArKits</v-btn>
         </template>
         <v-card outlined>
             <v-card-title class="blue">
