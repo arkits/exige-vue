@@ -26,7 +26,7 @@
                             <v-layout pt-1>
                                 <v-flex xs8>
                                     <h3>Lifecycle Demo</h3>
-                                    <p>Loads a sample Operation and position.</p>
+                                    <p>Loads a sample Operation and Positions.</p>
                                 </v-flex>
                                 <v-flex xs3>
                                     <LifecycleSample v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)" />
@@ -39,6 +39,15 @@
                                 </v-flex>
                                 <v-flex xs3>
                                     <v-btn block @click="clearStore">Clear Data</v-btn>
+                                </v-flex>
+                            </v-layout>
+                            <v-layout pt-1>
+                                <v-flex xs8>
+                                    <h3>Render in 3D</h3>
+                                    <p>Toggles between rendering 3D or 2D. Helps improve performance.</p>
+                                </v-flex>
+                                <v-flex xs3>
+                                    <DSwitch />
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -59,11 +68,13 @@
 
 <script>
 import LifecycleSample from "./LifecycleSample";
+import DSwitch from "./DSwitch";
 
 export default {
     name: "ExigeOptions",
     components: {
-        LifecycleSample
+        LifecycleSample,
+        DSwitch
     },
     data() {
         return {

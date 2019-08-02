@@ -17,8 +17,14 @@ export default {
         mapInitialized(map) {
             this.map = map;
         },
+        mapLoaded() {
+            console.log("Map Loaded!");
+        },
         createOperationLayer(operation) {
+
             var operationFillColor;
+
+            var renderIn3d = store.state.dswitch;
 
             if (
                 operation.state === "ACTIVE" ||
@@ -73,21 +79,37 @@ export default {
 
             var operationLayerId = operation.gufi + "_operation";
 
-            var mapLayer = {
-                id: operationLayerId,
-                type: "fill-extrusion",
-                source: {
-                    type: "geojson",
-                    data: mapboxData
-                },
-                layout: {},
-                paint: {
-                    "fill-extrusion-color": operationFillColor,
-                    "fill-extrusion-height": ["get", "height"],
-                    "fill-extrusion-base": ["get", "base_height"],
-                    "fill-extrusion-opacity": 0.5
-                }
-            };
+            if(renderIn3d){
+                var mapLayer = {
+                    id: operationLayerId,
+                    type: "fill-extrusion",
+                    source: {
+                        type: "geojson",
+                        data: mapboxData
+                    },
+                    layout: {},
+                    paint: {
+                        "fill-extrusion-color": operationFillColor,
+                        "fill-extrusion-height": ["get", "height"],
+                        "fill-extrusion-base": ["get", "base_height"],
+                        "fill-extrusion-opacity": 0.5
+                    }
+                };
+            } else {
+                var mapLayer = {
+                    id: operationLayerId,
+                    type: "fill",
+                    source: {
+                        type: "geojson",
+                        data: mapboxData
+                    },
+                    layout: {},
+                    paint: {
+                        "fill-color": operationFillColor,
+                        "fill-opacity": 0.5
+                    }
+                };
+            }
 
             if (this.map.getSource(operationLayerId)) {
                 console.log("Updating existing layer - " + operationLayerId);
@@ -176,9 +198,6 @@ export default {
                 }
             }
         },
-        mapLoaded() {
-            console.log("Map Loaded!");
-        },
         viewOperationOnMap(operationToView) {
             var operationVolumeFeatureCollection = {
                 type: "FeatureCollection",
@@ -206,8 +225,6 @@ export default {
             });
 
             var bounds = geojsonExtent.bboxify(operationVolumeFeatureCollection);
-
-            // this.map.setPitch(70);
 
             this.map.fitBounds(bounds.bbox);
         },
@@ -264,7 +281,9 @@ export default {
     watch: {
         computeStoreSocketOperations() {
             console.log("Watched change in Store Operations.");
+
             var updatedStoreOperations = store.getters.getSocketOperations;
+
             for (var i in updatedStoreOperations) {
                 this.createOperationLayer(updatedStoreOperations[i]);
             }

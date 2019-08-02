@@ -19,8 +19,8 @@
 
             <v-tabs centered color="white" background-color="green darken-2" dark slider-color="white">
                 <v-tab key="1" ripple>Operations</v-tab>
-                <v-tab key="1" ripple>Positions</v-tab>
-                <v-tab key="1" ripple>Misc</v-tab>
+                <v-tab key="2" ripple>Positions</v-tab>
+                <v-tab key="3" ripple>Misc</v-tab>
 
                 <v-tab-item key="1">
                     <v-card-text>

@@ -8,7 +8,8 @@ export default new Vuex.Store({
     state: {
         socket_operations: [],
         socket_positions: [],
-        positionsLayerColorMap: []
+        positionsLayerColorMap: [],
+        dswitch: true
     },
     mutations: {
         addOperationToSocketOperations: function (state, op) {
@@ -75,6 +76,9 @@ export default new Vuex.Store({
         },
         getPositionLayerColorMap: state => {
             return state.positionsLayerColorMap;
+        },
+        getDSwitch: state => {
+            return state.dswitch;
         }
     }
 });

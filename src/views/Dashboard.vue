@@ -53,12 +53,10 @@ export default {
     computed: {},
     methods: {
         viewOperationOnMap: function (val) {
-            console.log("viewOperationOnMap");
             var operationToView = val;
             this.$refs.Map.viewOperationOnMap(operationToView);
         },
         clearStore: function () {
-            console.log("clearStore");
             this.$refs.Map.clearMapAndStore();
         }
     }
