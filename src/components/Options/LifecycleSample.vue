@@ -14,7 +14,7 @@
             </v-card-title>
 
             <v-card-text>
-                <br>
+                <br />
                 <h3 class="font-weight-regular">{{lifecyleMessage}}</h3>
                 <br />
                 <center>
@@ -53,11 +53,11 @@ export default {
                             type: "Polygon",
                             coordinates: [
                                 [
-                                    [-122.41104125976564, 37.76637243960179],
-                                    [-122.4031448364258, 37.76637243960179],
-                                    [-122.4031448364258, 37.77261441408201],
-                                    [-122.41104125976564, 37.77261441408201],
-                                    [-122.41104125976564, 37.76637243960179]
+                                    [-122.43704795837402, 37.79811961477822],
+                                    [-122.43464469909667, 37.79811961477822],
+                                    [-122.43464469909667, 37.800188134708165],
+                                    [-122.43704795837402, 37.800188134708165],
+                                    [-122.43704795837402, 37.79811961477822]
                                 ]
                             ]
                         }
@@ -80,11 +80,11 @@ export default {
                             type: "Polygon",
                             coordinates: [
                                 [
-                                    [-122.40966796874999, 37.7280949075216],
-                                    [-122.40486145019531, 37.7280949075216],
-                                    [-122.40486145019531, 37.77464972662077],
-                                    [-122.40966796874999, 37.77464972662077],
-                                    [-122.40966796874999, 37.7280949075216]
+                                    [-122.43683338165283, 37.798458720375685],
+                                    [-122.4093246459961, 37.798458720375685],
+                                    [-122.4093246459961, 37.79998467630002],
+                                    [-122.43683338165283, 37.79998467630002],
+                                    [-122.43683338165283, 37.798458720375685]
                                 ]
                             ]
                         }
@@ -107,11 +107,11 @@ export default {
                             type: "Polygon",
                             coordinates: [
                                 [
-                                    [-122.41069793701172, 37.729248952286184],
-                                    [-122.3964500427246, 37.70046034927789],
-                                    [-122.38992691040038, 37.70229391925025],
-                                    [-122.4037456512451, 37.73169275242101],
-                                    [-122.41069793701172, 37.729248952286184]
+                                    [-122.41177082061768, 37.78452019757326],
+                                    [-122.40936756134033, 37.78452019757326],
+                                    [-122.40936756134033, 37.799916856706105],
+                                    [-122.41177082061768, 37.799916856706105],
+                                    [-122.41177082061768, 37.78452019757326]
                                 ]
                             ]
                         }
@@ -134,11 +134,11 @@ export default {
                             type: "Polygon",
                             coordinates: [
                                 [
-                                    [-122.39936828613281, 37.703380457832374],
-                                    [-122.39215850830078, 37.67553288205085],
-                                    [-122.38254547119139, 37.67689154297775],
-                                    [-122.38992691040038, 37.70609673460725],
-                                    [-122.39936828613281, 37.703380457832374]
+                                    [-122.43378639221191, 37.78465586496683],
+                                    [-122.40958213806151, 37.78465586496683],
+                                    [-122.40958213806151, 37.78618210598413],
+                                    [-122.43378639221191, 37.78618210598413],
+                                    [-122.43378639221191, 37.78465586496683]
                                 ]
                             ]
                         }
@@ -161,11 +161,11 @@ export default {
                             type: "Polygon",
                             coordinates: [
                                 [
-                                    [-122.38546371459961, 37.681239090750346],
-                                    [-122.4151611328125, 37.66058596987982],
-                                    [-122.41138458251953, 37.65365501656227],
-                                    [-122.38134384155272, 37.67200024720591],
-                                    [-122.38546371459961, 37.681239090750346]
+                                    [-122.43352890014648, 37.78499503236122],
+                                    [-122.43134021759032, 37.78499503236122],
+                                    [-122.43134021759032, 37.79598321371842],
+                                    [-122.43352890014648, 37.79598321371842],
+                                    [-122.43352890014648, 37.78499503236122]
                                 ]
                             ]
                         }
@@ -188,11 +188,11 @@ export default {
                             type: "Polygon",
                             coordinates: [
                                 [
-                                    [-122.41825103759764, 37.65813982494158],
-                                    [-122.39679336547852, 37.60552821745789],
-                                    [-122.38855361938475, 37.60797609482423],
-                                    [-122.40983963012695, 37.661809012124635],
-                                    [-122.41825103759764, 37.65813982494158]
+                                    [-122.43348598480225, 37.79401631367505],
+                                    [-122.4125862121582, 37.79401631367505],
+                                    [-122.4125862121582, 37.79571192027404],
+                                    [-122.43348598480225, 37.79571192027404],
+                                    [-122.43348598480225, 37.79401631367505]
                                 ]
                             ]
                         }
@@ -200,7 +200,7 @@ export default {
                     {
                         ordinal: 7,
                         min_altitude: {
-                            altitude_value: 700,
+                            altitude_value: 0,
                             vertical_reference: "W84",
                             units_of_measure: "FT",
                             source: "OTHER"
@@ -215,38 +215,11 @@ export default {
                             type: "Polygon",
                             coordinates: [
                                 [
-                                    [-122.4031448364258, 37.61640705577992],
-                                    [-122.40177154541014, 37.60729613696987],
-                                    [-122.3818588256836, 37.611239805997606],
-                                    [-122.38460540771483, 37.621302013833],
-                                    [-122.4031448364258, 37.61640705577992]
-                                ]
-                            ]
-                        }
-                    },
-                    {
-                        ordinal: 8,
-                        min_altitude: {
-                            altitude_value: 0,
-                            vertical_reference: "W84",
-                            units_of_measure: "FT",
-                            source: "OTHER"
-                        },
-                        max_altitude: {
-                            altitude_value: 700,
-                            vertical_reference: "W84",
-                            units_of_measure: "FT",
-                            source: "OTHER"
-                        },
-                        operation_geography: {
-                            type: "Polygon",
-                            coordinates: [
-                                [
-                                    [-122.39095687866211, 37.612599643383284],
-                                    [-122.38374710083008, 37.612599643383284],
-                                    [-122.38374710083008, 37.61831068887273],
-                                    [-122.39095687866211, 37.61831068887273],
-                                    [-122.39095687866211, 37.612599643383284]
+                                    [-122.4146032333374, 37.79415196363509],
+                                    [-122.41271495819092, 37.79415196363509],
+                                    [-122.41271495819092, 37.79561018497552],
+                                    [-122.4146032333374, 37.79561018497552],
+                                    [-122.4146032333374, 37.79415196363509]
                                 ]
                             ]
                         }
@@ -255,110 +228,101 @@ export default {
             }],
             samplePositions: [{
                     gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 600,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.40726470947266, 37.769900576875834]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.40743637084961, 37.75307256315459]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.40743637084961, 37.73909154437981]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.40365982055663, 37.72089869333035]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.39215850830078, 37.693465202875686]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.39009857177734, 37.671728499097895]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.41155624389647, 37.65718852458835]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.40760803222655, 37.64305348359734]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.40185737609865, 37.62660452137556]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.39619255065918, 37.61266763459988]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                    altitude_gps_wgs84_ft: 750,
-                    uss_name: "exige.archit.xyz",
-                    location: {
-                        type: "Point",
-                        coordinates: [-122.39516258239745, 37.61375548561097]
-                    }
-                },
-                {
-                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
                     altitude_gps_wgs84_ft: 100,
                     uss_name: "exige.archit.xyz",
                     location: {
                         type: "Point",
-                        coordinates: [-122.38700866699219, 37.61470734219136]
+                        coordinates: [-122.43588924407958, 37.79917083706328]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 700,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.43515968322752, 37.79927256745822]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.43382930755614, 37.79927256745822]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.43095397949219, 37.79934038764369]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.42717742919922, 37.79934038764369]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.42421627044679, 37.79927256745822]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.41932392120361, 37.79927256745822]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.41421699523924, 37.79927256745822]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.41052627563477, 37.79917083706328]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.41065502166748, 37.79564409675727]
+                    }
+                },
+                {
+                    gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
+                    altitude_gps_wgs84_ft: 750,
+                    uss_name: "exige.archit.xyz",
+                    location: {
+                        type: "Point",
+                        coordinates: [-122.41065502166748, 37.792490234462946]
                     }
                 }
             ],
@@ -393,7 +357,7 @@ export default {
         },
         addPositionToStore: function () {
             var positions = this.$data.samplePositions;
-            
+
             try {
                 var i = 0;
 
