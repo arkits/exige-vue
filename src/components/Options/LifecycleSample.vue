@@ -347,7 +347,7 @@ export default {
             var operations = this.$data.sampleOperations;
             try {
                 for (var i in operations) {
-                    this.$store.commit("addOperationToSocketOperations", operations[i]);
+                    this.$store.commit("addOperation", operations[i]);
                     this.$emit("exige-viewOperationOnMap", operations[i]);
                 }
             } catch (error) {
@@ -363,7 +363,7 @@ export default {
 
                 var delayedPositionAdder = function () {
                     if (i < positions.length) {
-                        this.$store.commit("addPositionToSocketPositions", positions[i]);
+                        this.$store.commit("addPosition", positions[i]);
                         i++;
                     } else {
                         window.clearInterval(timer);

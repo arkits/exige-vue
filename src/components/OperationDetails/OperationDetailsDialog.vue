@@ -67,11 +67,6 @@ export default {
         return {
             dialog: false
         };
-    },
-    computed: {
-        getSocketPositionsForOperation() {
-            return store.getters.getSocketPositionsForOperation(this.operation.gufi);
-        }
     }
 };
 </script>

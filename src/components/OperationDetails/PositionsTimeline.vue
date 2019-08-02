@@ -9,7 +9,7 @@
     </div>
     <div v-else>
         <v-timeline align-top dense>
-            <div v-for="(position, index) in getSocketPositionsForOperation" v-bind:key="index">
+            <div v-for="(position, index) in getPositionsForOperation" v-bind:key="index">
                 <v-timeline-item color="pink" small>
                     <v-layout pt-1>
                         <v-flex xs2>
@@ -48,8 +48,8 @@ export default {
         };
     },
     computed: {
-        getSocketPositionsForOperation() {
-            this.positions = store.getters.getSocketPositionsForOperation(this.operation.gufi);
+        getPositionsForOperation() {
+            this.positions = store.getters.getPositionsForOperation(this.operation.gufi);
             return this.positions;
         },
         positionsAsString() {

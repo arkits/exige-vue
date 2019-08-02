@@ -1,13 +1,13 @@
 <template>
 <v-container id="operations-cards-list" grid-list-md>
-    <div v-for="operation in getSocketOperationsFromStore" if="getSocketOperationsFromStore.length > 0" v-bind:key="operation.gufi">
+    <div v-for="operation in getOperationsFromStore" if="getOperationsFromStore.length > 0" v-bind:key="operation.gufi">
         <v-layout row wrap>
             <v-flex xs12>
                 <OperationCard v-bind:operation="operation" v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', operation)" />
             </v-flex>
         </v-layout>
     </div>
-    <div v-if="getSocketOperationsFromStore.length === 0">
+    <div v-if="getOperationsFromStore.length === 0">
         <v-layout row wrap>
             <v-flex xs12>
                 <center>
@@ -32,8 +32,8 @@ export default {
         DataAdder
     },
     computed: {
-        getSocketOperationsFromStore() {
-            return store.getters.getSocketOperations;
+        getOperationsFromStore() {
+            return store.getters.getOperations;
         }
     }
 };

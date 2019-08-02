@@ -6,33 +6,33 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        socket_operations: [],
-        socket_positions: [],
+        operations: [],
+        positions: [],
         positionsLayerColorMap: [],
         dswitch: true
     },
     mutations: {
-        addOperationToSocketOperations: function (state, op) {
+        addOperation: function (state, op) {
             var validOperation = validateOperationData(op);
 
-            var index = state.socket_operations.findIndex(function (operation) {
+            var index = state.operations.findIndex(function (operation) {
                 return operation.gufi === validOperation.gufi;
             });
 
             if (index != -1) {
                 console.log("Update Operation");
-                Vue.set(state.socket_operations, index, validOperation);
+                Vue.set(state.operations, index, validOperation);
             } else {
                 console.log("Add Operation");
-                state.socket_operations.push(validOperation);
+                state.operations.push(validOperation);
             }
         },
-        addPositionToSocketPositions: function (state, pos) {
+        addPosition: function (state, pos) {
             console.log("Adding to Position to Store.");
-            state.socket_positions.push(pos);
+            state.positions.push(pos);
         },
-        clearSocketOperations: function (state) {
-            state.socket_operations = [];
+        clearOperations: function (state) {
+            state.operations = [];
         },
         addToPositionsLayerColorMap: function (state, posLayerColor) {
             var index = state.positionsLayerColorMap.findIndex(function (plc) {
@@ -48,17 +48,16 @@ export default new Vuex.Store({
             }
         }
     },
-    actions: {},
     getters: {
-        getSocketOperations: state => {
-            return state.socket_operations;
+        getOperations: state => {
+            return state.operations;
         },
-        getSocketPositions: state => {
-            return state.socket_positions;
+        getPositions: state => {
+            return state.positions;
         },
-        getSocketPositionsForOperation: state => operationGufi => {
+        getPositionsForOperation: state => operationGufi => {
             var positionsToReturn = [];
-            state.socket_positions.forEach(function (position) {
+            state.positions.forEach(function (position) {
                 if (position.gufi == operationGufi) {
                     positionsToReturn.push(position);
                 }

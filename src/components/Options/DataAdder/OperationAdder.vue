@@ -37,12 +37,12 @@ export default {
                 if (Array.isArray(jsonUserInput)) {
                     for (var i in jsonUserInput) {
                         this.$store.commit(
-                            "addOperationToSocketOperations",
+                            "addOperation",
                             jsonUserInput[i]
                         );
                     }
                 } else {
-                    this.$store.commit("addOperationToSocketOperations", jsonUserInput);
+                    this.$store.commit("addOperation", jsonUserInput);
                 }
             } catch (error) {
                 this.inputError =

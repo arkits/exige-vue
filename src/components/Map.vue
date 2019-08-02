@@ -248,7 +248,7 @@ export default {
         clearMapAndStore() {
             console.log("clearMapStore from Map");
 
-            var storeOperations = store.getters.getSocketOperations;
+            var storeOperations = store.getters.getOperations;
 
             console.log("Removing operation layers...");
 
@@ -264,7 +264,7 @@ export default {
                 this.map.removeSource(positionLayerId);
             }
 
-            this.$store.commit("clearSocketOperations");
+            this.$store.commit("clearOperations");
         },
         clearPositionsLayer(gufi) {
             console.log("clearPositionsLayer from Map");
@@ -285,30 +285,30 @@ export default {
         };
     },
     computed: {
-        computeStoreSocketOperations() {
-            return store.getters.getSocketOperations;
+        computeOperations() {
+            return store.getters.getOperations;
         },
-        computeStoreSocketPositions() {
-            return store.getters.getSocketPositions;
+        computePositions() {
+            return store.getters.getPositions;
         },
         computePositionLayerColor() {
             return store.getters.getPositionLayerColorMap;
         }
     },
     watch: {
-        computeStoreSocketOperations() {
+        computeOperations() {
             console.log("Watched change in Store Operations.");
 
-            var updatedStoreOperations = store.getters.getSocketOperations;
+            var updatedStoreOperations = store.getters.getOperations;
 
             for (var i in updatedStoreOperations) {
                 this.createOperationLayer(updatedStoreOperations[i]);
             }
         },
-        computeStoreSocketPositions() {
+        computePositions() {
             console.log("Watched change in Store Positions.");
 
-            var storePositions = store.getters.getSocketPositions;
+            var storePositions = store.getters.getPositions;
 
             var sortedPositions = [];
 
@@ -332,7 +332,7 @@ export default {
         computePositionLayerColor(newValue) {
             console.log("Watched change in Store PositionLayerColors.");
             for (var i in newValue) {
-                var storePositions = store.getters.getSocketPositionsForOperation(
+                var storePositions = store.getters.getPositionsForOperation(
                     newValue[i].gufi
                 );
 
