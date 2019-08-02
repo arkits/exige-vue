@@ -1,6 +1,6 @@
 <template>
 <div class="options-list">
-    <v-layout row wrap>
+    <v-layout wrap>
         <v-flex>
             <ExigeOptions v-on:exige-clearStore="$emit('exige-clearStore')" v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)" />
         </v-flex>

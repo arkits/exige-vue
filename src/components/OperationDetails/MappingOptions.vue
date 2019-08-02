@@ -1,9 +1,25 @@
 <template>
 <div id="mappingOptions" class="white--text">
-    <h3 class="headline">Positions Color</h3>
+    <h2>Operation Layer Options</h2>
     <br />
+
+     <v-btn color="primary">Hide Volumes layer</v-btn> <br /> <br /> 
+
     <v-flex xs12 sm6 d-flex>
-        <v-select :items="items" v-on:change="updatePositionLayerColor" label="Choose position color layer here" solo></v-select>
+        <v-select :items="items" v-on:change="updatePositionLayerColor" label="Operation layer color" solo></v-select>
+    </v-flex>
+
+    <br />
+    <v-divider />
+    <br />
+
+    <h2>Positions Layer Options</h2>
+    <br />
+
+     <v-btn color="primary">Hide Positions layer</v-btn> <br /> <br /> 
+
+    <v-flex xs12 sm6 d-flex>
+        <v-select :items="items" v-on:change="updatePositionLayerColor" label="Positions layer color" solo></v-select>
     </v-flex>
 </div>
 </template>

@@ -10,11 +10,11 @@
     </v-layout>
     <v-footer fixed height="auto">
         <v-layout>
-            <v-flex row grey darken-4 white--text xs12>
-                <v-layout align-end justify-start>
+            <v-flex row>
+                <v-layout>
                     <OptionsList v-on:exige-clearStore="clearStore()" v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
                 </v-layout>
-                <v-layout align-end justify-end>
+                <v-layout justify-end>
                     <AboutPopup />
                 </v-layout>
             </v-flex>
