@@ -24,12 +24,12 @@
 
                 <v-tab-item key="1">
                     <v-card-text>
-                        <OperationAdder />
+                        <OperationAdder v-bind:dialog="dialog"/>
                     </v-card-text>
                 </v-tab-item>
                 <v-tab-item key="2">
                     <v-card-text>
-                        <PositionAdder />
+                        <PositionAdder v-bind:dialog="dialog"/>
                     </v-card-text>
                 </v-tab-item>
                 <v-tab-item key="3">
@@ -66,12 +66,6 @@ export default {
         return {
             dialog: false,
         };
-    },
-    methods: {
-        closeDialog: function () {
-            this.dialog = false;
-            this.$refs.operationAdderForm.reset();
-        }
     }
 };
 </script>
