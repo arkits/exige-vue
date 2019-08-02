@@ -11,7 +11,7 @@
         <v-layout row wrap>
             <v-flex xs12>
                 <center>
-                    <OperationAdder />
+                    <DataAdder />
                 </center>
             </v-flex>
         </v-layout>
@@ -21,7 +21,7 @@
 
 <script>
 import OperationCard from "./OperationCard";
-import OperationAdder from  "./Options/OperationAdder";
+import DataAdder from  "./Options/DataAdder/DataAdder";
 import store from "../store";
 
 export default {
@@ -29,7 +29,7 @@ export default {
     props: ["operations"],
     components: {
         OperationCard,
-        OperationAdder
+        DataAdder
     },
     computed: {
         getSocketOperationsFromStore() {

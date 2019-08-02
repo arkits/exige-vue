@@ -9,48 +9,42 @@
         </template>
         <v-card outlined>
             <v-card-title class="headline orange darken-2" primary-title>
-                
                 <v-list-item>
                     <v-list-item-content>
-                        <v-list-item-title class="headline mb-1">
-                            Exige Options
-                        </v-list-item-title>
+                        <v-list-item-title class="headline mb-1">Exige Options</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+            </v-card-title>
+
+            <v-tabs centered color="white" background-color="orange darken-2" dark slider-color="white">
                 
-                </v-card-title>
+                <v-tab key="1" ripple>Exige Options</v-tab>
 
-            <v-card-text>
-                <v-tabs centered color="orange darken-2" dark slider-color="white">
-                    <v-tab key="1" ripple>Exige Options</v-tab>
-
-                    <v-tab-item key="1">
-                        <v-card-text>
-                            <v-container class="white--text">
-                                <v-layout pt-1>
-                                    <v-flex xs8>
-                                        <h3>Lifecycle Demo</h3>
-                                        <p>Loads a sample Operation and position.</p>
-                                    </v-flex>
-                                    <v-flex xs3>
-                                        <LifecycleSample v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)" />
-                                    </v-flex>
-                                </v-layout>
-                                <v-layout pt-1>
-                                    <v-flex xs8>
-                                        <h3>Clear Data</h3>
-                                        <p>Clear all store data - Operations and Positions.</p>
-                                    </v-flex>
-                                    <v-flex xs3>
-                                        <v-btn block @click="clearStore">Clear Data</v-btn>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </v-card-text>
-                    </v-tab-item>
-
-                </v-tabs>
-            </v-card-text>
+                <v-tab-item key="1">
+                    <v-card-text>
+                        <v-container class="white--text">
+                            <v-layout pt-1>
+                                <v-flex xs8>
+                                    <h3>Lifecycle Demo</h3>
+                                    <p>Loads a sample Operation and position.</p>
+                                </v-flex>
+                                <v-flex xs3>
+                                    <LifecycleSample v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)" />
+                                </v-flex>
+                            </v-layout>
+                            <v-layout pt-1>
+                                <v-flex xs8>
+                                    <h3>Clear Data</h3>
+                                    <p>Clear all store data - Operations and Positions.</p>
+                                </v-flex>
+                                <v-flex xs3>
+                                    <v-btn block @click="clearStore">Clear Data</v-btn>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card-text>
+                </v-tab-item>
+            </v-tabs>
 
             <v-divider></v-divider>
 
@@ -60,7 +54,6 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
-
 </div>
 </template>
 
@@ -74,7 +67,7 @@ export default {
     },
     data() {
         return {
-            dialog: false,
+            dialog: false
         };
     },
     methods: {
@@ -82,7 +75,7 @@ export default {
             console.log("Clearing Store...");
             // this.$store.commit('clearSocketOperations');
             this.$emit("exige-clearStore");
-        },
+        }
     },
     computed: {}
 };

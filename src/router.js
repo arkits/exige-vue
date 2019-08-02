@@ -11,11 +11,6 @@ export default new Router({
       path: '/exige',
       name: 'dashboard',
       component: Dashboard
-    },
-    {
-      path: '/exige/about',
-      name: 'about',
-      component: () => import('./views/About.vue')
     }
   ]
 })

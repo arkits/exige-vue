@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-layout row>
+    <v-layout wrap>
         <v-flex xs12 md3>
             <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
         </v-flex>

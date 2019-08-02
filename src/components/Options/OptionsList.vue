@@ -4,20 +4,20 @@
         <ExigeOptions 
         v-on:exige-clearStore="$emit('exige-clearStore')" 
         v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)"/>
-        <OperationAdder />
+        <DataAdder />
     </v-layout>
 </div>
 </template>
 
 <script>
 import ExigeOptions from "./ExigeOptions";
-import OperationAdder from "./OperationAdder";
+import DataAdder from "./DataAdder/DataAdder";
 import RefreshData from "./RefreshData";
 export default {
     name: "OptionsList",
     components: {
         ExigeOptions,
-        OperationAdder,
+        DataAdder,
         RefreshData
     },
     data() {
