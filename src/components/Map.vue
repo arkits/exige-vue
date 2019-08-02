@@ -21,9 +21,7 @@ export default {
             console.log("Map Loaded!");
         },
         createOperationLayer(operation) {
-
             var operationFillColor;
-
             var renderIn3d = store.state.dswitch;
 
             if (
@@ -79,8 +77,10 @@ export default {
 
             var operationLayerId = operation.gufi + "_operation";
 
+            var mapLayer
+
             if(renderIn3d){
-                var mapLayer = {
+                mapLayer = {
                     id: operationLayerId,
                     type: "fill-extrusion",
                     source: {
@@ -96,7 +96,7 @@ export default {
                     }
                 };
             } else {
-                var mapLayer = {
+                mapLayer = {
                     id: operationLayerId,
                     type: "fill",
                     source: {
@@ -123,6 +123,7 @@ export default {
         createPositionLayer(positions, layerColor) {
             var positionLayerId = positions[0].gufi + "_positions";
             var operationLayerId = positions[0].gufi + "_operation";
+            var renderIn3d = store.state.dswitch;
 
             var layers = this.map.getStyle().layers;
             var placeBelowOperationLayer = false;
@@ -171,19 +172,35 @@ export default {
                 mapboxData.features.push(positionVolumeGeojson);
             }
 
-            var mapLayer = {
-                id: positionLayerId,
-                type: "fill-extrusion",
-                source: {
-                    type: "geojson",
-                    data: mapboxData
-                },
-                paint: {
-                    "fill-extrusion-color": layerColor,
-                    "fill-extrusion-height": ["get", "height"],
-                    "fill-extrusion-base": ["get", "base_height"]
-                }
-            };
+            var mapLayer;
+
+            if(renderIn3d){
+                mapLayer = {
+                    id: positionLayerId,
+                    type: "fill-extrusion",
+                    source: {
+                        type: "geojson",
+                        data: mapboxData
+                    },
+                    paint: {
+                        "fill-extrusion-color": layerColor,
+                        "fill-extrusion-height": ["get", "height"],
+                        "fill-extrusion-base": ["get", "base_height"]
+                    }
+                };
+            } else {
+                mapLayer = {
+                    id: positionLayerId,
+                    type: "symbol",
+                    source: {
+                        type: "geojson",
+                        data: mapboxData
+                    },
+                    layout: {
+                       "icon-image": "airport-15",
+                    },
+                };
+            }
 
             if (this.map.getSource(positionLayerId)) {
                 console.log("Updating existing layer - " + positionLayerId);
@@ -312,7 +329,7 @@ export default {
                 this.createPositionLayer(sortedPositions[i], positionLayerColor);
             }
         },
-        computePositionLayerColor(newValue, oldValue) {
+        computePositionLayerColor(newValue) {
             console.log("Watched change in Store PositionLayerColors.");
             for (var i in newValue) {
                 var storePositions = store.getters.getSocketPositionsForOperation(
