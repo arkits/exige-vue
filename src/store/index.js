@@ -13,6 +13,7 @@ export default new Vuex.Store({
     },
     mutations: {
         addOperation: function (state, op) {
+
             var validOperation = validateOperationData(op);
 
             var index = state.operations.findIndex(function (operation) {

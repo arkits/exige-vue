@@ -6,7 +6,7 @@
      <v-btn color="primary">Hide Volumes layer</v-btn> <br /> <br /> 
 
     <v-flex xs12 sm6 d-flex>
-        <v-select :items="items" v-on:change="updatePositionLayerColor" label="Operation layer color" solo></v-select>
+        <v-select :items="volumeColors" v-on:change="updateOperationLayerColor" label="Operation layer color" solo></v-select>
     </v-flex>
 
     <br />
@@ -19,7 +19,7 @@
      <v-btn color="primary">Hide Positions layer</v-btn> <br /> <br /> 
 
     <v-flex xs12 sm6 d-flex>
-        <v-select :items="items" v-on:change="updatePositionLayerColor" label="Positions layer color" solo></v-select>
+        <v-select :items="positionColors" v-on:change="updatePositionLayerColor" label="Positions layer color" solo></v-select>
     </v-flex>
 </div>
 </template>
@@ -33,7 +33,8 @@ export default {
     data() {
         return {
             dialog: false,
-            items: ["red", "lime", "pink", "yellow", "orange", "teal"]
+            positionColors: ["red", "lime", "pink", "yellow", "orange", "teal"],
+            volumeColors: ["#F44336", "#9C27B0", "#2196F3", "#4CAF50", "#FF5722"]
         };
     },
     methods: {
@@ -42,10 +43,12 @@ export default {
                 gufi: this.operation.gufi,
                 color: event
             };
-
-            // console.log(postionLayerColor);
-
             this.$store.commit("addToPositionsLayerColorMap", postionLayerColor);
+        },
+        updateOperationLayerColor(event) {
+            var newOperation = this.operation;
+            newOperation.exige_op_color = event;
+            this.$store.commit("addOperation", newOperation);
         }
     }
 };
