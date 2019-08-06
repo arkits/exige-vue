@@ -96,7 +96,7 @@ function validateOperationData(operation) {
         goodOperation.uss_name = operation.uss_name;
     } else {
         console.log("OpVal: uss_name not found. Using default.");
-        goodOperation.uss_name = "exige.archit.xyz";
+        goodOperation.uss_name = "exige.xyz";
     }
 
     if (operation.state) {
@@ -104,6 +104,14 @@ function validateOperationData(operation) {
     } else {
         console.log("OpVal: state not found. Using CLOSED.");
         goodOperation.state = "CLOSED";
+    }
+
+    if(operation.exige_op_color){
+        goodOperation.exige_op_color = operation.exige_op_color
+    } else {
+        var randomColor = generateRandomColor();
+        goodOperation.exige_op_color = randomColor;
+        console.log("OpVal: exige_op_color not found. Using " + randomColor);
     }
 
     if (operation.operation_volumes) {
@@ -144,4 +152,10 @@ function validateOperationData(operation) {
     }
 
     return goodOperation;
+}
+
+function generateRandomColor(){
+    var colorArray = ["#F44336", "#9C27B0", "#2196F3", "#4CAF50", "#FF5722"];    
+    var randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+    return randomColor;
 }

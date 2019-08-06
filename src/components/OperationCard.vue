@@ -25,22 +25,7 @@ export default {
     },
     computed: {
         cardBackgroud: function () {
-            var bg;
-
-            if (this.operation.state === "ACTIVE" || this.operation.state === "A" || this.operation.state === "V") {
-                bg = "#388E3C";
-            }
-            else if (this.operation.state === "ROGUE" || this.operation.state === "U") {
-                bg = "#FF5722";
-            }
-            else if (this.operation.state === "REJECTED" || this.operation.state === "R") {
-                bg = "#D32F2F";
-            }
-            else if (this.operation.state === "CLOSED" || this.operation.state === "C" || this.operation.state === "G") {
-                bg = "#616161";
-            }
-
-
+            var bg = this.operation.exige_op_color;
             return bg;
         }
     }
