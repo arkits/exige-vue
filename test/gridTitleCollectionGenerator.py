@@ -36,21 +36,29 @@ def makeGeoJsonFeature(zoom, xtitle, ytile):
 
 def makeGeoJsonCollection():
 
+    # Entire USA
     zoom = 10
-    xStart = 200
-    xEnd = 210
-    yStart = 200
-    yEnd = 250
+    xStart = 154
+    xEnd = 286
+    yStart = 358
+    yEnd = 433
 
     geoJsonFeatureCollection = {}
     geoJsonFeatureCollection["type"] = "FeatureCollection"
     geoJsonFeatureCollection["features"] = []
 
     for x in range(xStart, xEnd):
-        geoJsonFeature = makeGeoJsonFeature(zoom, x, yStart)
-        geoJsonFeatureCollection["features"].append(geoJsonFeature)
+        for y in range(yStart, yEnd):
+            geoJsonFeature = makeGeoJsonFeature(zoom, x, y)
+            geoJsonFeatureCollection["features"].append(geoJsonFeature)
+    
+    return geoJsonFeatureCollection
 
-    print(json.dumps(geoJsonFeatureCollection))
+def writeToFile(jsonToWrite):
+    f = open("gridTiles.json", "w")
+    f.write(json.dumps(jsonToWrite, indent=4))
+    print("Wrote to file...")
 
-
-makeGeoJsonCollection()
+geoJsonFeatureCollection = makeGeoJsonCollection()
+writeToFile(geoJsonFeatureCollection)
+print("Done!")
