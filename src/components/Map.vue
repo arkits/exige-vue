@@ -10,6 +10,8 @@ import {
     constants
 } from "crypto";
 
+import gridGeoJson from "../assets/gridTiles.json";
+
 export default {
     name: "Map",
     props: ["operations", "positions"],
@@ -23,6 +25,7 @@ export default {
         mapLoaded() {
             console.log("Map Loaded!");
             this.createPointsLayer();
+            this.createGridLayer();
         },
         createOperationLayer(operation) {
             var operationFillColor = operation.exige_op_color;
@@ -228,11 +231,32 @@ export default {
                     "text-color": ["get", "color"]
                 }
             };
-            
+
+            this.map.addLayer(mapLayer);
+        },
+        createGridLayer() {
+            var gridLayerId = "exigeGridLayer";
+
+            var mapboxData = gridGeoJson;
+
+            var mapLayer = {
+                id: gridLayerId,
+                type: "fill",
+                source: {
+                    type: "geojson",
+                    data: mapboxData
+                },
+                paint: {
+                    "fill-color": "rgba(255,255,255,0.0)",
+                    "fill-outline-color": "rgba(51, 181, 229,1.0)",
+                    "fill-opacity": 1
+                }
+            };
+
+            console.log("Creating Grid Layer!");
             this.map.addLayer(mapLayer);
         },
         addToPointLayer(points) {
-
             var pointsLayerId = "exigePointsLayer";
 
             var mapboxData = {
@@ -243,7 +267,7 @@ export default {
             for (var i in points) {
                 var point = points[i];
 
-                if(point.label === ''){
+                if (point.label === "") {
                     point.label = point.lat + "," + point.long;
                 }
 
@@ -260,7 +284,6 @@ export default {
                 };
 
                 mapboxData.features.push(pointGeoJson);
-
             }
 
             this.map.getSource(pointsLayerId).setData(mapboxData);
