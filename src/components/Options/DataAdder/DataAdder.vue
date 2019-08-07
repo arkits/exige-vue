@@ -34,9 +34,7 @@
                 </v-tab-item>
                 <v-tab-item key="3">
                     <v-card-text>
-                        <v-container class="white--text">
-                            <center> <h1> Coming Soon! </h1> </center>
-                        </v-container>
+                        <MiscAdder v-bind:dialog="dialog"/>
                     </v-card-text>
                 </v-tab-item>
             </v-tabs>
@@ -55,12 +53,14 @@
 <script>
 import OperationAdder from "./OperationAdder";
 import PositionAdder from "./PositionAdder";
+import MiscAdder from "./MiscAdder";
 
 export default {
     name: "DataAdder",
     components:{
         OperationAdder,
-        PositionAdder
+        PositionAdder,
+        MiscAdder
     },
     data() {
         return {

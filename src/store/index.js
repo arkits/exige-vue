@@ -8,6 +8,7 @@ export default new Vuex.Store({
     state: {
         operations: [],
         positions: [],
+        points: [],
         positionsLayerColorMap: [],
         dswitch: true
     },
@@ -28,12 +29,12 @@ export default new Vuex.Store({
                 state.operations.push(validOperation);
             }
         },
-        addPosition: function (state, pos) {
-            // console.log("Adding to Position to Store.");
-            state.positions.push(pos);
-        },
         clearOperations: function (state) {
             state.operations = [];
+        },
+        addPosition: function (state, pos) {
+            console.log("Adding to Position to Store.");
+            state.positions.push(pos);
         },
         addToPositionsLayerColorMap: function (state, posLayerColor) {
             var index = state.positionsLayerColorMap.findIndex(function (plc) {
@@ -47,7 +48,12 @@ export default new Vuex.Store({
                 console.log("Add PLC");
                 state.positionsLayerColorMap.push(posLayerColor);
             }
-        }
+        },
+        addPoint: function (state, point) {
+            console.log("Adding to Point to Store.");
+            var goodPoint = validatePoint(point);
+            state.points.push(goodPoint);
+        },
     },
     getters: {
         getOperations: state => {
@@ -79,6 +85,9 @@ export default new Vuex.Store({
         },
         getDSwitch: state => {
             return state.dswitch;
+        },
+        getPoints: state => {
+            return state.points;
         }
     }
 });
@@ -153,6 +162,12 @@ function validateOperationData(operation) {
     }
 
     return goodOperation;
+}
+
+function validatePoint(point){
+    var goodPoint = point;
+    goodPoint.exige_point_color = generateRandomColor();
+    return goodPoint;
 }
 
 function generateRandomColor(){

@@ -6,6 +6,9 @@
 import Mapbox from "mapbox-gl-vue";
 import store from "../store";
 import geojsonExtent from "@mapbox/geojson-extent";
+import {
+    constants
+} from "crypto";
 
 export default {
     name: "Map",
@@ -19,11 +22,11 @@ export default {
         },
         mapLoaded() {
             console.log("Map Loaded!");
+            this.createPointsLayer();
         },
         createOperationLayer(operation) {
-
             var operationFillColor = operation.exige_op_color;
-            
+
             var renderIn3d = store.state.dswitch;
 
             var mapboxData = {
@@ -61,9 +64,9 @@ export default {
 
             var operationLayerId = operation.gufi + "_operation";
 
-            var mapLayer
+            var mapLayer;
 
-            if(renderIn3d){
+            if (renderIn3d) {
                 mapLayer = {
                     id: operationLayerId,
                     type: "fill-extrusion",
@@ -158,7 +161,7 @@ export default {
 
             var mapLayer;
 
-            if(renderIn3d){
+            if (renderIn3d) {
                 mapLayer = {
                     id: positionLayerId,
                     type: "fill-extrusion",
@@ -181,8 +184,8 @@ export default {
                         data: mapboxData
                     },
                     layout: {
-                       "icon-image": "airport-15",
-                    },
+                        "icon-image": "star-15"
+                    }
                 };
             }
 
@@ -198,6 +201,69 @@ export default {
                     this.map.addLayer(mapLayer);
                 }
             }
+        },
+        createPointsLayer() {
+            var pointsLayerId = "exigePointsLayer";
+
+            var mapboxData = {
+                type: "FeatureCollection",
+                features: []
+            };
+
+            var mapLayer = {
+                id: pointsLayerId,
+                type: "symbol",
+                source: {
+                    type: "geojson",
+                    data: mapboxData
+                },
+                layout: {
+                    "icon-image": "star-15",
+                    "text-field": "{title}",
+                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    "text-offset": [0, 0.6],
+                    "text-anchor": "top"
+                },
+                paint: {
+                    "text-color": ["get", "color"]
+                }
+            };
+            
+            this.map.addLayer(mapLayer);
+        },
+        addToPointLayer(points) {
+
+            var pointsLayerId = "exigePointsLayer";
+
+            var mapboxData = {
+                type: "FeatureCollection",
+                features: []
+            };
+
+            for (var i in points) {
+                var point = points[i];
+
+                if(point.label === ''){
+                    point.label = point.lat + "," + point.long;
+                }
+
+                var pointGeoJson = {
+                    type: "Feature",
+                    geometry: {
+                        type: "Point",
+                        coordinates: [point.long, point.lat]
+                    },
+                    properties: {
+                        title: point.label,
+                        color: point.exige_point_color
+                    }
+                };
+
+                mapboxData.features.push(pointGeoJson);
+
+            }
+
+            this.map.getSource(pointsLayerId).setData(mapboxData);
         },
         viewOperationOnMap(operationToView) {
             var operationVolumeFeatureCollection = {
@@ -229,41 +295,41 @@ export default {
 
             this.map.fitBounds(bounds.bbox);
         },
-        toggleOperationOnMap(operation){
-
+        toggleOperationOnMap(operation) {
             console.log("toggleOperationOnMap - " + operation.gufi);
 
             var operationLayerId = operation.gufi + "_operation";
 
-            var visibilityOp = this.map.getLayoutProperty(operationLayerId, 'visibility');
+            var visibilityOp = this.map.getLayoutProperty(
+                operationLayerId,
+                "visibility"
+            );
 
-            if (visibilityOp === 'visible' || typeof visibilityOp === "undefined") {
+            if (visibilityOp === "visible" || typeof visibilityOp === "undefined") {
                 console.log("toggleOperationOnMap - Hide " + operationLayerId);
-                this.map.setLayoutProperty(operationLayerId, 'visibility', 'none');
-
+                this.map.setLayoutProperty(operationLayerId, "visibility", "none");
             } else {
                 console.log("toggleOperationOnMap - Show " + operationLayerId);
-                this.map.setLayoutProperty(operationLayerId, 'visibility', 'visible');
+                this.map.setLayoutProperty(operationLayerId, "visibility", "visible");
             }
-
         },
-        togglePositionsOnMap(operation){
-
+        togglePositionsOnMap(operation) {
             console.log("togglePositionsOnMap - " + operation.gufi);
 
             var positionLayerId = operation.gufi + "_positions";
 
-            var visibilityPos = this.map.getLayoutProperty(positionLayerId, 'visibility');
+            var visibilityPos = this.map.getLayoutProperty(
+                positionLayerId,
+                "visibility"
+            );
 
-            if (visibilityPos === 'visible' || typeof visibilityPos === "undefined") {
+            if (visibilityPos === "visible" || typeof visibilityPos === "undefined") {
                 console.log("togglePositionsOnMap - Hide " + positionLayerId);
-                this.map.setLayoutProperty(positionLayerId, 'visibility', 'none');
-
+                this.map.setLayoutProperty(positionLayerId, "visibility", "none");
             } else {
                 console.log("togglePositionsOnMap - Show " + positionLayerId);
-                this.map.setLayoutProperty(positionLayerId, 'visibility', 'visible');
+                this.map.setLayoutProperty(positionLayerId, "visibility", "visible");
             }
-
         },
         clearMapAndStore() {
             console.log("clearMapStore from Map");
@@ -313,6 +379,9 @@ export default {
         },
         computePositionLayerColor() {
             return store.getters.getPositionLayerColorMap;
+        },
+        computePoints() {
+            return store.getters.getPoints;
         }
     },
     watch: {
@@ -359,6 +428,10 @@ export default {
                 this.clearPositionsLayer(newValue[i].gufi);
                 this.createPositionLayer(storePositions, newValue[i].color);
             }
+        },
+        computePoints(points) {
+            console.log("Watched change in Store Points.");
+            this.addToPointLayer(points);
         }
     }
 };
