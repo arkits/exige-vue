@@ -11,7 +11,11 @@
 
     <center>
         <div v-if="inputError">
-            <p class="font-weight-bold red">{{inputError}}</p>
+            <v-alert type="error">{{inputError}}</v-alert>
+        </div>
+
+        <div v-if="inputSuccess">
+            <v-alert type="success">{{inputSuccess}}</v-alert>
         </div>
 
         <v-btn color="green" @click="addPositionToStore">Add Position</v-btn>
@@ -26,7 +30,8 @@ export default {
     data() {
         return {
             userInputPosition: "",
-            inputError: ""
+            inputError: "",
+            inputSuccess: ""
         };
     },
     methods: {
@@ -36,13 +41,12 @@ export default {
                 var jsonUserInput = JSON.parse(userInput);
                 if (Array.isArray(jsonUserInput)) {
                     for (var i in jsonUserInput) {
-                        this.$store.commit(
-                            "addPosition",
-                            jsonUserInput[i]
-                        );
+                        this.$store.commit("addPosition", jsonUserInput[i]);
+                         this.inputSuccess = "Added " + jsonUserInput.length + " Positions!";
                     }
                 } else {
                     this.$store.commit("addPosition", jsonUserInput);
+                     this.inputSuccess = "Added Position!";
                 }
             } catch (error) {
                 this.inputError =

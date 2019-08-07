@@ -11,7 +11,11 @@
 
     <center>
         <div v-if="inputError">
-            <p class="font-weight-bold red">{{inputError}}</p>
+            <v-alert type="error">{{inputError}}</v-alert>
+        </div>
+
+        <div v-if="inputSuccess">
+            <v-alert type="success">{{inputSuccess}}</v-alert>
         </div>
 
         <v-btn color="green" @click="addOperationToStore">Add Operation</v-btn>
@@ -26,7 +30,8 @@ export default {
     data() {
         return {
             userInputOperation: "",
-            inputError: ""
+            inputError: "",
+            inputSuccess: ""
         };
     },
     methods: {
@@ -36,14 +41,14 @@ export default {
                 var jsonUserInput = JSON.parse(userInput);
                 if (Array.isArray(jsonUserInput)) {
                     for (var i in jsonUserInput) {
-                        this.$store.commit(
-                            "addOperation",
-                            jsonUserInput[i]
-                        );
+                        this.$store.commit("addOperation", jsonUserInput[i]);
                     }
+                    this.inputSuccess = "Added " + jsonUserInput.length + " Operations!";
                 } else {
                     this.$store.commit("addOperation", jsonUserInput);
+                    this.inputSuccess = "Added Operation!";
                 }
+                console.log(this.inputSuccess);
             } catch (error) {
                 this.inputError =
                     "Error occured when adding Operation to Store... " + error;
