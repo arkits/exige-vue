@@ -2,7 +2,7 @@
 <div>
     <v-layout wrap>
         <v-flex xs12 md3>
-            <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
+            <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" v-on:exige-hideOperationOnMap="hideOperationOnMap($event)" />
         </v-flex>
         <v-flex xs12 md9>
             <Map ref="Map" />
@@ -39,15 +39,7 @@ export default {
     },
     data() {
         return {
-            org_title: "~/",
-            snackbar: false,
-            snackbarY: "bottom",
-            snackbarX: "right",
-            mode: "",
-            snackbarTimeout: 6000,
-            snackbarColor: "success",
-            snackbarMessage: "Welcome to Exige!",
-            websocketToggleButton: "Connect WebSocket"
+            org_title: "~/"
         };
     },
     computed: {},
@@ -55,6 +47,10 @@ export default {
         viewOperationOnMap: function (val) {
             var operationToView = val;
             this.$refs.Map.viewOperationOnMap(operationToView);
+        },
+        hideOperationOnMap: function (val) {
+            var operation = val;
+            this.$refs.Map.toggleOperationOnMap(operation);
         },
         clearStore: function () {
             this.$refs.Map.clearMapAndStore();

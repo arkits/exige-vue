@@ -8,8 +8,9 @@
             </div>
         </v-card-text>
         <v-card-actions>
-            <v-btn text @click="$emit('exige-viewOperationOnMap', operation)">View on Map</v-btn>
             <OperationDetailsDialog v-bind:operation="operation" />
+            <v-btn text @click="hideOperation">Hide</v-btn>
+            <v-btn text @click="$emit('exige-viewOperationOnMap', operation)">View on Map</v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -27,6 +28,11 @@ export default {
         cardBackgroud: function () {
             var bg = this.operation.exige_op_color;
             return bg;
+        }
+    },
+    methods:{
+        hideOperation(){
+            this.$emit("exige-hideOperationOnMap", this.operation);
         }
     }
 };

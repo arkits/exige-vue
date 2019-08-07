@@ -229,6 +229,11 @@ export default {
 
             this.map.fitBounds(bounds.bbox);
         },
+        toggleOperationOnMap(operation){
+
+            console.log("toggleOperationOnMap");
+
+        },
         clearMapAndStore() {
             console.log("clearMapStore from Map");
 

@@ -3,7 +3,8 @@
     <div v-for="operation in getOperationsFromStore" if="getOperationsFromStore.length > 0" v-bind:key="operation.gufi">
         <v-layout row wrap>
             <v-flex xs12>
-                <OperationCard v-bind:operation="operation" v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', operation)" />
+                <OperationCard v-bind:operation="operation" v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', operation)"
+                v-on:exige-hideOperationOnMap="$emit('exige-hideOperationOnMap', operation)" />
             </v-flex>
         </v-layout>
     </div>
