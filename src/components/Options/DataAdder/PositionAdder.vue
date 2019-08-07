@@ -9,15 +9,15 @@
         </v-flex>
     </center>
 
+    <div v-if="inputError">
+        <v-alert type="error">{{inputError}}</v-alert>
+    </div>
+
+    <div v-if="inputSuccess">
+        <v-alert type="success">{{inputSuccess}}</v-alert>
+    </div>
+
     <center>
-        <div v-if="inputError">
-            <v-alert type="error">{{inputError}}</v-alert>
-        </div>
-
-        <div v-if="inputSuccess">
-            <v-alert type="success">{{inputSuccess}}</v-alert>
-        </div>
-
         <v-btn color="green" @click="addPositionToStore">Add Position</v-btn>
     </center>
 </div>
@@ -42,11 +42,11 @@ export default {
                 if (Array.isArray(jsonUserInput)) {
                     for (var i in jsonUserInput) {
                         this.$store.commit("addPosition", jsonUserInput[i]);
-                         this.inputSuccess = "Added " + jsonUserInput.length + " Positions!";
+                        this.inputSuccess = "Added " + jsonUserInput.length + " Positions!";
                     }
                 } else {
                     this.$store.commit("addPosition", jsonUserInput);
-                     this.inputSuccess = "Added Position!";
+                    this.inputSuccess = "Added Position!";
                 }
             } catch (error) {
                 this.inputError =
@@ -58,6 +58,8 @@ export default {
     },
     watch: {
         dialog: function () {
+            this.inputError = "";
+            this.inputSuccess = "";
             this.$refs.positionAdderForm.reset();
         }
     }

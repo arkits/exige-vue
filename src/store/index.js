@@ -29,7 +29,7 @@ export default new Vuex.Store({
             }
         },
         addPosition: function (state, pos) {
-            console.log("Adding to Position to Store.");
+            // console.log("Adding to Position to Store.");
             state.positions.push(pos);
         },
         clearOperations: function (state) {

@@ -9,15 +9,15 @@
         </v-flex>
     </center>
 
+    <div v-if="inputError">
+        <v-alert type="error">{{inputError}}</v-alert>
+    </div>
+
+    <div v-if="inputSuccess">
+        <v-alert type="success">{{inputSuccess}}</v-alert>
+    </div>
+
     <center>
-        <div v-if="inputError">
-            <v-alert type="error">{{inputError}}</v-alert>
-        </div>
-
-        <div v-if="inputSuccess">
-            <v-alert type="success">{{inputSuccess}}</v-alert>
-        </div>
-
         <v-btn color="green" @click="addOperationToStore">Add Operation</v-btn>
     </center>
 </div>
@@ -48,7 +48,6 @@ export default {
                     this.$store.commit("addOperation", jsonUserInput);
                     this.inputSuccess = "Added Operation!";
                 }
-                console.log(this.inputSuccess);
             } catch (error) {
                 this.inputError =
                     "Error occured when adding Operation to Store... " + error;
@@ -59,6 +58,8 @@ export default {
     },
     watch: {
         dialog: function () {
+            this.inputError = "";
+            this.inputSuccess = "";
             this.$refs.operationAdderForm.reset();
         }
     }
