@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import store from "../../store";
-
 export default {
     name: "MappingOptions",
     props: ["operation"],

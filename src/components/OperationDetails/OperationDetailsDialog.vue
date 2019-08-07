@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import store from "../../store";
 import OperationDataView from "./OperationDataView";
 import PositionsTimeline from "./PositionsTimeline";
 import MappingOptions from "./MappingOptions";
