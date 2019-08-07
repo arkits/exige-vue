@@ -132,11 +132,20 @@ export default {
             for (i in positions) {
                 var coordinates = positions[i].location.coordinates;
 
-                var topAlt = 5000;
-                var baseAlt = 500;
+                var topAlt;
+                var baseAlt;
+
                 if (positions[i].altitude_gps_wgs84_ft != null) {
                     topAlt = positions[i].altitude_gps_wgs84_ft + 10;
                     baseAlt = positions[i].altitude_gps_wgs84_ft - 10;
+                } 
+                else if (positions[i].altitude_gps.altitude_value != null) {
+                    topAlt = positions[i].altitude_gps.altitude_value + 10;
+                    baseAlt = positions[i].altitude_gps.altitude_value  - 10;
+                } else {
+                    console.warn("Can't parse Position for " + positionLayerId);
+                    topAlt = 650;
+                    baseAlt = 640;
                 }
 
                 var positionVolumeGeojson = {
