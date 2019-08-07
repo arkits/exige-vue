@@ -231,7 +231,23 @@ export default {
         },
         toggleOperationOnMap(operation){
 
-            console.log("toggleOperationOnMap");
+            console.log("toggleOperationOnMap - " + operation.gufi);
+
+            var operationLayerId = operation.gufi + "_operation";
+            var positionLayerId = operation.gufi + "_positions";
+
+            var visibilityOp = this.map.getLayoutProperty(operationLayerId, 'visibility');
+
+            if (visibilityOp === 'visible' || typeof visibilityOp === "undefined") {
+                console.log("toggleOperationOnMap - Hide " + operationLayerId);
+                this.map.setLayoutProperty(operationLayerId, 'visibility', 'none');
+                this.map.setLayoutProperty(positionLayerId, 'visibility', 'none');
+
+            } else {
+                console.log("toggleOperationOnMap - Show " + operationLayerId);
+                this.map.setLayoutProperty(operationLayerId, 'visibility', 'visible');
+                this.map.setLayoutProperty(positionLayerId, 'visibility', 'visible');
+            }
 
         },
         clearMapAndStore() {
@@ -246,10 +262,10 @@ export default {
                 var operationLayerId = operation.gufi + "_operation";
                 var positionLayerId = operation.gufi + "_positions";
                 console.log("Removing layer - " + operationLayerId);
-                console.log("Removing layer - " + positionLayerId);
                 this.map.removeLayer(operationLayerId);
-                this.map.removeLayer(positionLayerId);
                 this.map.removeSource(operationLayerId);
+                console.log("Removing layer - " + positionLayerId);
+                this.map.removeLayer(positionLayerId);
                 this.map.removeSource(positionLayerId);
             }
 
