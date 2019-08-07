@@ -1,26 +1,42 @@
 <template>
 <div id="mappingOptions" class="white--text">
-    <h2>Operation Layer Options</h2>
-    <br />
+    <v-container class="white--text">
+        <h2 class="headline">Operation Layer Options</h2>
+        <br />
+        <v-layout pt-1>
+            <v-flex xs8>
+                <h3>Hide Operation Volumes</h3>
+                <p>This doesnt't work right now... Hides the Operation Volumes layer.</p>
+            </v-flex>
+            <v-flex xs3>
+                <v-btn color="primary">Hide Volumes</v-btn>
+            </v-flex>
+        </v-layout>
+        <v-layout pt-1>
+            <v-flex xs8>
+                <h3>Operation Volumes Color</h3>
+                <p>Choose the color of the Operation Volumes layer.</p>
+            </v-flex>
+            <v-flex xs3>
+                <v-select :items="volumeColors" v-on:change="updateOperationLayerColor" label="Volume Color" solo></v-select>
+            </v-flex>
+        </v-layout>
+        <v-divider />
+        <br />
+        <h2 class="headline">Position Layer Options</h2>
+        <br />
+        <v-layout pt-1>
+            <v-flex xs8>
+                <h3>Position Marker Color</h3>
+                <p>Choose the color of the positions markers.</p>
+            </v-flex>
+            <v-flex xs3>
+                <v-select :items="positionColors" v-on:change="updatePositionLayerColor" label="Marker Color" solo></v-select>
+            </v-flex>
+        </v-layout>
+    </v-container>
 
-     <v-btn color="primary">Hide Volumes layer</v-btn> <br /> <br /> 
-
-    <v-flex xs12 sm6 d-flex>
-        <v-select :items="volumeColors" v-on:change="updateOperationLayerColor" label="Operation layer color" solo></v-select>
-    </v-flex>
-
-    <br />
-    <v-divider />
-    <br />
-
-    <h2>Positions Layer Options</h2>
-    <br />
-
-     <v-btn color="primary">Hide Positions layer</v-btn> <br /> <br /> 
-
-    <v-flex xs12 sm6 d-flex>
-        <v-select :items="positionColors" v-on:change="updatePositionLayerColor" label="Positions layer color" solo></v-select>
-    </v-flex>
+    <v-flex xs12 sm6 d-flex></v-flex>
 </div>
 </template>
 

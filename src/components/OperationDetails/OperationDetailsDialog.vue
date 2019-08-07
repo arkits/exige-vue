@@ -5,41 +5,41 @@
             <v-btn text v-on="on">Details</v-btn>
         </template>
         <v-card outlined>
-            <v-card-title class="blue">
+            <v-card-title class="blue darken-2">
                 <v-list-item>
                     <v-list-item-content>
                         <v-list-item-title class="headline mb-1">Operation Details</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-card-title>
-            <v-card-text>
-                <v-tabs color="blue" centered dark slider-color="pink">
-                    <v-tab key="1" ripple>Operation Details</v-tab>
-                    <v-tab key="2" ripple>Position Details</v-tab>
-                    <v-tab key="3" ripple>Mapping Options</v-tab>
-                    <v-tab-item key="1">
-                        <v-card flat>
-                            <v-card-text>
-                                <OperationDataView v-bind:operation="operation" />
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-                    <v-tab-item key="2">
-                        <v-card flat>
-                            <v-card-text>
-                                <PositionsTimeline v-bind:operation="operation" />
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-                    <v-tab-item key="3">
-                        <v-card flat>
-                            <v-card-text>
-                                <MappingOptions v-bind:operation="operation" />
-                            </v-card-text>
-                        </v-card>
-                    </v-tab-item>
-                </v-tabs>
-            </v-card-text>
+
+            <v-tabs centered color="white" background-color="blue darken-2" dark slider-color="white">
+                <v-tab key="1" ripple>Operation Details</v-tab>
+                <v-tab key="2" ripple>Position Details</v-tab>
+                <v-tab key="3" ripple>Mapping Options</v-tab>
+                <v-tab-item key="1">
+                    <v-card flat>
+                        <v-card-text>
+                            <OperationDataView v-bind:operation="operation" />
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+                <v-tab-item key="2">
+                    <v-card flat>
+                        <v-card-text>
+                            <PositionsTimeline v-bind:operation="operation" />
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+                <v-tab-item key="3">
+                    <v-card flat>
+                        <v-card-text>
+                            <MappingOptions v-bind:operation="operation" />
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+            </v-tabs>
+
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="pink darken-1" @click="dialog = false">Close</v-btn>
