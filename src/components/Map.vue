@@ -10,7 +10,7 @@ import {
     constants
 } from "crypto";
 
-import gridGeoJson from "../assets/gridTiles.json";
+// import gridGeoJson from "../assets/gridTiles.json";
 
 export default {
     name: "Map",
@@ -25,7 +25,7 @@ export default {
         mapLoaded() {
             console.log("Map Loaded!");
             this.createPointsLayer();
-            this.createGridLayer();
+            // this.createGridLayer();
         },
         createOperationLayer(operation) {
             var operationFillColor = operation.exige_op_color;
