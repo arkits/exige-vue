@@ -4,7 +4,9 @@
         <v-layout row wrap>
             <v-flex xs12>
                 <OperationCard v-bind:operation="operation" v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', operation)"
-                v-on:exige-hideOperationOnMap="$emit('exige-hideOperationOnMap', operation)" />
+                v-on:exige-hideOperationOnMap="$emit('exige-hideOperationOnMap', operation)" 
+                v-on:exige-hidePositionsOnMap="$emit('exige-hidePositionsOnMap', operation)" 
+                />
             </v-flex>
         </v-layout>
     </div>

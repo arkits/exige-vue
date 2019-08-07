@@ -234,18 +234,33 @@ export default {
             console.log("toggleOperationOnMap - " + operation.gufi);
 
             var operationLayerId = operation.gufi + "_operation";
-            var positionLayerId = operation.gufi + "_positions";
 
             var visibilityOp = this.map.getLayoutProperty(operationLayerId, 'visibility');
 
             if (visibilityOp === 'visible' || typeof visibilityOp === "undefined") {
                 console.log("toggleOperationOnMap - Hide " + operationLayerId);
                 this.map.setLayoutProperty(operationLayerId, 'visibility', 'none');
-                this.map.setLayoutProperty(positionLayerId, 'visibility', 'none');
 
             } else {
                 console.log("toggleOperationOnMap - Show " + operationLayerId);
                 this.map.setLayoutProperty(operationLayerId, 'visibility', 'visible');
+            }
+
+        },
+        togglePositionsOnMap(operation){
+
+            console.log("togglePositionsOnMap - " + operation.gufi);
+
+            var positionLayerId = operation.gufi + "_positions";
+
+            var visibilityPos = this.map.getLayoutProperty(positionLayerId, 'visibility');
+
+            if (visibilityPos === 'visible' || typeof visibilityPos === "undefined") {
+                console.log("togglePositionsOnMap - Hide " + positionLayerId);
+                this.map.setLayoutProperty(positionLayerId, 'visibility', 'none');
+
+            } else {
+                console.log("togglePositionsOnMap - Show " + positionLayerId);
                 this.map.setLayoutProperty(positionLayerId, 'visibility', 'visible');
             }
 

@@ -8,7 +8,7 @@
             </div>
         </v-card-text>
         <v-card-actions>
-            <OperationDetailsDialog v-bind:operation="operation" />
+            <OperationDetailsDialog v-on:exige-hidePositionsOnMap="$emit('exige-hidePositionsOnMap', operation)" v-bind:operation="operation" />
             <v-btn text @click="hideOperation">Hide</v-btn>
             <v-btn text @click="$emit('exige-viewOperationOnMap', operation)">View on Map</v-btn>
         </v-card-actions>

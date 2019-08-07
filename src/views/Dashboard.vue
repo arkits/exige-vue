@@ -2,7 +2,10 @@
 <div>
     <v-layout wrap>
         <v-flex xs12 md3>
-            <Operations v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" v-on:exige-hideOperationOnMap="hideOperationOnMap($event)" />
+            <Operations 
+                v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" v-on:exige-hideOperationOnMap="hideOperationOnMap($event)"
+                v-on:exige-hidePositionsOnMap="hidePositionsOnMap($event)"  
+            />
         </v-flex>
         <v-flex xs12 md9>
             <Map ref="Map" />
@@ -51,6 +54,10 @@ export default {
         hideOperationOnMap: function (val) {
             var operation = val;
             this.$refs.Map.toggleOperationOnMap(operation);
+        },
+        hidePositionsOnMap: function (val) {
+            var operation = val;
+            this.$refs.Map.togglePositionsOnMap(operation);
         },
         clearStore: function () {
             this.$refs.Map.clearMapAndStore();

@@ -5,15 +5,6 @@
         <br />
         <v-layout pt-1>
             <v-flex xs8>
-                <h3>Hide Operation Volumes</h3>
-                <p>This doesnt't work right now... Hides the Operation Volumes layer.</p>
-            </v-flex>
-            <v-flex xs3>
-                <v-btn color="primary">Hide Volumes</v-btn>
-            </v-flex>
-        </v-layout>
-        <v-layout pt-1>
-            <v-flex xs8>
                 <h3>Operation Volumes Color</h3>
                 <p>Choose the color of the Operation Volumes layer.</p>
             </v-flex>
@@ -25,6 +16,15 @@
         <br />
         <h2 class="headline">Position Layer Options</h2>
         <br />
+        <v-layout pt-1>
+            <v-flex xs8>
+                <h3>Hide Position Markers</h3>
+                <p>Hides the Position Markers layer.</p>
+            </v-flex>
+            <v-flex xs3>
+                <v-btn color="primary" @click="hidePositions">Hide Positions</v-btn>
+            </v-flex>
+        </v-layout>
         <v-layout pt-1>
             <v-flex xs8>
                 <h3>Position Marker Color</h3>
@@ -65,6 +65,9 @@ export default {
             var newOperation = this.operation;
             newOperation.exige_op_color = event;
             this.$store.commit("addOperation", newOperation);
+        },
+        hidePositions(){
+             this.$emit("exige-hidePositionsOnMap", this.operation);
         }
     }
 };

@@ -34,7 +34,7 @@
                 <v-tab-item key="3">
                     <v-card flat>
                         <v-card-text>
-                            <MappingOptions v-bind:operation="operation" />
+                            <MappingOptions v-on:exige-hidePositionsOnMap="$emit('exige-hidePositionsOnMap', operation)" v-bind:operation="operation" />
                         </v-card-text>
                     </v-card>
                 </v-tab-item>
