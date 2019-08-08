@@ -4,13 +4,12 @@
 
 <script>
 import Mapbox from "mapbox-gl-vue";
+import axios from "axios";
 import store from "../store";
 import geojsonExtent from "@mapbox/geojson-extent";
 import {
     constants
 } from "crypto";
-
-import gridGeoJson from "../assets/gridTiles.json";
 
 export default {
     name: "Map",
@@ -137,10 +136,9 @@ export default {
                 if (positions[i].altitude_gps_wgs84_ft != null) {
                     topAlt = positions[i].altitude_gps_wgs84_ft + 10;
                     baseAlt = positions[i].altitude_gps_wgs84_ft - 10;
-                } 
-                else if (positions[i].altitude_gps.altitude_value != null) {
+                } else if (positions[i].altitude_gps.altitude_value != null) {
                     topAlt = positions[i].altitude_gps.altitude_value + 10;
-                    baseAlt = positions[i].altitude_gps.altitude_value  - 10;
+                    baseAlt = positions[i].altitude_gps.altitude_value - 10;
                 } else {
                     console.warn("Can't parse Position for " + positionLayerId);
                     topAlt = 650;
@@ -244,25 +242,37 @@ export default {
         },
         createGridLayer() {
             var gridLayerId = "exigeGridLayer";
+            var map = this.map;
 
-            var mapboxData = gridGeoJson;
+            axios
+                .get(
+                    "https://raw.githubusercontent.com/arkits/exige/master/grid/gridTiles.json"
+                )
+                .then(function (response) {
+                    console.log("Got Grid Adaptation!");
 
-            var mapLayer = {
-                id: gridLayerId,
-                type: "fill",
-                source: {
-                    type: "geojson",
-                    data: mapboxData
-                },
-                paint: {
-                    "fill-color": "rgba(255,255,255,0.0)",
-                    "fill-outline-color": "rgba(51, 181, 229,1.0)",
-                    "fill-opacity": 1
-                }
-            };
+                    var mapboxData = response.data;
 
-            console.log("Creating Grid Layer!");
-            this.map.addLayer(mapLayer);
+                    var mapLayer = {
+                        id: gridLayerId,
+                        type: "fill",
+                        source: {
+                            type: "geojson",
+                            data: mapboxData
+                        },
+                        paint: {
+                            "fill-color": "rgba(255,255,255,0.0)",
+                            "fill-outline-color": "rgba(51, 181, 229,1.0)",
+                            "fill-opacity": 1
+                        }
+                    };
+
+                    console.log("Creating Grid Layer!");
+                    map.addLayer(mapLayer);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
         addToPointLayer(points) {
             var pointsLayerId = "exigePointsLayer";
@@ -475,7 +485,7 @@ export default {
         },
         computeGridDraw(newValue) {
             console.log("Watched change in GridDraw - " + newValue);
-            if(newValue){
+            if (newValue) {
                 this.createGridLayer();
             } else {
                 this.removeGridLayer();
