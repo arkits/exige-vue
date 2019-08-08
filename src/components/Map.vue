@@ -10,7 +10,7 @@ import {
     constants
 } from "crypto";
 
-// import gridGeoJson from "../assets/gridTiles.json";
+import gridGeoJson from "../assets/gridTiles.json";
 
 export default {
     name: "Map",
@@ -25,7 +25,6 @@ export default {
         mapLoaded() {
             console.log("Map Loaded!");
             this.createPointsLayer();
-            // this.createGridLayer();
         },
         createOperationLayer(operation) {
             var operationFillColor = operation.exige_op_color;
@@ -389,6 +388,12 @@ export default {
             var positionLayerId = gufi + "_positions";
             this.map.removeLayer(positionLayerId);
             this.map.removeSource(positionLayerId);
+        },
+        removeGridLayer() {
+            console.log("Removing Grid Layer from Map");
+            var gridLayerId = "exigeGridLayer";
+            this.map.removeLayer(gridLayerId);
+            this.map.removeSource(gridLayerId);
         }
     },
     data() {
@@ -397,8 +402,8 @@ export default {
             mapboxAccessToken: "pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA",
             mapOptions: {
                 style: "mapbox://styles/mapbox/dark-v9",
-                center: [-100, 37],
-                zoom: 4
+                center: [-122.3465, 37.6977],
+                zoom: 9
             }
         };
     },
@@ -414,6 +419,9 @@ export default {
         },
         computePoints() {
             return store.getters.getPoints;
+        },
+        computeGridDraw() {
+            return store.getters.getGridDraw;
         }
     },
     watch: {
@@ -464,6 +472,14 @@ export default {
         computePoints(points) {
             console.log("Watched change in Store Points.");
             this.addToPointLayer(points);
+        },
+        computeGridDraw(newValue) {
+            console.log("Watched change in GridDraw - " + newValue);
+            if(newValue){
+                this.createGridLayer();
+            } else {
+                this.removeGridLayer();
+            }
         }
     }
 };

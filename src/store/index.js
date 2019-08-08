@@ -10,7 +10,8 @@ export default new Vuex.Store({
         positions: [],
         points: [],
         positionsLayerColorMap: [],
-        dswitch: true
+        dswitch: true,
+        gridDraw: false
     },
     mutations: {
         addOperation: function (state, op) {
@@ -39,6 +40,10 @@ export default new Vuex.Store({
         setDSwitch: function (state, newDSwitch) {
             console.log("Setting DSwitch to - " + newDSwitch);
             state.dswitch = newDSwitch;
+        },
+        setGridDraw: function (state, newGridDraw) {
+            console.log("Setting gridDraw to - " + newGridDraw);
+            state.gridDraw = newGridDraw;
         },
         addToPositionsLayerColorMap: function (state, posLayerColor) {
             var index = state.positionsLayerColorMap.findIndex(function (plc) {
@@ -89,6 +94,9 @@ export default new Vuex.Store({
         },
         getDSwitch: state => {
             return state.dswitch;
+        },
+        getGridDraw: state => {
+            return state.gridDraw;
         },
         getPoints: state => {
             return state.points;

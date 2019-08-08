@@ -35,10 +35,26 @@
                             <v-layout pt-1>
                                 <v-flex xs8>
                                     <h3>Render in 3D</h3>
-                                    <p>Toggles between rendering 3D or 2D. Helps improve performance.</p>
+                                    <p>
+                                        Toggles between rendering 3D or 2D.
+                                        <br />Turning off may help improve performance.
+                                    </p>
                                 </v-flex>
                                 <v-flex xs3>
                                     <DSwitch />
+                                </v-flex>
+                            </v-layout>
+
+                            <v-layout pt-1>
+                                <v-flex xs8>
+                                    <h3>Display Grid</h3>
+                                    <p>
+                                        Displays borders of Slippy tiles at zoom level 10.
+                                        <br />Turning off may help improve performance.
+                                    </p>
+                                </v-flex>
+                                <v-flex xs3>
+                                    <GridDraw />
                                 </v-flex>
                             </v-layout>
 
@@ -83,13 +99,15 @@
 import LifecycleSample from "./LifecycleSample";
 import DSwitch from "./DSwitch";
 import ExportData from "./ExportData";
+import GridDraw from "./GridDraw";
 
 export default {
     name: "ExigeOptions",
     components: {
         LifecycleSample,
         DSwitch,
-        ExportData
+        ExportData,
+        GridDraw
     },
     data() {
         return {

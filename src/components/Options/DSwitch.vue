@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-switch v-model="dswitch" inset :label="`3D: ${dswitch.toString()}`"></v-switch>
+    <v-switch v-model="dswitch" inset></v-switch>
 </div>
 </template>
 
