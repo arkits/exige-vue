@@ -63,7 +63,7 @@ export default {
                 }
 
                 if (exige_positions != null) {
-                    for (var i in exige_positions) {
+                    for (i in exige_positions) {
                         this.$store.commit("addPosition", exige_positions[i]);
                     }
                     this.inputSuccess =
@@ -71,7 +71,7 @@ export default {
                 }
 
                 if (exige_positionsLayerColorMap != null) {
-                    for (var i in exige_positionsLayerColorMap) {
+                    for (i in exige_positionsLayerColorMap) {
                         this.$store.commit(
                             "addToPositionsLayerColorMap",
                             exige_positionsLayerColorMap[i]
@@ -84,7 +84,7 @@ export default {
                 }
 
                 if (exige_points != null) {
-                    for (var i in exige_points) {
+                    for (i in exige_points) {
                         this.$store.commit("addPoint", exige_points[i]);
                     }
                     this.inputSuccess =
