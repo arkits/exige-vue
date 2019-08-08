@@ -19,11 +19,10 @@ export default {
     name: "OptionsList",
     components: {
         ExigeOptions,
-        DataAdder,
+        DataAdder
     },
     data() {
-        return {
-        };
+        return {};
     }
 };
 </script>

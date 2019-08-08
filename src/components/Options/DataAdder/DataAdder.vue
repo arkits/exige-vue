@@ -20,7 +20,8 @@
             <v-tabs centered color="white" background-color="green darken-2" dark slider-color="white">
                 <v-tab key="1" ripple>Operations</v-tab>
                 <v-tab key="2" ripple>Positions</v-tab>
-                <v-tab key="3" ripple>Misc</v-tab>
+                <v-tab key="3" ripple>Point</v-tab>
+                <v-tab key="4" ripple>Import</v-tab>
 
                 <v-tab-item key="1">
                     <v-card-text>
@@ -35,6 +36,11 @@
                 <v-tab-item key="3">
                     <v-card-text>
                         <MiscAdder v-bind:dialog="dialog"/>
+                    </v-card-text>
+                </v-tab-item>
+                <v-tab-item key="4">
+                    <v-card-text>
+                        <ExportImport v-bind:dialog="dialog"/>
                     </v-card-text>
                 </v-tab-item>
             </v-tabs>
@@ -54,13 +60,15 @@
 import OperationAdder from "./OperationAdder";
 import PositionAdder from "./PositionAdder";
 import MiscAdder from "./MiscAdder";
+import ExportImport from "./ExportImport";
 
 export default {
     name: "DataAdder",
     components:{
         OperationAdder,
         PositionAdder,
-        MiscAdder
+        MiscAdder,
+        ExportImport
     },
     data() {
         return {

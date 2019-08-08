@@ -31,6 +31,7 @@
     <center>
         <v-btn color="green" @click="addPointToStore">Add A Point</v-btn>
     </center>
+    <br />
 </div>
 </template>
 

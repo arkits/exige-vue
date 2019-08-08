@@ -17,7 +17,6 @@
             </v-card-title>
 
             <v-tabs centered color="white" background-color="orange darken-2" dark slider-color="white">
-                
                 <v-tab key="1" ripple>Exige Options</v-tab>
 
                 <v-tab-item key="1">
@@ -32,15 +31,7 @@
                                     <LifecycleSample v-on:exige-viewOperationOnMap="$emit('exige-viewOperationOnMap', $event)" />
                                 </v-flex>
                             </v-layout>
-                            <v-layout pt-1>
-                                <v-flex xs8>
-                                    <h3>Clear Data</h3>
-                                    <p>Clear all store data - Operations and Positions.</p>
-                                </v-flex>
-                                <v-flex xs3>
-                                    <v-btn block @click="clearStore">Clear Data</v-btn>
-                                </v-flex>
-                            </v-layout>
+
                             <v-layout pt-1>
                                 <v-flex xs8>
                                     <h3>Render in 3D</h3>
@@ -48,6 +39,28 @@
                                 </v-flex>
                                 <v-flex xs3>
                                     <DSwitch />
+                                </v-flex>
+                            </v-layout>
+
+                            <v-divider />
+                            <br />
+
+                            <v-layout pt-1>
+                                <v-flex xs8>
+                                    <h3>Export Data</h3>
+                                    <p>Export current data as JSON.</p>
+                                </v-flex>
+                                <v-flex xs3>
+                                    <ExportData />
+                                </v-flex>
+                            </v-layout>
+                            <v-layout pt-1>
+                                <v-flex xs8>
+                                    <h3>Clear Data</h3>
+                                    <p>Clear all Exige data - Operations and Positions.</p>
+                                </v-flex>
+                                <v-flex xs3>
+                                    <v-btn block @click="clearStore">Clear Data</v-btn>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -59,7 +72,7 @@
 
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="orange" @click="dialog = false">Close</v-btn>
+                <v-btn color="orange darken-2" @click="dialog = false">Close</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -69,12 +82,14 @@
 <script>
 import LifecycleSample from "./LifecycleSample";
 import DSwitch from "./DSwitch";
+import ExportData from "./ExportData";
 
 export default {
     name: "ExigeOptions",
     components: {
         LifecycleSample,
-        DSwitch
+        DSwitch,
+        ExportData
     },
     data() {
         return {

@@ -2,7 +2,7 @@
 <div class="text-xs-center">
     <v-dialog v-model="dialog" scrollable width="400">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="teal" block @click="startLifecycleDemo">Start Demo</v-btn>
+            <v-btn v-on="on" color="blue darken-2" block @click="startLifecycleDemo">Start Demo</v-btn>
         </template>
         <v-card outlined>
             <v-card-title class="teal">

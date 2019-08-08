@@ -2,7 +2,6 @@
 <div>
     <v-switch v-model="dswitch" inset :label="`3D: ${dswitch.toString()}`"></v-switch>
 </div>
-
 </template>
 
 <script>
@@ -16,10 +15,16 @@ export default {
             dswitch: true
         };
     },
-    watch:{
-        dswitch(newValue){
+    watch: {
+        dswitch(newValue) {
             console.log("3D Render = " + newValue);
             store.state.dswitch = newValue;
+        }
+    },
+    computed: {
+        computeDSwitch() {
+            this.dswitch = store.getters.dswitch;
+            return store.getters.dswitch;
         }
     }
 };

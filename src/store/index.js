@@ -36,6 +36,10 @@ export default new Vuex.Store({
             console.log("Adding to Position to Store.");
             state.positions.push(pos);
         },
+        setDSwitch: function (state, newDSwitch) {
+            console.log("Setting DSwitch to - " + newDSwitch);
+            state.dswitch = newDSwitch;
+        },
         addToPositionsLayerColorMap: function (state, posLayerColor) {
             var index = state.positionsLayerColorMap.findIndex(function (plc) {
                 return plc.gufi === posLayerColor.gufi;
