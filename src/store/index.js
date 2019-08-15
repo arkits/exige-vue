@@ -128,6 +128,13 @@ function validateOperationData(operation) {
         goodOperation.state = "CLOSED";
     }
 
+    if (operation.flight_number) {
+        goodOperation.flight_number = operation.flight_number;
+    } else {
+        console.log("OpVal: flight_number not found. Using EXIGE123.");
+        goodOperation.flight_number = "EXIGE123";
+    }
+
     if(operation.exige_op_color){
         goodOperation.exige_op_color = operation.exige_op_color
     } else {

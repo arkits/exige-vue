@@ -4,6 +4,7 @@
             <div class="white--text">
                 <span>{{operation.gufi}}</span> <br>
                 <span>{{operation.uss_name}}</span> <br>
+                <span>{{operation.flight_number}}</span> <br>
                 <span>{{operation.state}}</span>
             </div>
         </v-card-text>

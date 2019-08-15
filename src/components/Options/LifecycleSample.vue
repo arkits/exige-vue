@@ -33,7 +33,8 @@ export default {
         return {
             sampleOperations: [{
                 gufi: "21f12af5-bfef-426a-8ab7-f1241a6ce714",
-                uss_name: "exige.archit.xyz",
+                flight_number: "EXIGE123",
+                uss_name: "sample.exige.xyz",
                 state: "ACTIVE",
                 operation_volumes: [{
                         ordinal: 1,

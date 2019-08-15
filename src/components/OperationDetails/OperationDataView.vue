@@ -16,6 +16,11 @@
                 </tr>
 
                 <tr>
+                    <td>Flight Number</td>
+                    <td>{{operation.flight_number}}</td>
+                </tr>
+
+                <tr>
                     <td>State</td>
                     <td>{{operation.state}}</td>
                 </tr>
