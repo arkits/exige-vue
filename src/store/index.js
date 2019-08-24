@@ -2,10 +2,24 @@ import Vuex from "vuex";
 import Vue from "vue";
 import uuid from "uuid/v1";
 
+import {
+    SOCKET_ONOPEN,
+    SOCKET_ONCLOSE,
+    SOCKET_ONERROR,
+    SOCKET_ONMESSAGE,
+    SOCKET_RECONNECT,
+    SOCKET_RECONNECT_ERROR
+} from "./mutation-types";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        socket: {
+            isConnected: false,
+            message: "",
+            reconnectError: false
+        },
         operations: [],
         positions: [],
         points: [],
@@ -14,6 +28,60 @@ export default new Vuex.Store({
         gridDraw: false
     },
     mutations: {
+        [SOCKET_ONOPEN](state, event) {
+            console.log("WebSocket Connected!");
+            state.socket.isConnected = true;
+        },
+        [SOCKET_ONCLOSE](state, event) {
+            console.log("WebSocket Closed!");
+            state.socket.isConnected = false;
+        },
+        [SOCKET_ONERROR](state, event) {
+            console.log("WebSocket Closed with an error!");
+            console.error(state, event);
+        },
+        [SOCKET_ONMESSAGE](state, message) {
+
+            try {
+                var received_data = JSON.parse(message.data);
+                console.log(received_data);
+            } catch {
+                console.error(
+                    "An error occured when trying to parse WebSocket message!"
+                );
+            }
+
+            if(message.currentTarget.url == 'ws://localhost:1234/testbed/sndem/uamposition'){
+                console.log("Received Position from WebSocket");
+                var positionToStore = parseWsPosition(received_data);
+                state.positions.push(positionToStore);
+            } 
+            else if(message.currentTarget.url == 'ws://localhost:1234/testbed/sndem/uamoperation') {
+                console.log("Received Operation from WebSocket");
+                var operationToStore = parseWsOperation(received_data);
+                
+                var index = state.operations.findIndex(function (operation) {
+                    return operation.gufi === operationToStore.gufi;
+                });
+    
+                if (index != -1) {
+                    console.log("Update Operation");
+                    Vue.set(state.operations, index, operationToStore);
+                } else {
+                    console.log("Add Operation");
+                    state.operations.push(operationToStore);
+                }
+            }
+
+        },
+        [SOCKET_RECONNECT](state, count) {
+            console.log("WebSocket reconnecting...");
+            console.info(state, count);
+        },
+        [SOCKET_RECONNECT_ERROR](state) {
+            console.log("WebSocket reconnecting error!");
+            state.socket.reconnectError = true;
+        },
         addOperation: function (state, op) {
 
             var validOperation = validateOperationData(op);
@@ -193,4 +261,67 @@ function generateRandomColor(){
     var colorArray = ["#F44336", "#9C27B0", "#2196F3", "#4CAF50", "#FF5722"];    
     var randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
     return randomColor;
+}
+
+function parseWsPosition(received_data){
+    var parsedPosition = {
+        gufi: received_data.gufi,
+        altitude_gps_wgs84_ft: received_data.altitude,
+        uss_name: received_data.ussName,
+        location: {
+            type: "Point",
+            coordinates: [received_data.lngPos, received_data.latPos]
+        }
+    };
+    return parsedPosition;
+}
+
+function parseWsOperation(received_data){
+    var parsedOperation = {
+        gufi: received_data.gufi,
+        uss_name: received_data.ussName,
+        state: received_data.opState,
+        operation_volumes: []
+    };
+
+    var receivedOperationVolumes = received_data.operationVolumes;
+
+    for (var i = 0; i < receivedOperationVolumes.length; i++){
+        var opVol = receivedOperationVolumes[i];
+
+        var parsedVolume = {
+            min_altitude : {},
+            max_altitude : {},
+            operation_geography : {}
+        }
+
+        parsedVolume.min_altitude.altitude_value = opVol.minAltitude;
+        parsedVolume.max_altitude.altitude_value = opVol.maxAltitude;
+        parsedVolume.operation_geography.type = "Polygon"
+
+        var tempCoords = [];
+
+        for(var j = 0; j < opVol.operationGeography.length; j++){
+            var geo = opVol.operationGeography[j];
+            tempCoords.push(geo);
+        }
+
+        parsedVolume.operation_geography.coordinates = [tempCoords]
+
+        parsedOperation.operation_volumes.push(parsedVolume);
+    }
+
+    var vOp = validateOperationData(parsedOperation);
+
+    if(vOp.state=='ACTIVATED'){
+        vOp.exige_op_color = '#4CAF50';
+    } else if(vOp.state=='ROGUE'){
+        vOp.exige_op_color = '#F44336';
+    } else if(vOp.state=='ACCEPTED'){
+        vOp.exige_op_color = '#2196F3';
+    } else {
+        vOp.exige_op_color = '#9C27B0';
+    }
+
+    return vOp;
 }

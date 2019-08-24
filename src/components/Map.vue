@@ -411,7 +411,7 @@ export default {
             map: {},
             mapboxAccessToken: "pk.eyJ1IjoiYXJraXRzIiwiYSI6ImNqc3Bud29jMjAzcWc0OXJ6Y3YzOHltaTcifQ.EMMG5GSbT0T-lD8RGJgnAA",
             mapOptions: {
-                style: "mapbox://styles/mapbox/dark-v9",
+                style: "mapbox://styles/arkits/cjvhbvo4z0edh1cmtjmpg9ii8?optimize=true",
                 center: [-122.3465, 37.6977],
                 zoom: 9
             }
