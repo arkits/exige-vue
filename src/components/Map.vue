@@ -444,29 +444,30 @@ export default {
                 this.createOperationLayer(updatedStoreOperations[i]);
             }
         },
-        computePositions() {
+        computePositions(newPositions, oldPositions) {
             console.log("Watched change in Store Positions.");
 
-            var storePositions = store.getters.getPositions;
+            var newPositionGufis = Object.keys(newPositions)
+            var positionLayerColor = "yellow";
 
-            var sortedPositions = [];
+            for (var i in newPositionGufis){
 
-            for (var i in storePositions) {
-                var position = storePositions[i];
+                var newGufi = newPositionGufis[i];
 
-                if (sortedPositions.hasOwnProperty(position.gufi)) {
-                    sortedPositions[position.gufi].push(position);
+                if(oldPositions[newGufi]){
+                    // oldPositions has this gufi
+
+                    if(oldPositions[newGufi].length != newPositions[newGufi]){
+                        // Change in length of old and new
+                        this.createPositionLayer(newPositions[newGufi], positionLayerColor);
+                    }
+
                 } else {
-                    sortedPositions[position.gufi] = [];
-                    sortedPositions[position.gufi].push(position);
+                    // oldPositons does not have this gufi
+                    this.createPositionLayer(newPositions[newGufi], positionLayerColor);
                 }
             }
 
-            var positionLayerColor = "yellow";
-
-            for (i in sortedPositions) {
-                this.createPositionLayer(sortedPositions[i], positionLayerColor);
-            }
         },
         computePositionLayerColor(newValue) {
             console.log("Watched change in Store PositionLayerColors.");

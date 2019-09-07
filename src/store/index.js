@@ -1,6 +1,7 @@
 import Vuex from "vuex";
 import Vue from "vue";
 import uuid from "uuid/v1";
+import _ from "lodash"
 
 import {
     SOCKET_ONOPEN,
@@ -21,7 +22,7 @@ export default new Vuex.Store({
             reconnectError: false
         },
         operations: [],
-        positions: [],
+        positions: {},
         points: [],
         positionsLayerColorMap: [],
         dswitch: true,
@@ -101,9 +102,22 @@ export default new Vuex.Store({
         clearOperations: function (state) {
             state.operations = [];
         },
-        addPosition: function (state, pos) {
+        addPosition: function (state, inputPosition) {
             console.log("Adding to Position to Store.");
-            state.positions.push(pos);
+
+            var positionsCopy = _.cloneDeep(state.positions);
+
+            var listOfPos = [];
+
+            if (state.positions.hasOwnProperty(inputPosition.gufi)){
+                listOfPos = state.positions[inputPosition.gufi];
+            } 
+
+            listOfPos.push(inputPosition);
+
+            positionsCopy[inputPosition.gufi] = listOfPos;
+
+            state.positions = Object.assign({}, positionsCopy);
         },
         setDSwitch: function (state, newDSwitch) {
             console.log("Setting DSwitch to - " + newDSwitch);
@@ -141,11 +155,9 @@ export default new Vuex.Store({
         },
         getPositionsForOperation: state => operationGufi => {
             var positionsToReturn = [];
-            state.positions.forEach(function (position) {
-                if (position.gufi == operationGufi) {
-                    positionsToReturn.push(position);
-                }
-            });
+            if (state.positions.has(operationGufi)){
+                positionsToReturn = state.positions.get(operationGufi);
+            } 
             return positionsToReturn;
         },
         getPositionLayerColorForGufi: state => gufi => {
