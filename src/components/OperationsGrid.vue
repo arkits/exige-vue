@@ -6,38 +6,35 @@
                 <br />
                 <v-row no-gutters>
                     <v-col>
-                        <h2 class="text-uppercase">{{ ussName }}</h2>
-                    </v-col>
-                    <v-col>
+                        <h3 class="text-uppercase">{{ ussName }}</h3>
                         <span class="white--text">TOTAL:{{operations.length}}</span>
                     </v-col>
-                    <v-col>
-                        <span class="green--text">ACTIVE:{{countState(operations, "ACTIVATED")}}</span>
-                    </v-col>
-                    <v-col>
-                        <span class="red--text">ROUGE:{{countState(operations, "ROUGE")}}</span>
-                    </v-col>
-                    <v-col>
-                        <span class="yellow--text">CLOSED:{{countState(operations, "CLOSED")}}</span>
+                    
+                    <v-col class="text-right">
+                        <span class="green--text">ACTIVE:{{countState(operations, "ACTIVATED")}}</span> |
+                         <span class="red--text">ROGUE:{{countState(operations, "ROGUE")}}</span> |
+                        <span class="text-right">CLOSED:{{countState(operations, "CLOSED")}}</span>
                     </v-col>
                 </v-row>
+                <hr />
                 <br />
                 <v-container class="dark-grey">
-                    <v-row>
-                        <v-col v-for="operation in operations" :key="operation.gufi">
-                            <v-hover v-slot:default="{ hover }">
-                                <v-card class="pa-2" min-width="140"  min-height="140" max-height="300" :elevation="hover ? 12 : 2" max-width="250">
-                                    <v-card-text class="white--text">
-                                        {{hover ? operation.gufi : operation.gufi.slice(0,8)}}
-                                        <br />
-                                        {{operation.state}}
-                                        <br />
-                                        {{operation.flight_number}}
-                                    </v-card-text>
-                                </v-card>
-                            </v-hover>
-                        </v-col>
-                    </v-row>
+                    <v-simple-table>
+                        <thead>
+                            <tr>
+                                <th class="text-left">GUFI</th>
+                                <th class="text-left">Flight Number</th>
+                                <th class="text-left">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-bind:class="generateCardBg(operation.state)" v-for="operation in operations" :key="operation.gufi">
+                                <td>{{ operation.gufi }}</td>
+                                <td>{{ operation.flight_number }}</td>
+                                <td>{{ operation.state }}</td>
+                            </tr>
+                        </tbody>
+                    </v-simple-table>
                 </v-container>
             </v-flex>
         </v-layout>
@@ -89,15 +86,38 @@ export default {
             return ussToOperationMap;
         }
     },
-    methods:{
+    methods: {
         countState(operations, stateName) {
             var n = 0;
-            for(var operation of operations){
-                if(operation.state == stateName){
-                    n++
+            for (var operation of operations) {
+                if (operation.state == stateName) {
+                    n++;
                 }
             }
             return n;
+        },
+        generateCardBg(opState) {
+            if (opState == "ROGUE" || opState == "U") {
+                return "red";
+            } else if (
+                opState == "ACTIVE" ||
+                opState == "ACTIVATED" ||
+                opState == "V"
+            ) {
+                return "green darken-1";
+            } else if (opState == "ACCEPTED" || opState == "A") {
+                return "teal";
+            } else if (
+                opState == "NONCONFORMING" ||
+                opState == "NON-CONFORMING" ||
+                opState == "F"
+            ) {
+                return "purple darken-1";
+            } else if (opState == "REJECTED" || opState == "R") {
+                return "yellow darken-3";
+            } else {
+                return "grey darken-4";
+            }
         }
     }
 };
