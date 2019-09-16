@@ -7,6 +7,9 @@
                 <a href="/exige" class="app-title white--text">Exige</a>
             </span>
         </v-toolbar-title>
+              <div class="flex-grow-1"></div>
+              <router-link :to="{ name: 'dashboard' }" class="white--text nav-butt">Dashboard</router-link>
+              <router-link :to="{ name: 'timeline' }" class="white--text nav-butt" >Timeline</router-link>
     </v-app-bar>
 
     <v-content>
@@ -32,14 +35,20 @@ export default {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 300;
     font-style: italic;
-    color: white;
 }
 
 .app-title {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
     font-style: italic;
-    color: white;
     text-decoration: none;
+}
+
+.nav-butt {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: italic;
+    text-decoration: none;
+    padding: 10px;
 }
 </style>
