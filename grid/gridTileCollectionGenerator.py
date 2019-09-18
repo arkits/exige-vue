@@ -56,7 +56,7 @@ def makeGeoJsonCollection():
 
 def writeToFile(jsonToWrite):
     f = open("gridTiles.json", "w")
-    f.write(json.dumps(jsonToWrite, indent=4))
+    f.write(json.dumps(jsonToWrite))
     print("Wrote to file...")
 
 geoJsonFeatureCollection = makeGeoJsonCollection()
