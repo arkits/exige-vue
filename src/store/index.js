@@ -54,8 +54,15 @@ export default new Vuex.Store({
 
             if(message.currentTarget.url == 'ws://localhost:1234/testbed/sndem/uamposition'){
                 console.log("Received Position from WebSocket");
-                var positionToStore = parseWsPosition(received_data);
-                state.positions.push(positionToStore);
+                var inputPosition = parseWsPosition(received_data);
+                var positionsCopy = _.cloneDeep(state.positions);
+                var listOfPos = [];
+                if (state.positions.hasOwnProperty(inputPosition.gufi)){
+                    listOfPos = state.positions[inputPosition.gufi];
+                } 
+                listOfPos.push(inputPosition);
+                positionsCopy[inputPosition.gufi] = listOfPos;
+                state.positions = Object.assign({}, positionsCopy);
             } 
             else if(message.currentTarget.url == 'ws://localhost:1234/testbed/sndem/uamoperation') {
                 console.log("Received Operation from WebSocket");
