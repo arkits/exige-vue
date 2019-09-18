@@ -466,7 +466,6 @@ export default {
 
                 if (oldPositions[newGufi]) {
                     // oldPositions has this gufi
-
                     if (oldPositions[newGufi].length != newPositions[newGufi]) {
                         // Change in length of old and new
                         this.createPositionLayer(newPositions[newGufi], positionLayerColor);
