@@ -383,12 +383,18 @@ export default {
                 var operation = storeOperations[i];
                 var operationLayerId = operation.gufi + "_operation";
                 var positionLayerId = operation.gufi + "_positions";
-                console.log("Removing layer - " + operationLayerId);
-                this.map.removeLayer(operationLayerId);
-                this.map.removeSource(operationLayerId);
-                console.log("Removing layer - " + positionLayerId);
-                this.map.removeLayer(positionLayerId);
-                this.map.removeSource(positionLayerId);
+
+                try {
+                    console.log("Removing layer - " + operationLayerId);
+                    this.map.removeLayer(operationLayerId);
+                    this.map.removeSource(operationLayerId);
+                    console.log("Removing layer - " + positionLayerId);
+                    this.map.removeLayer(positionLayerId);
+                    this.map.removeSource(positionLayerId);
+                } catch (error) {
+                    console.log("Caught error when clearing store!");
+                    console.error(error);
+                }
             }
 
             this.$store.commit("clearOperations");
@@ -396,8 +402,13 @@ export default {
         clearPositionsLayer(gufi) {
             console.log("clearPositionsLayer from Map");
             var positionLayerId = gufi + "_positions";
-            this.map.removeLayer(positionLayerId);
-            this.map.removeSource(positionLayerId);
+            try {
+                this.map.removeLayer(positionLayerId);
+                this.map.removeSource(positionLayerId);
+            } catch (error) {
+                console.log("Caught error when clearing store!");
+                console.error(error);
+            }
         },
         removeGridLayer() {
             console.log("Removing Grid Layer from Map");
@@ -447,27 +458,24 @@ export default {
         computePositions(newPositions, oldPositions) {
             console.log("Watched change in Store Positions.");
 
-            var newPositionGufis = Object.keys(newPositions)
+            var newPositionGufis = Object.keys(newPositions);
             var positionLayerColor = "yellow";
 
-            for (var i in newPositionGufis){
-
+            for (var i in newPositionGufis) {
                 var newGufi = newPositionGufis[i];
 
-                if(oldPositions[newGufi]){
+                if (oldPositions[newGufi]) {
                     // oldPositions has this gufi
 
-                    if(oldPositions[newGufi].length != newPositions[newGufi]){
+                    if (oldPositions[newGufi].length != newPositions[newGufi]) {
                         // Change in length of old and new
                         this.createPositionLayer(newPositions[newGufi], positionLayerColor);
                     }
-
                 } else {
                     // oldPositons does not have this gufi
                     this.createPositionLayer(newPositions[newGufi], positionLayerColor);
                 }
             }
-
         },
         computePositionLayerColor(newValue) {
             console.log("Watched change in Store PositionLayerColors.");
