@@ -3,15 +3,6 @@ import Vue from "vue";
 import uuid from "uuid/v1";
 import _ from "lodash"
 
-import {
-    SOCKET_ONOPEN,
-    SOCKET_ONCLOSE,
-    SOCKET_ONERROR,
-    SOCKET_ONMESSAGE,
-    SOCKET_RECONNECT,
-    SOCKET_RECONNECT_ERROR
-} from "./mutation-types";
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -29,66 +20,12 @@ export default new Vuex.Store({
         gridDraw: false
     },
     mutations: {
-        [SOCKET_ONOPEN](state, event) {
-            console.log("WebSocket Connected!");
+        SOCKET_CONNECT(state) {
+            console.log("Connected");
             state.socket.isConnected = true;
         },
-        [SOCKET_ONCLOSE](state, event) {
-            console.log("WebSocket Closed!");
-            state.socket.isConnected = false;
-        },
-        [SOCKET_ONERROR](state, event) {
-            console.log("WebSocket Closed with an error!");
-            console.error(state, event);
-        },
-        [SOCKET_ONMESSAGE](state, message) {
-
-            try {
-                var received_data = JSON.parse(message.data);
-                console.log(received_data);
-            } catch {
-                console.error(
-                    "An error occured when trying to parse WebSocket message!"
-                );
-            }
-
-            if(message.currentTarget.url == 'ws://localhost:1234/testbed/sndem/uamposition'){
-                console.log("Received Position from WebSocket");
-                var inputPosition = parseWsPosition(received_data);
-                var positionsCopy = _.cloneDeep(state.positions);
-                var listOfPos = [];
-                if (state.positions.hasOwnProperty(inputPosition.gufi)){
-                    listOfPos = state.positions[inputPosition.gufi];
-                } 
-                listOfPos.push(inputPosition);
-                positionsCopy[inputPosition.gufi] = listOfPos;
-                state.positions = Object.assign({}, positionsCopy);
-            } 
-            else if(message.currentTarget.url == 'ws://localhost:1234/testbed/sndem/uamoperation') {
-                console.log("Received Operation from WebSocket");
-                var operationToStore = parseWsOperation(received_data);
-                
-                var index = state.operations.findIndex(function (operation) {
-                    return operation.gufi === operationToStore.gufi;
-                });
-    
-                if (index != -1) {
-                    console.log("Update Operation");
-                    Vue.set(state.operations, index, operationToStore);
-                } else {
-                    console.log("Add Operation");
-                    state.operations.push(operationToStore);
-                }
-            }
-
-        },
-        [SOCKET_RECONNECT](state, count) {
-            console.log("WebSocket reconnecting...");
-            console.info(state, count);
-        },
-        [SOCKET_RECONNECT_ERROR](state) {
-            console.log("WebSocket reconnecting error!");
-            state.socket.reconnectError = true;
+        SOCKET_TWEET(state, message) {
+            console.log(message);
         },
         addOperation: function (state, op) {
 
