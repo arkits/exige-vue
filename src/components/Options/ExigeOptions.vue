@@ -64,7 +64,7 @@
                                     <p>Status: {{getSocketState}}</p>
                                 </v-flex>
                                 <v-flex xs3>
-                                    <v-btn color="green darken-2" block @click="websocketButton">{{websocketToggleButton}}</v-btn>
+                                    <v-btn color="green darken-2" block @click="websocketButton">{{getSocketButtonText}}</v-btn>
                                 </v-flex>
                             </v-layout>
 
@@ -107,7 +107,6 @@
 
 <script>
 import Vue from "vue";
-import store from "../../store";
 
 import LifecycleSample from "./LifecycleSample";
 import DSwitch from "./DSwitch";
@@ -125,36 +124,40 @@ export default {
     data() {
         return {
             dialog: false,
-            websocketToggleButton: "Connect WebSocket",
         };
     },
     methods: {
         websocketButton: function () {
             console.log("Toggling WebSocket...");
-            if (store.state.socket.isConnected) {
-                Vue.prototype.$disconnect();
-                this.$data.websocketToggleButton = "Connect WebSocket";
+            if (Vue.prototype.$socket.connected) {
+                Vue.prototype.$socket.client.disconnect();
             } else {
-                Vue.prototype.$connect('ws://localhost:1234/testbed/sndem/uamposition');
-                Vue.prototype.$connect('ws://localhost:1234/testbed/sndem/uamoperation');
-                this.$data.websocketToggleButton = "Disconnect WebSocket";
+                Vue.prototype.$socket.client.connect();
             }
         },
         clearStore: function () {
             console.log("Clearing Store...");
-            // this.$store.commit('clearSocketOperations');
             this.$emit("exige-clearStore");
         }
     },
     computed: {
 
-        getSocketState(state) {
-            if (store.state.socket.isConnected) {
+        getSocketState() {
+            if (Vue.prototype.$socket.connected) {
                 return "Connected";
             } else {
                 return "Not Connected";
             }
+        },
+
+        getSocketButtonText() {
+            if (Vue.prototype.$socket.connected) {
+                return "Disconnect";
+            } else {
+                return "Connected";
+            }
         }
+        
     }
 };
 </script>
