@@ -29,9 +29,18 @@
                         </thead>
                         <tbody>
                             <tr v-bind:class="generateCardBg(operation.state)" v-for="operation in operations" :key="operation.gufi">
-                                <td>{{ operation.gufi }}</td>
+                                <td>{{ operation.gufi.substring(0, 8) }}</td>
                                 <td>{{ operation.flight_number }}</td>
                                 <td>{{ operation.state }}</td>
+                                <td>
+                                    <v-row>
+                                            <OperationDetailsDialog 
+                                                v-on:exige-hidePositionsOnMap="$emit('exige-hidePositionsOnMap', operation)" 
+                                                v-bind:operation="operation" 
+                                            />
+                                            <v-btn text @click="$emit('exige-viewOperationOnMap', operation)"><v-icon>search</v-icon></v-btn>
+                                    </v-row>
+                                </td>
                             </tr>
                         </tbody>
                     </v-simple-table>
@@ -56,14 +65,14 @@
 </template>
 
 <script>
-import OperationCard from "./OperationCard";
+import OperationDetailsDialog from "./OperationDetails/OperationDetailsDialog";
 import store from "../store";
 
 export default {
     name: "OperationsGrid",
     props: ["operations"],
     components: {
-        OperationCard
+        OperationDetailsDialog
     },
     computed: {
         createOperationTreeList() {

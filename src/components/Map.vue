@@ -7,9 +7,7 @@ import Mapbox from "mapbox-gl-vue";
 import axios from "axios";
 import store from "../store";
 import geojsonExtent from "@mapbox/geojson-extent";
-import {
-    constants
-} from "crypto";
+
 
 export default {
     name: "Map",

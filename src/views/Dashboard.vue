@@ -2,9 +2,10 @@
 <div>
     <v-layout wrap>
         <v-flex xs12 md3>
-            <Operations 
-                v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" v-on:exige-hideOperationOnMap="hideOperationOnMap($event)"
-                v-on:exige-hidePositionsOnMap="hidePositionsOnMap($event)"  
+            <OperationsGrid 
+                v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" 
+                v-on:exige-hideOperationOnMap="hideOperationOnMap($event)"
+                v-on:exige-hidePositionsOnMap="hidePositionsOnMap($event)" 
             />
         </v-flex>
         <v-flex xs12 md9>
@@ -15,7 +16,10 @@
         <v-layout>
             <v-flex row>
                 <v-layout>
-                    <OptionsList v-on:exige-clearStore="clearStore()" v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" />
+                    <OptionsList 
+                        v-on:exige-clearStore="clearStore()" 
+                        v-on:exige-viewOperationOnMap="viewOperationOnMap($event)" 
+                    />
                 </v-layout>
                 <v-layout justify-end>
                     <AboutPopup />
@@ -27,7 +31,7 @@
 </template>
 
 <script>
-import Operations from "../components/Operations";
+import OperationsGrid from "../components/OperationsGrid";
 import Map from "../components/Map";
 import AboutPopup from "../components/Options/AboutPopup";
 import OptionsList from "../components/Options/OptionsList";
@@ -35,7 +39,7 @@ import OptionsList from "../components/Options/OptionsList";
 export default {
     name: "Dashboard",
     components: {
-        Operations,
+        OperationsGrid,
         Map,
         OptionsList,
         AboutPopup
