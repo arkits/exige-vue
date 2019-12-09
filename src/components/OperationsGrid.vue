@@ -83,10 +83,10 @@ export default {
             for (var operation of operations) {
                 var ussName = operation["uss_name"];
 
-                if (ussToOperationMap.hasOwnProperty(ussName)) {
+                if (Object.prototype.hasOwnProperty.call(ussToOperationMap, ussName)) {
                     var opList = ussToOperationMap[ussName];
                 } else {
-                    var opList = [];
+                    opList = [];
                 }
 
                 opList.push(operation);

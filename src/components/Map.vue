@@ -38,7 +38,7 @@ export default {
             operationVolumes.forEach(function (operationVolume) {
                 var operationVolumeGeojson = {};
 
-                if (operationVolume.hasOwnProperty("operation_geography")) {
+                if (Object.prototype.hasOwnProperty.call(operationVolume, "operation_geography")) {
                     operationVolumeGeojson = {
                         type: "Feature",
                         geometry: operationVolume.operation_geography,
@@ -47,7 +47,7 @@ export default {
                             base_height: operationVolume.min_altitude.altitude_value
                         }
                     };
-                } else if (operationVolume.hasOwnProperty("flight_geography")) {
+                } else if (Object.prototype.hasOwnProperty.call(operationVolume, "flight_geography")) {
                     operationVolumeGeojson = {
                         type: "Feature",
                         geometry: operationVolume.flight_geography,
@@ -313,13 +313,13 @@ export default {
             operationToView.operation_volumes.forEach(function (operationVolume) {
                 var geometry = {};
 
-                if (operationVolume.hasOwnProperty("operation_geography")) {
+                if (Object.prototype.hasOwnProperty.call(operationVolume, "operation_geography")) {
                     geometry = {
                         type: "Feature",
                         properties: {},
                         geometry: operationVolume.operation_geography
                     };
-                } else if (operationVolume.hasOwnProperty("flight_geography")) {
+                } else if (Object.prototype.hasOwnProperty.call(operationVolume, "flight_geography")) {
                     geometry = {
                         type: "Feature",
                         properties: {},

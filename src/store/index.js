@@ -79,7 +79,7 @@ export default new Vuex.Store({
 
             var listOfPos = [];
 
-            if (state.positions.hasOwnProperty(inputPosition.gufi)){
+            if (Object.prototype.hasOwnProperty.call(state.positions, inputPosition.gufi)){
                 listOfPos = state.positions[inputPosition.gufi];
             } 
 
@@ -120,7 +120,7 @@ export default new Vuex.Store({
 
             var listOfPos = [];
 
-            if (state.positions.hasOwnProperty(inputPosition.gufi)){
+            if (Object.prototype.hasOwnProperty.call(state.positions, inputPosition.gufi)){
                 listOfPos = state.positions[inputPosition.gufi];
             } 
 
@@ -166,7 +166,7 @@ export default new Vuex.Store({
         },
         getPositionsForOperation: state => operationGufi => {
             var positionsToReturn = [];
-            if (state.positions.hasOwnProperty(operationGufi)){
+            if (Object.prototype.hasOwnProperty.call(state.positions, operationGufi)){
                 positionsToReturn = state.positions[operationGufi];
             } 
             return positionsToReturn;

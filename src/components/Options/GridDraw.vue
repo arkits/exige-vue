@@ -6,7 +6,6 @@
 
 <script>
 import store from "../../store";
-import { constants } from 'crypto';
 
 export default {
     name: "GridDraw",
