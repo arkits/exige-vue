@@ -8,7 +8,7 @@ import store from "./store";
 import router from './router'
 import vuetify from './plugins/vuetify';
 
-const socket = io("wss://socket-io-tweet-stream.now.sh");
+const socket = io("http://localhost:8000");
  
 Vue.use(VueSocketIOExt, socket, { store });
   

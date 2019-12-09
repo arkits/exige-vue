@@ -14,6 +14,7 @@ export default new Vuex.Store({
         },
         operations: [],
         positions: {},
+        messages: [],
         points: [],
         positionsLayerColorMap: [],
         dswitch: true,
@@ -24,8 +25,74 @@ export default new Vuex.Store({
             console.log("Connected");
             state.socket.isConnected = true;
         },
-        SOCKET_TWEET(state, message) {
-            console.log(message);
+        SOCKET_OPERATIONS(state, message) {
+
+            // Parse String operation into a JSON
+            var operationToStore = JSON.parse(message);
+            operationToStore = validateOperationData(operationToStore);
+
+            // Find whether the Operation exists based on the gufi
+            var index = state.operations.findIndex(function (operation) {
+                return operation.gufi === operationToStore.gufi;
+            });
+
+            // if the Operations exists, update it, else add it as a new one
+            if (index != -1) {
+                console.log("Update Operation");
+                Vue.set(state.operations, index, operationToStore);
+            } else {
+                console.log("Add Operation");
+                state.operations.push(operationToStore);
+            }
+        },
+        SOCKET_MESSAGES(state, message) {
+            var messageToStore = JSON.parse(message);
+
+            // Add to Store messages
+            state.messages.push(messageToStore);
+
+            // Handle Operation State changes
+            if ("inform_message" in messageToStore){
+
+                var gufi = messageToStore["gufi"];
+                
+                var index = state.operations.findIndex(function (operation) {
+                    return operation.gufi === gufi;
+                });
+        
+                if (index != -1) {
+                    console.log("Update Operation");
+                    var operationToUpdate = state.operations[index];
+                    operationToUpdate["state"] = messageToStore["inform_message"];
+                    Vue.set(state.operations, index, operationToUpdate);
+                } 
+            }
+
+        },
+        SOCKET_POSITIONS(state, message) {
+            
+            // Parse String message into a JSON
+            var inputPosition = JSON.parse(message);
+
+            // To mutate Store positions properly, we will need to make a deep copy
+            var positionsCopy = _.cloneDeep(state.positions);
+
+            var listOfPos = [];
+
+            if (state.positions.hasOwnProperty(inputPosition.gufi)){
+                listOfPos = state.positions[inputPosition.gufi];
+            } 
+
+            listOfPos.push(inputPosition);
+
+            // Only keep the last 50 positions
+            if(listOfPos.length > 50){
+                listOfPos.shift();
+            }
+
+            positionsCopy[inputPosition.gufi] = listOfPos;
+            state.positions = Object.assign({}, positionsCopy);
+
         },
         addOperation: function (state, op) {
 
@@ -99,8 +166,8 @@ export default new Vuex.Store({
         },
         getPositionsForOperation: state => operationGufi => {
             var positionsToReturn = [];
-            if (state.positions.has(operationGufi)){
-                positionsToReturn = state.positions.get(operationGufi);
+            if (state.positions.hasOwnProperty(operationGufi)){
+                positionsToReturn = state.positions[operationGufi];
             } 
             return positionsToReturn;
         },
@@ -217,67 +284,4 @@ function generateRandomColor(){
     var colorArray = ["#F44336", "#9C27B0", "#2196F3", "#4CAF50", "#FF5722"];    
     var randomColor = colorArray[Math.floor(Math.random() * colorArray.length)];
     return randomColor;
-}
-
-function parseWsPosition(received_data){
-    var parsedPosition = {
-        gufi: received_data.gufi,
-        altitude_gps_wgs84_ft: received_data.altitude,
-        uss_name: received_data.ussName,
-        location: {
-            type: "Point",
-            coordinates: [received_data.lngPos, received_data.latPos]
-        }
-    };
-    return parsedPosition;
-}
-
-function parseWsOperation(received_data){
-    var parsedOperation = {
-        gufi: received_data.gufi,
-        uss_name: received_data.ussName,
-        state: received_data.opState,
-        operation_volumes: []
-    };
-
-    var receivedOperationVolumes = received_data.operationVolumes;
-
-    for (var i = 0; i < receivedOperationVolumes.length; i++){
-        var opVol = receivedOperationVolumes[i];
-
-        var parsedVolume = {
-            min_altitude : {},
-            max_altitude : {},
-            operation_geography : {}
-        }
-
-        parsedVolume.min_altitude.altitude_value = opVol.minAltitude;
-        parsedVolume.max_altitude.altitude_value = opVol.maxAltitude;
-        parsedVolume.operation_geography.type = "Polygon"
-
-        var tempCoords = [];
-
-        for(var j = 0; j < opVol.operationGeography.length; j++){
-            var geo = opVol.operationGeography[j];
-            tempCoords.push(geo);
-        }
-
-        parsedVolume.operation_geography.coordinates = [tempCoords]
-
-        parsedOperation.operation_volumes.push(parsedVolume);
-    }
-
-    var vOp = validateOperationData(parsedOperation);
-
-    if(vOp.state=='ACTIVATED'){
-        vOp.exige_op_color = '#4CAF50';
-    } else if(vOp.state=='ROGUE'){
-        vOp.exige_op_color = '#F44336';
-    } else if(vOp.state=='ACCEPTED'){
-        vOp.exige_op_color = '#2196F3';
-    } else {
-        vOp.exige_op_color = '#9C27B0';
-    }
-
-    return vOp;
 }
